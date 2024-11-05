@@ -1,7 +1,18 @@
-FROM ckan/ckan-base:2.11.0
+FROM ckan/ckan-base:2.9.11
+
 
 # Install any extensions needed by your CKAN instance
 # See Dockerfile.dev for more details and examples
+
+RUN apk add python3-dev py3-lxml geos-dev
+
+RUN pip3 install -e 'git+https://github.com/ckan/ckanext-basiccharts.git@master#egg=ckanext-basiccharts'
+RUN pip3 install -e 'git+https://github.com/keitaroinc/ckanext-visualize.git@master#egg=ckanext-visualize'
+RUN pip3 install geojson shapely
+RUN pip3 install -e 'git+https://github.com/ckan/ckanext-geoview.git@v0.2.0#egg=ckanext-geoview'
+RUN pip3 install -e 'git+https://github.com/ckan/ckanext-spatial.git@master#egg=ckanext-spatial'
+RUN pip3 install -e 'git+https://github.com/ckan/ckanext-hierarchy.git@master#egg=ckanext-hierarchy' && pip3 install -r ${APP_DIR}/src/ckanext-hierarchy/requirements.txt
+RUN pip3 install -e 'git+https://github.com/ckan/ckanext-harvest.git@v1.6.0#egg=ckanext-harvest' && pip3 install -r ${APP_DIR}/src/ckanext-harvest/requirements.txt
 
 # Copy custom initialization scripts
 COPY docker-entrypoint.d/* /docker-entrypoint.d/
