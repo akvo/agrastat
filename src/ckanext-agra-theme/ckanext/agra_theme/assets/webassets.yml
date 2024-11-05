@@ -1,0 +1,14 @@
+# agra_theme-js:
+#   filter: rjsmin
+#   output: ckanext-agra_theme/%(version)s-agra_theme.js
+#   contents:
+#     - js/agra_theme.js
+#   extra:
+#     preload:
+#       - base/main
+
+# agra_theme-css:
+#   filter: cssrewrite
+#   output: ckanext-agra_theme/%(version)s-agra_theme.css
+#   contents:
+#     - css/agra_theme.css
