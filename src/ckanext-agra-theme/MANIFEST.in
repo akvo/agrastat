@@ -1,5 +1,5 @@
 include README.rst
 include LICENSE
 include requirements.txt
-recursive-include ckanext/agra_theme *.html *.json *.js *.less *.css *.mo *.yml
+recursive-include ckanext/agra_theme *.html *.json *.js *.less *.css *.mo *.jpg *.yml
 recursive-include ckanext/agra_theme/migration *.ini *.py *.mako

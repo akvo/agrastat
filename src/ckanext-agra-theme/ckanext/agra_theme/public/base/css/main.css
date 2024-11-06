@@ -9777,7 +9777,7 @@ h4 small {
 }
 [role="main"],
 .main {
-    min-height: 350px;
+    min-height: 667px;
 }
 .main:after,
 [role="main"]:after {
@@ -9868,8 +9868,9 @@ h4 small {
 }
 @media (min-width: 768px) {
     .hero {
-        background: #ddd;
-        /* background: url("../../../base/images/background-tile.png");*/
+        /*background: #ddd;*/
+        background: url("../../../base/images/agra-bg.jpg");
+        background-size: cover;
     }
 }
 .hero:after {
