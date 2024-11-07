@@ -7,19 +7,37 @@ volumes:
 
 services:
 
-  nginx:
-    build:
-      context: nginx/
-      dockerfile: Dockerfile
+  traefik:
+    image: traefik:v3.0
+    container_name: traefik
+    env_file:
+      - .env
+    restart: unless-stopped
+    environment:
+      - TRAEFIK_PROVIDERS_FILE_FILENAME=/traefik-config/dynamic.yml
+      - TRAEFIK_PROVIDERS_FILE_WATCH=true
+      - TRAEFIK_ENTRYPOINTS_WEB_ADDRESS=:80
+      - TRAEFIK_ENTRYPOINTS_WEBSECURE_ADDRESS=:443
+      - TRAEFIK_CERTIFICATESRESOLVERS_MYRESOLVER_ACME_STORAGE=/letsencrypt/acme.json
+      - TRAEFIK_CERTIFICATESRESOLVERS_MYRESOLVER_ACME_TLSCHALLENGE=true
+      - TRAEFIK_LOG_LEVEL=DEBUG
+      - TRAEFIK_LOG=true
+      - TRAEFIK_LOG_FORMAT=common
+      - TRAEFIK_ACCESSLOG=false
+      - TRAEFIK_ACCESSLOG_FILEPATH=/var/log/traefik/access.log
+      - TRAEFIK_ACCESSLOG_FORMAT=common
+    entrypoint: ["sh", "-c", "/generate_dynamic_config.sh && traefik"]
+    volumes:
+      - "traefik-certificates:/letsencrypt"
+      - "./traefik/generate_dynamic_config.sh:/generate_dynamic_config.sh:ro"
+      - "/traefik-config"
     networks:
       - webnet
       - ckannet
-    depends_on:
-      ckan:
-        condition: service_healthy
     ports:
       - "0.0.0.0:${NGINX_SSLPORT_HOST}:${NGINX_SSLPORT}"
-    
+      - "0.0.0.0:${NGINX_PORT_HOST}:${NGINX_PORT}"
+
   ckan:
     build:
       context: ckan/
