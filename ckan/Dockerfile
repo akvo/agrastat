@@ -28,3 +28,5 @@ RUN for d in $APP_DIR/patches/*; do \
             done ; \
         fi ; \
     done
+
+COPY setup/start_ckan.sh.override ${APP_DIR}/start_ckan.sh

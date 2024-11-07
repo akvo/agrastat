@@ -10,7 +10,6 @@ services:
 
   traefik:
     image: traefik:v3.0
-    container_name: traefik
     env_file:
       - .env
     restart: unless-stopped
@@ -63,6 +62,7 @@ services:
       - ckan_storage:/var/lib/ckan
       - pip_cache:/root/.cache/pip
       - site_packages:/usr/lib/python3.10/site-packages
+      - ./src:/srv/app/src_extensions
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "wget", "-qO", "/dev/null", "http://ckan:5000/api/action/status_show"]
