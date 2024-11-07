@@ -34,6 +34,7 @@ class AgraThemeMiddleware:
             "/",  # Home page
             "/user/login",  # Login page
             "/user/reset",  # Reset password page
+            "/about",
         ]
         resource_paths = ["/base/", "/public/", "/fanstatic/"]
         allowed_resource = [".jpg", ".png", ".css", ".js"]

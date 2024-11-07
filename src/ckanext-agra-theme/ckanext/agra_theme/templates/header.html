@@ -114,6 +114,7 @@
             </ul>
           </li>
           {% else %}
+          <li>{% link_for _('About'), named_route='home.about' %}</li>
           <li>{% link_for _('Log in'), named_route='user.login' %}</li>
           {% endif %}
         </ul>
