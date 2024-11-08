@@ -1,7 +1,8 @@
 from os import environ
-from werkzeug.wrappers import Response
+from werkzeug.wrappers import Response, Request
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
+import logging
 
 
 class AgraThemePlugin(plugins.SingletonPlugin):
@@ -35,13 +36,25 @@ class AgraThemeMiddleware:
             "/user/login",  # Login page
             "/user/reset",  # Reset password page
             "/about",
-            "/download/",
         ]
         resource_paths = ["/base/", "/public/", "/fanstatic/"]
-        allowed_resource = [".jpg", ".png", ".css", ".js"]
+        allowed_path_keywords = ["/api/"]
+        allowed_resource = [
+            ".jpg",
+            ".png",
+            ".css",
+            ".js",
+            ".csv",
+            ".xls",
+            ".xlsx",
+        ]
+
         if path.startswith(tuple(resource_paths)) or path.endswith(
             tuple(allowed_resource)
         ):
+            return self.app(environ, start_response)
+
+        if any(keyword in path for keyword in allowed_path_keywords):
             return self.app(environ, start_response)
 
         # Redirect non-logged-in users trying to access any other page
