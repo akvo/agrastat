@@ -36,7 +36,7 @@ class AgraThemeMiddleware:
             "/user/reset",  # Reset password page
             "/about",
         ]
-        resource_paths = ["/base/", "/public/", "/fanstatic/"]
+        resource_paths = ["/base/", "/public/", "/fanstatic/", "/download/"]
         allowed_resource = [".jpg", ".png", ".css", ".js"]
         if path.startswith(tuple(resource_paths)) or path.endswith(
             tuple(allowed_resource)
