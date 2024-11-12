@@ -1,0 +1,14 @@
+<h1>File Sizes for Resources in Dataset</h1>
+
+<table>
+  <tr>
+    <th>Resource Name</th>
+    <th>File Size (bytes)</th>
+  </tr>
+  {% for resource in resource_sizes %}
+  <tr>
+    <td>{{ resource.name }}</td>
+    <td>{{ resource.size }}</td>
+  </tr>
+  {% endfor %}
+</table>

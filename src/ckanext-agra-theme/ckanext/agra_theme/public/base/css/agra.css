@@ -10258,6 +10258,7 @@ h4 small {
     border-radius: 4px;
 }
 .masthead {
+    z-index: 7;
     margin-bottom: initial;
     padding: 5px;
     color: #fff;
@@ -11263,4 +11264,28 @@ iframe {
     object-fit: cover;
     margin-top: -3px;
     margin-right: 8px;
+}
+
+.facet-category {
+    border-bottom: 1px solid #f2f2f2;
+}
+.facet-category .facet-title,
+.facet-category .facet-items {
+    padding: 5px 10px;
+}
+.facet-category .group-hierarchy label,
+.facet-category .facet-items label {
+    display: block;
+    font-weight: normal;
+}
+.facet-category .group-hierarchy label::after,
+.facet-category .facet-items label::after {
+    content: "";
+}
+.facet-category .facet-title {
+    background: #f6f6f6;
+}
+.facet-category .group-hierarchy {
+    list-style: none;
+    padding: 5px 10px;
 }
