@@ -1,14 +1,42 @@
 from os import environ
 from werkzeug.wrappers import Response, Request
-from flask import Blueprint, render_template, abort
+from flask import Blueprint, render_template, request, abort, jsonify
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
+import requests
 import logging
 
-file_size_blueprint = Blueprint("file_size", __name__)
+agra_blueprint = Blueprint("agra", __name__)
 
 
-@file_size_blueprint.route("/dataset/<dataset_id>/file_size")
+@agra_blueprint.route("/api/2/util/tag/autocomplete", methods=["GET"])
+def agrovoc_search():
+    # Get the 'incomplete' query parameter from the request
+    incomplete = request.args.get("incomplete", "")
+    if not incomplete:
+        return jsonify({"ResultSet": {"Result": []}})
+
+    # Call the AGROVOC API
+    agrovoc_url = f"https://agrovoc.fao.org/browse/rest/v1/search?vocab=agrovoc&lang=en&labellang=en&query={incomplete}*"
+    response = requests.get(agrovoc_url)
+
+    # Check if the AGROVOC API call was successful
+    if response.status_code != 200:
+        return jsonify({"ResultSet": {"Result": []}})
+
+    agrovoc_data = response.json()
+
+    # Transform the AGROVOC API response to CKAN's expected format
+    results = [
+        {"Name": result.get("prefLabel", "")}
+        for result in agrovoc_data.get("results", [])
+        if "prefLabel" in result
+    ]
+
+    return jsonify({"ResultSet": {"Result": results}})
+
+
+@agra_blueprint.route("/dataset/<dataset_id>/file_size")
 def file_size(dataset_id):
     # Set up the context for accessing CKAN actions
     context = {"user": toolkit.g.user}
@@ -52,7 +80,7 @@ class AgraThemePlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IRoutes, inherit=True)
 
     def get_blueprint(self):
-        return file_size_blueprint
+        return agra_blueprint
 
     def make_middleware(self, app, config):
         # Wrap the CKAN app with our custom middleware
