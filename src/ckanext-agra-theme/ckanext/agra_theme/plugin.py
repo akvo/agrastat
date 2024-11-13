@@ -7,6 +7,17 @@ import requests
 import logging
 
 agra_blueprint = Blueprint("agra", __name__)
+agrovoc_params = {
+    "maxhits": 10,
+    "lang": "en",
+    "labellang": "en",
+    "vocab": "agrovoc",
+}
+agrovoc_query = "&".join(
+    [f"{key}={value}" for key, value in agrovoc_params.items()]
+)
+min_query_length = 3
+agrovoc_url = "https://agrovoc.fao.org/browse/rest/v1/search"
 
 
 @agra_blueprint.route("/api/2/util/tag/autocomplete", methods=["GET"])
@@ -15,10 +26,13 @@ def agrovoc_search():
     incomplete = request.args.get("incomplete", "")
     if not incomplete:
         return jsonify({"ResultSet": {"Result": []}})
+    if len(incomplete) < min_query_length:
+        return jsonify({"ResultSet": {"Result": []}})
 
     # Call the AGROVOC API
-    agrovoc_url = f"https://agrovoc.fao.org/browse/rest/v1/search?vocab=agrovoc&lang=en&labellang=en&query={incomplete}*"
-    response = requests.get(agrovoc_url)
+    # https://www.fao.org/agrovoc/machine-use
+    search_url = f"{agrovoc_url}?query={incomplete}*&{agrovoc_query}"
+    response = requests.get(search_url)
 
     # Check if the AGROVOC API call was successful
     if response.status_code != 200:
