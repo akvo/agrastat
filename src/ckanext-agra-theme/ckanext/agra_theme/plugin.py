@@ -121,9 +121,12 @@ class AgraThemeMiddleware:
         allowed_paths = [
             "/",  # Home page
             "/user/login",  # Login page
-            "/user/reset",  # Reset password page
             "/about",
         ]
+        # start with "/user/reset"
+        if path.startswith("/user/reset"):
+            return self.app(environ, start_response)
+
         resource_paths = ["/base/", "/public/", "/fanstatic/"]
         allowed_path_keywords = ["/api/"]
         allowed_resource = [
