@@ -6,7 +6,7 @@ import ckan.plugins.toolkit as toolkit
 import requests
 import logging
 
-agra_blueprint = Blueprint("agra", __name__)
+# Constants
 agrovoc_params = {
     "maxhits": 10,
     "lang": "en",
@@ -18,6 +18,42 @@ agrovoc_query = "&".join(
 )
 min_query_length = 3
 agrovoc_url = "https://agrovoc.fao.org/browse/rest/v1/search"
+
+# Extra Dataset
+ignore_missing = toolkit.get_validator("ignore_missing")
+not_empty = toolkit.get_validator("not_empty")
+
+
+def dataset_schema():
+    schema = {
+        "extras": {
+            "country": [ignore_missing],
+        },
+    }
+    return schema
+
+
+# Blueprint
+agra_blueprint = Blueprint("agra", __name__)
+countries_json = "https://gist.githubusercontent.com/almost/7748738/raw/575f851d945e2a9e6859fb2308e95a3697bea115/countries.json"
+countries = requests.get(countries_json).json()
+
+
+@agra_blueprint.route("/api/countries", methods=["GET"])
+def search_countries():
+    # Get the query parameter
+    query = request.args.get("q", "").lower()
+    if query:
+        # Filter countries by query
+        filtered_countries = [
+            country for country in countries if query in country["name"].lower()
+        ]
+    else:
+        # Return all countries if no query is provided
+        filtered_countries = countries
+
+    # Return JSON response
+    return jsonify(filtered_countries)
 
 
 @agra_blueprint.route("/api/2/util/tag/autocomplete", methods=["GET"])
