@@ -6,6 +6,8 @@ if [[ $CKAN__PLUGINS == *"datapusher"* ]]; then
     ckan config-tool $CKAN_INI ckan.datapusher.api_token=xxx
 fi
 
+ckan config-tool $CKAN_INI "ckan.tracking_enabled = $CKAN__TRACKING_ENABLED"
+
 # Install any local extensions in the src_extensions volume
 echo "Looking for local extensions to install..."
 echo "Extension dir contents:"

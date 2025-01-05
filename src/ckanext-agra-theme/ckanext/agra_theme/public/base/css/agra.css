@@ -9678,11 +9678,14 @@ h4 small {
 }
 .format-label[data-format="geo"],
 .format-label[data-format*="geo"] {
-    width: 60px;
-    height: 65px;
-    background-position: -2220px -220px;
-    transform: scale(0.53);
-    margin: -14px 0 0 -14px;
+    background: url("../../img/gis-resources-sprite-icons.png") no-repeat 0 0;
+    background-position-x: 0px;
+    background-position-y: 0px;
+    background-position: -128px -62px;
+    transform: none;
+    margin: 0;
+    width: 32px;
+    height: 35px;
 }
 [class^="icon-"],
 [class*=" icon-"] {

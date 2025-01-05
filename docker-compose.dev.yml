@@ -65,6 +65,19 @@ services:
       test:
         ["CMD", "pg_isready", "-U", "${POSTGRES_USER}", "-d", "${POSTGRES_DB}"]
 
+  pgadmin:
+    image: dpage/pgadmin4:5.7
+    environment:
+      - PGADMIN_LISTEN_PORT=5050
+      - PGADMIN_DEFAULT_EMAIL=dev@akvo.org
+      - PGADMIN_DEFAULT_PASSWORD=password
+    volumes:
+      - ./pgadmin4/servers.json:/pgadmin4/servers.json
+    depends_on:
+      - db
+    ports:
+      - 5050:5050
+
   solr:
     image: ckan/ckan-solr:${SOLR_IMAGE_VERSION}
     volumes:

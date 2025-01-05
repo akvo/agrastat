@@ -6,6 +6,7 @@ import ckan.plugins.toolkit as toolkit
 import requests
 import logging
 
+
 # Constants
 agrovoc_params = {
     "maxhits": 10,
@@ -116,7 +117,10 @@ def file_size(dataset_id):
 
         # Append to list with resource name and size
         resource_sizes.append(
-            {"name": resource.get("name"), "size": size if size else "Unknown"}
+            {
+                "name": resource.get("name"),
+                "size": size if size else "Unknown",
+            }
         )
 
     # Render a template with the resource size data
