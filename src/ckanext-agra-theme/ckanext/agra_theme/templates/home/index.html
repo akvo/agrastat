@@ -1,7 +1,7 @@
 {% extends "page.html" %}{% block subtitle %}{{ _("Welcome") }}{% endblock %} {%
 block maintag %}{% endblock %} {% block toolbar %}{% endblock %} {% block
 content %}
-<div class="homepage">
+<div id="home" class="homepage">
   <div id="content" class="container">{{ self.flash() }}</div>
   {% block primary_content %}
   <div role="main">
