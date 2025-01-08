@@ -11163,11 +11163,6 @@ br.line-height2 {
 .input-group-btn:last-child > .btn {
     z-index: 0;
 }
-body {
-    background: url("../../../base/images/agra-bg.jpg");
-    background-size: cover;
-    background-position: center;
-}
 [hidden] {
     display: none;
 }

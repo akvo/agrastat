@@ -1,3 +1,11 @@
+body {
+    background: url("../../../base/images/agra-bg.jpg");
+    background-size: cover;
+    background-position: center;
+}
+.hero {
+    background: none;
+}
 a.tag {
     border: none;
     box-shadow: none;
@@ -7,6 +15,9 @@ a.tag:hover {
     text-decoration: none;
     color: #fff;
     background-color: #919191;
+}
+.masthead {
+    background: none;
 }
 .masthead a,
 .masthead .nav > li > a:focus,
@@ -41,4 +52,7 @@ a.tag:hover {
     font-size: 22px;
     margin-top: 0px;
     margin-bottom: 42px;
+}
+.homepage .module-search {
+    background: none;
 }

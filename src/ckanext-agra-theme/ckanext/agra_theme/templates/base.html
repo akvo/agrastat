@@ -82,6 +82,7 @@
     {# render all assets included in styles block #}
     {{ h.render_assets('style') }}
     {%- block custom_styles %}
+      <link rel="stylesheet" href="/base/css/base.css" />
       <link rel="stylesheet" href="/base/css/agra.css" />
       {%- if g.site_custom_css -%}
       <style>
