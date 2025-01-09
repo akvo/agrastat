@@ -79,41 +79,13 @@
             {% for item in search_facets[facet]['items'] %}
               <label>
                 <input type="checkbox" name="{{ facet }}" value="{{ item['name'] }}" {% if item['active'] %}checked{% endif %}>
-                {{ item['display_name'] }} [{{ item['count'] }}]
+                {{ item['display_name'] }} <span class="label label-count">{{ item['count'] }}</span>
               </label>
             {% endfor %}
           </div>
         </div>
       {% endfor %}
     </div>
-    <!-- Example for Hierarchical Groups -->
-    {% if search_facets.get('groups') %}
-      <div class="facet-category">
-        <div class="facet-title">{{ facet_titles.get('groups', 'Groups') }}</div>
-        <ul class="group-hierarchy">
-          {% for group in search_facets['groups']['items'] %}
-            <li>
-              <label>
-                <input type="checkbox" name="groups" value="{{ group['id'] }}" {% if group['active'] %}checked{% endif %}>
-                {{ group['display_name'] }}
-              </label>
-              {% if group.get('children') %}
-                <ul>
-                  {% for child in group['children'] %}
-                    <li>
-                      <label>
-                        <input type="checkbox" name="groups" value="{{ child['id'] }}" {% if child['active'] %}checked{% endif %}>
-                        {{ child['display_name'] }}
-                      </label>
-                    </li>
-                  {% endfor %}
-                </ul>
-              {% endif %}
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
-    {% endif %}
     <a class="close no-text hide-filters"><i class="fa fa-times-circle"></i><span class="text">close</span></a>
   </div>
 {% endblock %}

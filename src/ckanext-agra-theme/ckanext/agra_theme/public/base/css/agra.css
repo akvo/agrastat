@@ -16,8 +16,38 @@ a.tag:hover {
     color: #fff;
     background-color: #919191;
 }
+span.label.label-count {
+    margin-left: 5px;
+    background-color: #ffffd6;
+    color: #00565a;
+}
+.row.dataset-list {
+    min-height: 120px;
+    border-bottom: 1px solid #e5e5e5;
+    margin: 0px;
+}
+.row.dataset-list .dataset-info,
+.row.dataset-list .dataset-description {
+    min-height: 120px;
+    padding: 0px;
+}
+.row.dataset-list .dataset-info .dataset-resources {
+    position: absolute;
+    bottom: 10px;
+}
+.row.dataset-list h2 {
+    font-weight: 600;
+}
+span.recent-views,
+span.private-views {
+    font-weight: 400;
+    color: #00565a;
+}
+span.private-views {
+    color: #e0051e;
+}
 .masthead {
-    background: none;
+    background: rgba(0, 0, 0, 0.2);
 }
 .masthead a,
 .masthead .nav > li > a:focus,
@@ -26,7 +56,7 @@ a.tag:hover {
 .masthead .nav > .active > a:hover,
 .masthead .nav > .active > a:focus {
     font-family: Poppins, sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     color: #fff;
 }
 /* Home Page */
@@ -34,6 +64,7 @@ a.tag:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: calc(100vh - 72px);
 }
 #home > div[role="main"] > .main.hero h1,
 #home > div[role="main"] > .main.hero h1 small {
@@ -43,6 +74,9 @@ a.tag:hover {
     margin-bottom: 0;
 }
 
+#home > div[role="main"] .main.content {
+    background: #fff;
+}
 #home > div[role="main"] > .main.hero h1 small {
     color: #e5e71e;
 }
@@ -55,4 +89,10 @@ a.tag:hover {
 }
 .homepage .module-search {
     background: none;
+    padding: 40px;
+}
+
+#home > div[role="main"] .main.content h1 {
+    text-align: center;
+    color: #08743f;
 }
