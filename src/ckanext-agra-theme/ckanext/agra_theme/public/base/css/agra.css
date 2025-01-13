@@ -1,10 +1,79 @@
 body {
     background: url("../../../base/images/agra-bg.jpg");
     background-size: cover;
-    background-position: center;
+    background-position: right;
+}
+.row-flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 .hero {
     background: none;
+}
+.navbar-nav > li > a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    line-height: 20px;
+}
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+}
+.login-image {
+    background: url("../../../base/images/login.jpg");
+    background-size: cover;
+    min-height: 50vh;
+    background-position: center;
+    border-radius: 5px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.login-form {
+    margin-top: auto;
+    margin-bottom: auto;
+    justify-content: center;
+    align-items: center;
+}
+.masthead {
+    z-index: 7;
+    margin-bottom: initial;
+    padding: 5px;
+    background: #fff;
+}
+.masthead .logo img {
+    padding-top: 5px;
+}
+.masthead a,
+.masthead .nav > li > a:focus,
+.masthead .nav > li > a:hover,
+.masthead .nav > .active > a,
+.masthead .nav > .active > a:hover,
+.masthead .nav > .active > a:focus {
+    font-family: Poppins, sans-serif;
+    font-weight: 400;
+    color: #fff;
+}
+.masthead .nav > li > a {
+    color: #000;
+}
+.masthead .nav > li > a:focus,
+.masthead .nav > li > a:hover,
+.masthead .nav > .active > a,
+.masthead .nav > .active > a:hover,
+.masthead .nav > .active > a:focus {
+    color: #fff;
+    text-shadow: none;
+}
+.masthead .navigation .nav-pills li a:hover,
+.masthead .navigation .nav-pills li a:focus,
+.masthead .navigation .nav-pills li.active a {
+    background-color: #08743f;
+}
+.masthead .site-search {
+    margin: 4px 8px 4px 0;
 }
 a.tag {
     border: none;
@@ -45,19 +114,6 @@ span.private-views {
 }
 span.private-views {
     color: #e0051e;
-}
-.masthead {
-    background: rgba(0, 0, 0, 0.2);
-}
-.masthead a,
-.masthead .nav > li > a:focus,
-.masthead .nav > li > a:hover,
-.masthead .nav > .active > a,
-.masthead .nav > .active > a:hover,
-.masthead .nav > .active > a:focus {
-    font-family: Poppins, sans-serif;
-    font-weight: 400;
-    color: #fff;
 }
 /* Home Page */
 #home > div[role="main"] > .main.hero {
