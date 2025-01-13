@@ -16,27 +16,6 @@ body {
     padding-bottom: 10px;
     line-height: 20px;
 }
-.login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 70vh;
-}
-.login-image {
-    background: url("../../../base/images/login.jpg");
-    background-size: cover;
-    min-height: 50vh;
-    background-position: center;
-    border-radius: 5px;
-    margin-top: auto;
-    margin-bottom: auto;
-}
-.login-form {
-    margin-top: auto;
-    margin-bottom: auto;
-    justify-content: center;
-    align-items: center;
-}
 .masthead {
     z-index: 7;
     margin-bottom: initial;
@@ -114,6 +93,63 @@ span.private-views {
 }
 span.private-views {
     color: #e0051e;
+}
+.site-footer {
+    font-family: Poppins, sans-serif;
+    padding: 20px 0px 0px;
+    background: #ebebeb;
+    border-top: 1px solid #e5e5e5;
+    color: #08743f;
+}
+.site-footer ul li {
+    padding-bottom: 5px;
+    margin-bottom: 0px;
+}
+.site-footer ul li a {
+    color: #08743f;
+}
+.site-footer ul li a:hover {
+    color: #00565a;
+    text-decoration: none;
+}
+.site-footer .footer-logo-agra img {
+    height: 50px;
+    margin-top: 5px;
+}
+.site-footer .attribution {
+    text-align: right;
+}
+.site-footer .attribution img {
+    margin-left: 10px;
+    vertical-align: middle;
+    max-height: 16px;
+}
+.container-end {
+    border-top: 1px solid #e5e5e5;
+    margin-top: 20px;
+    padding-top: 10px;
+}
+/* Login Page */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+}
+.login-image {
+    background: url("../../../base/images/login.jpg");
+    background-size: cover;
+    min-height: 50vh;
+    background-position: center;
+    border-radius: 5px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.login-form {
+    margin-top: auto;
+    margin-bottom: auto;
+    justify-content: center;
+    align-items: center;
 }
 /* Home Page */
 #home > div[role="main"] > .main.hero {
