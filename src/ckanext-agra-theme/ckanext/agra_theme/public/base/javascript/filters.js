@@ -8,7 +8,7 @@ if (
     const countryDropdown = document.getElementById("field-country");
 
     // Fetch countries from the API when the page loads
-    fetch("/api/countries")
+    fetch("/api/2/util/countries")
       .then((response) => response.json())
       .then((data) => {
         // Populate the dropdown with countries
@@ -19,28 +19,6 @@ if (
           countryDropdown.appendChild(option);
         });
       });
-
-    // Optional: Add autocomplete functionality
-    const searchInput = document.querySelector('[data-module="autocomplete"]');
-    searchInput.addEventListener("input", function () {
-      const query = searchInput.value;
-
-      fetch(`/api/countries?q=${query}`)
-        .then((response) => response.json())
-        .then((data) => {
-          // Clear the dropdown
-          countryDropdown.innerHTML =
-            '<option value="">{{ _("Select a country") }}</option>';
-
-          // Populate with filtered countries
-          data.forEach((country) => {
-            const option = document.createElement("option");
-            option.value = country.code;
-            option.textContent = country.name;
-            countryDropdown.appendChild(option);
-          });
-        });
-    });
   });
   $(document).ready(function () {
     // Select the Select2 element by its ID
