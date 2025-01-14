@@ -9,16 +9,20 @@ import logging
 
 # Constants
 agrovoc_params = {
-    "maxhits": 10,
+    "maxhits": 1,
     "lang": "en",
     "labellang": "en",
     "vocab": "agrovoc",
+    "unique": "true",
+    "type": "skos:Concept",
 }
 agrovoc_query = "&".join(
     [f"{key}={value}" for key, value in agrovoc_params.items()]
 )
-min_query_length = 3
-agrovoc_url = "https://agrovoc.fao.org/browse/rest/v1/search"
+min_query_length = 1
+agrovoc_url = "https://agrovoc.fao.org"
+agrovoc_search_url = f"{agrovoc_url}/browse/rest/v1/search"
+agrovoc_child_url = f"{agrovoc_url}/browse/rest/v1/agrovoc/children?uri="
 
 # Extra Dataset
 ignore_missing = toolkit.get_validator("ignore_missing")
@@ -68,7 +72,7 @@ def agrovoc_search():
 
     # Call the AGROVOC API
     # https://www.fao.org/agrovoc/machine-use
-    search_url = f"{agrovoc_url}?query={incomplete}*&{agrovoc_query}"
+    search_url = f"{agrovoc_search_url}?query={incomplete}*&{agrovoc_query}"
     response = requests.get(search_url)
 
     # Check if the AGROVOC API call was successful
@@ -76,11 +80,14 @@ def agrovoc_search():
         return jsonify({"ResultSet": {"Result": []}})
 
     agrovoc_data = response.json()
+    content_url = agrovoc_data.get("results")[0].get("uri", "")
+    response = requests.get(f"{agrovoc_child_url}{content_url}")
+    agrovoc_child_data = response.json()
 
     # Transform the AGROVOC API response to CKAN's expected format
     results = [
         {"Name": result.get("prefLabel", "")}
-        for result in agrovoc_data.get("results", [])
+        for result in agrovoc_child_data.get("narrower", [])
         if "prefLabel" in result
     ]
 
