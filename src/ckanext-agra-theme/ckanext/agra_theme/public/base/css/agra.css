@@ -16,6 +16,16 @@ body {
     padding-bottom: 10px;
     line-height: 20px;
 }
+.stages li.active .highlight {
+    background: #08743f;
+}
+.stages li.active::before {
+    color: #08743f;
+}
+.form-actions {
+    text-align: right;
+    height: 82px;
+}
 
 .nav-item a i {
     padding-right: 5px;
