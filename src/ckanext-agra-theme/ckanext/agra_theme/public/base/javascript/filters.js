@@ -1,31 +1,39 @@
 /* Agrovoc tags */
-function handleTagChange(tags, query_params = "") {
-  var tag = tags[tags.length - 1];
+function appendTags(suggestion) {
   var tag_suggestions = $("#tag-suggestions");
-  var api_url = "/api/2/util/tag/suggestion?q=" + tag + query_params;
   var loading_suggestions = $("#loading-tag-suggestions");
+  var currentTags = $("#field-tags").val();
+  currentTags = currentTags.split(",");
+  if (currentTags.includes(suggestion)) {
+    return;
+  }
+  // create tag suggestion using pill
+  var pill = document.createElement("div");
+  pill.className = "label";
+  pill.onclick = function () {
+    currentTags.push(suggestion);
+    $("#field-tags").val(currentTags.join(","));
+    $("#field-tags").trigger("change.select2");
+    pill.remove();
+  };
+  console.log(currentTags);
+  var plus = document.createElement("i");
+  plus.className = "fa fa-plus";
+  pill.appendChild(plus);
+  var text = document.createElement("span");
+  text.textContent = suggestion;
+  pill.appendChild(text);
+  loading_suggestions.remove();
+  tag_suggestions.append(pill);
+}
+
+function handleTagChange(tag, query_params = "") {
+  var api_url = "/api/2/util/tag/suggestion?q=" + tag + query_params;
   fetch(api_url)
     .then((response) => response.json())
     .then((data) => {
       data.forEach((suggestion) => {
-        // create tag suggestion using pill
-        var pill = document.createElement("div");
-        pill.className = "label";
-        pill.onclick = function () {
-          var currentTags = $("#field-tags").val();
-          currentTags = currentTags.split(",");
-          currentTags.push(suggestion);
-          $("#field-tags").val(currentTags.join(","));
-          $("#field-tags").trigger("change.select2");
-        };
-        var plus = document.createElement("i");
-        plus.className = "fa fa-plus";
-        pill.appendChild(plus);
-        var text = document.createElement("span");
-        text.textContent = suggestion;
-        pill.appendChild(text);
-        loading_suggestions.remove();
-        tag_suggestions.append(pill);
+        appendTags(suggestion);
       });
     });
 }
@@ -54,17 +62,42 @@ if (
     /* End of Country list */
 
     /* Agrovoc tags */
+    $("#field-title").on("change", function () {
+      /* use title as suggestion if tag is empty */
+      var field_tags_is_empty = $("#field-tags").val() === "";
+      if (field_tags_is_empty) {
+        var titles = $(this).val();
+        var tag_suggestions = $("#tag-suggestions");
+        tag_suggestions.empty();
+        titles.split(" ").forEach((title) => {
+          if (title.length > 3) {
+            handleTagChange(title);
+            appendTags(title);
+          }
+        });
+      }
+    });
+
     $("#field-tags").on("change.select2", function () {
-      const selectedTags = $(this).val();
+      var field_tags_is_empty = $("#field-tags").val() === "";
       var tag_suggestions = $("#tag-suggestions");
       tag_suggestions.empty();
+      const selectedTags = $(this).val();
       var loading_suggestions = document.createElement("div");
       loading_suggestions.id = "loading-tag-suggestions";
       loading_suggestions.className = "text-muted";
       loading_suggestions.textContent = "Loading suggestions...";
       tag_suggestions.append(loading_suggestions);
-      handleTagChange(selectedTags.split(","));
-      handleTagChange(selectedTags.split(","), "&category=children");
+      var tags = selectedTags.split(",");
+      if (tags.length) {
+        var tag = tags[tags.length - 1];
+        if (tag.length > 3) {
+          handleTagChange(tag);
+          handleTagChange(tag, "&category=children");
+        }
+      } else {
+        loading_suggestions.remove();
+      }
     });
     /* End of Agrovoc tags */
   });

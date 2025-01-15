@@ -8328,8 +8328,8 @@ fieldset[disabled] .control-custom.disabled .checkbox.btn.focus {
 }
 .stages li.active:after {
     border-color: rgba(140, 198, 138, 0);
-    border-top-color: #8cc68a;
-    border-bottom-color: #8cc68a;
+    border-top-color: #08743f;
+    border-bottom-color: #08743f;
 }
 .stages li.complete:after {
     border-color: rgba(197, 226, 196, 0);
@@ -11250,6 +11250,11 @@ iframe {
 .facet-category .group-hierarchy label::after,
 .facet-category .facet-items label::after {
     content: "";
+}
+.facet-title {
+    background: #ddd;
+    font-weight: 600;
+    padding: 20px;
 }
 .facet-category .facet-title {
     background: #ddd;
