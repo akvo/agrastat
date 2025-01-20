@@ -23,6 +23,7 @@ def upgrade():
     if "kobo" not in tables:
         op.create_table(
             "kobo",
+            sa.Column("id", sa.Integer, primary_key=True),
             sa.Column(
                 "package_id",
                 sa.UnicodeText,

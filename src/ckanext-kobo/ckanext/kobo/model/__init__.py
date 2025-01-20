@@ -45,7 +45,7 @@ class KoboObject(DomainObject):
         return query.filter_by(**kwds)
 
 
-class Kobo(BaseModel, KoboDomainObject):
+class Kobo(BaseModel, KoboObject):
     __tablename__ = "kobo"
 
     id = Column(types.UnicodeText, primary_key=True, default=make_uuid)
@@ -86,6 +86,19 @@ class Kobo(BaseModel, KoboDomainObject):
 
     def __str__(self):
         return self.__repr__().encode("ascii", "ignore")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "package_id": self.package_id,
+            "export_settings_uid": self.export_settings_uid,
+            "asset_uid": self.asset_uid,
+            "kobo_token": self.kobo_token,
+            "kf_url": self.kf_url,
+            "next_run": self.next_run,
+            "last_run": self.last_run,
+            "package": self.package.name if self.package else None,
+        }
 
     @classmethod
     def get(cls, package_id):
