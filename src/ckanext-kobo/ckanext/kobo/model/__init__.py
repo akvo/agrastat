@@ -10,7 +10,7 @@ from sqlalchemy.exc import InvalidRequestError
 from ckan.model.meta import Session
 from ckan.model.types import make_uuid
 from ckan.model.domain_object import DomainObject
-from ckan.model.package import Package
+from ckan.model.resource import Resource
 
 
 try:
@@ -49,80 +49,117 @@ class Kobo(BaseModel, KoboObject):
     __tablename__ = "kobo"
 
     id = Column(types.UnicodeText, primary_key=True, default=make_uuid)
-    package_id = Column(types.UnicodeText, ForeignKey("package.id"))
+    resource_id = Column(types.UnicodeText, ForeignKey("resource.id"))
     export_settings_uid = Column(types.String(255))
     asset_uid = Column(types.String(255))
     kobo_token = Column(types.String(255))
     kf_url = Column(types.String(255))
     next_run = Column(types.DateTime)
     last_run = Column(types.DateTime)
-    package = relationship(Package, backref=backref("kobo", uselist=False))
+
+    # Added fields
+    status = Column(
+        types.String(50), default="inactive"
+    )  # e.g., 'active', 'inactive', 'error'
+    error_message = Column(types.UnicodeText)
+    last_successful_run = Column(types.DateTime)
+    update_frequency = Column(
+        types.String(50)
+    )  # e.g., 'daily', 'weekly', 'hourly'
+
+    resource = relationship(Resource, backref=backref("kobo", uselist=False))
 
     def __init__(
         self,
-        package_id,
+        resource_id,
         export_settings_uid,
         asset_uid,
         kobo_token,
         kf_url,
         next_run,
         last_run,
+        status="inactive",  # New field with default
+        error_message=None,  # New field
+        last_successful_run=None,  # New field
+        update_frequency=None,  # New field
     ):
-        self.package_id = package_id
+        self.resource_id = resource_id
         self.export_settings_uid = export_settings_uid
         self.asset_uid = asset_uid
         self.kobo_token = kobo_token
         self.kf_url = kf_url
         self.next_run = next_run
         self.last_run = last_run
+        self.status = status
+        self.error_message = error_message
+        self.last_successful_run = last_successful_run
+        self.update_frequency = update_frequency
 
     def __repr__(self):
-        return "<Kobo id=%s package_id=%s kf_url=%s asset_uid=%s>" % (
-            id,
-            self.package_id,
-            self.kf_url,
-            self.asset_uid,
+        return (
+            "<Kobo id=%s resource_id=%s kf_url=%s asset_uid=%s status=%s>"
+            % (
+                self.id,
+                self.resource_id,
+                self.kf_url,
+                self.asset_uid,
+                self.status,  # Include status in representation
+            )
         )
 
     def __str__(self):
         return self.__repr__().encode("ascii", "ignore")
 
     def to_dict(self):
-        return {
+        data = {
             "id": self.id,
-            "package_id": self.package_id,
+            "resource_id": self.resource_id,
             "export_settings_uid": self.export_settings_uid,
             "asset_uid": self.asset_uid,
             "kobo_token": self.kobo_token,
             "kf_url": self.kf_url,
             "next_run": self.next_run,
             "last_run": self.last_run,
-            "package": self.package.name if self.package else None,
+            "resource": self.resource.name if self.resource else None,
+            # Add new fields to the dictionary
+            "status": self.status,
+            "error_message": self.error_message,
+            "last_successful_run": self.last_successful_run,
+            "update_frequency": self.update_frequency,
         }
+        return data
 
     @classmethod
-    def get(cls, package_id):
-        return cls.filter(package_id=package_id).first()
+    def get(cls, resource_id):
+        return cls.filter(resource_id=resource_id).first()
 
     @classmethod
     def create(
         cls,
-        package_id,
+        resource_id,
         export_settings_uid,
         asset_uid,
         kobo_token,
         kf_url,
         next_run,
         last_run,
+        status="inactive",  # New field with default
+        error_message=None,  # New field
+        last_successful_run=None,  # New field
+        update_frequency=None,  # New field
     ):
         obj = cls(
-            package_id,
+            resource_id,
             export_settings_uid,
             asset_uid,
             kobo_token,
             kf_url,
             next_run,
             last_run,
+            status,
+            error_message,
+            last_successful_run,
+            update_frequency,
         )
         Session.add(obj)
         Session.commit()
@@ -131,15 +168,19 @@ class Kobo(BaseModel, KoboObject):
     @classmethod
     def update(
         cls,
-        package_id,
+        resource_id,
         export_settings_uid,
         asset_uid,
         kobo_token,
         kf_url,
         next_run,
         last_run,
+        status="inactive",  # New field with default
+        error_message=None,  # New field
+        last_successful_run=None,  # New field
+        update_frequency=None,  # New field
     ):
-        obj = cls.get(package_id)
+        obj = cls.get(resource_id)
         if obj:
             obj.export_settings_uid = export_settings_uid
             obj.asset_uid = asset_uid
@@ -147,13 +188,18 @@ class Kobo(BaseModel, KoboObject):
             obj.kf_url = kf_url
             obj.next_run = next_run
             obj.last_run = last_run
+            # Update new fields
+            obj.status = status
+            obj.error_message = error_message
+            obj.last_successful_run = last_successful_run
+            obj.update_frequency = update_frequency
             Session.commit()
             return obj
         return None
 
     @classmethod
-    def delete(cls, package_id):
-        obj = cls.get(package_id)
+    def delete(cls, resource_id):
+        obj = cls.get(resource_id)
         if obj:
             Session.delete(obj)
             Session.commit()

@@ -25,9 +25,9 @@ def upgrade():
             "kobo",
             sa.Column("id", sa.Integer, primary_key=True),
             sa.Column(
-                "package_id",
+                "resource_id",
                 sa.UnicodeText,
-                sa.ForeignKey("package.id", deferrable=True),
+                sa.ForeignKey("resource.id", deferrable=True),
                 nullable=True,
             ),
             sa.Column(
@@ -38,6 +38,11 @@ def upgrade():
             sa.Column("kf_url", sa.String(length=255), nullable=True),
             sa.Column("next_run", sa.DateTime),
             sa.Column("last_run", sa.DateTime),
+            # Added columns
+            sa.Column("status", sa.String(50), nullable=True),
+            sa.Column("error_message", sa.UnicodeText, nullable=True),
+            sa.Column("last_successful_run", sa.DateTime, nullable=True),
+            sa.Column("update_frequency", sa.String(50), nullable=True),
         )
 
 
