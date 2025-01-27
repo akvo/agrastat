@@ -33,8 +33,8 @@
       {{ form.select('kf_url', id='field-kf-url', label=_('KF URL'), options=[{'value': 'https://kf.kobotoolbox.org', 'text':'kf.kobotoolbox.org'},{'value':'https://eu.kobotoolbox.org','text':'eu.kobotoolbox.org'}], selected=data.kf_url, error=errors.kf_url, classes=['control-full']) }}
       {{ form.input('asset_uid', id='field-asset-uid', label=_('Asset UID'), placeholder=_('eg. yoiufas79834J'), value=data.asset_uid, error=errors.asset_uid, classes=['control-full']) }}
       {{ form.input('hash', id='field-hash', label=_('Hash'), value=data.hash, error=errors.hash, classes=['hidden']) }}
-      {{ form.input('export_settings_uid', id='field-export-settings-uid', label=_('Export Settings UID'), placeholder=_('eg. yoiufas79834J'), value=data.export_settings_uid, error=errors.export_settings_uid, classes=['control-full']) }}
       {{ form.input('kobo_token', id='field-kobo-token', label=_('API Token'), placeholder=_('eg. yoiufas79834J'), type='password',value=data.kobo_token, error=errors.kobo_token, classes=['control-full']) }}
+      <a class="btn btn-info" id="validate-kobo">Validate</a>
       </div>
     {% endblock %}
 

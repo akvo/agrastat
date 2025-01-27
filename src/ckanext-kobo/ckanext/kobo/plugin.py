@@ -35,10 +35,6 @@ class KoboPlugin(plugins.SingletonPlugin):
                     tk.get_validator("ignore_missing"),
                     tk.get_validator("unicode"),
                 ],
-                "export_settings_uid": [
-                    tk.get_validator("ignore_missing"),
-                    tk.get_validator("unicode"),
-                ],
                 "kobo_token": [
                     tk.get_validator("ignore_missing"),
                     tk.get_validator("unicode"),
@@ -57,10 +53,6 @@ class KoboPlugin(plugins.SingletonPlugin):
                     tk.get_validator("unicode"),
                 ],
                 "asset_uid": [
-                    tk.get_validator("ignore_missing"),
-                    tk.get_validator("unicode"),
-                ],
-                "export_settings_uid": [
                     tk.get_validator("ignore_missing"),
                     tk.get_validator("unicode"),
                 ],
