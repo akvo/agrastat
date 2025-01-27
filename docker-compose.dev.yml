@@ -5,6 +5,7 @@ volumes:
   pip_cache:
   site_packages:
   vscode_server:
+  pg-admin-data:
 
 services:
   ckan-dev:
@@ -73,6 +74,7 @@ services:
       - PGADMIN_DEFAULT_PASSWORD=password
     volumes:
       - ./pgadmin4/servers.json:/pgadmin4/servers.json
+      - pg-admin-data:/var/lib/pgadmin
     depends_on:
       - db
     ports:

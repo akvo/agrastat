@@ -1,0 +1,14 @@
+# kobo-js:
+#   filter: rjsmin
+#   output: ckanext-kobo/%(version)s-kobo.js
+#   contents:
+#     - js/kobo.js
+#   extra:
+#     preload:
+#       - base/main
+
+# kobo-css:
+#   filter: cssrewrite
+#   output: ckanext-kobo/%(version)s-kobo.css
+#   contents:
+#     - css/kobo.css

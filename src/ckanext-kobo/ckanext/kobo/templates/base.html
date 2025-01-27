@@ -1,0 +1,10 @@
+{% ckan_extends %}
+{%- block styles %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ h.url_for_static('/base/css/kobo.css') }}">
+{% endblock %}
+
+{%- block scripts %}
+  {{super()}}
+  <script src='/base/js/kobo-custom.js'></script>
+{% endblock %}
