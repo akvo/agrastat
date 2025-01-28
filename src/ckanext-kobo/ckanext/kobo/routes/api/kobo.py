@@ -41,7 +41,9 @@ def download_kobo_data(res):
     data = fetch_all_assets(res.extras)
     df = pd.DataFrame(data)
     df = pd.json_normalize(data)
-    response = make_response(df.to_csv())
+    # replace prefix _ in headers with empty string
+    df.columns = df.columns.str.replace("^_+", "", regex=True)
+    response = make_response(df.to_csv(index=False))
     response.headers["Content-Disposition"] = "attachment; filename=data.csv"
     response.headers["Content-Type"] = "text/csv"
     return response
