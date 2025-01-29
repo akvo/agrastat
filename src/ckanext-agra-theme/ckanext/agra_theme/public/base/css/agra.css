@@ -248,3 +248,7 @@ span.private-views {
     text-align: center;
     color: #08743f;
 }
+
+.padding-top-20 {
+    padding-top: 20px;
+}

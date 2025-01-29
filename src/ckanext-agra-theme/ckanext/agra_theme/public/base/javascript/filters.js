@@ -16,7 +16,6 @@ function appendTags(suggestion) {
     $("#field-tags").trigger("change.select2");
     pill.remove();
   };
-  console.log(currentTags);
   var plus = document.createElement("i");
   plus.className = "fa fa-plus";
   pill.appendChild(plus);

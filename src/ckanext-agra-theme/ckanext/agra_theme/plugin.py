@@ -28,6 +28,25 @@ class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
     def get_helpers(self):
         return {
             "countries": countries,
+            "business_lines": [
+                "Policy and Advocacy",
+                "Sustainable Farming",
+                "Gender and Youth",
+                "Cessa",
+                "IMTF",
+                "Monitoring and Evaluation",
+            ],
+            "data_sources": ["Internal", "External"],
+            "methodologies": [
+                "Primary Data Collection",
+                "Secondary Data",
+            ],
+            "updating_schedules": [
+                "Regular",
+                "One off",
+                "Monthly",
+                "Daily",
+            ],
         }
 
     def get_blueprint(self):
