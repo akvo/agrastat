@@ -174,8 +174,14 @@
   <label for="field-pii" class="control-label">{{ _('Does the dataset contain PII ?') }}</label>
   <div class="controls">
     <select id="field-pii" name="pii" class="form-control">
-      {% for option in [('True', _('Yes')), ('False', _('No'))] %}
-      <option value="{{ option[0] }}" {% if option[0] == data.pii|trim %}selected="selected"{% endif %}>{{ option[1] }}</option>
+      {% for option in [('Yes', _('Yes')), ('No', _('No'))] %}
+          <option value="{{ option[0] }}"
+          {% for extra in data.get('extras', []) %}
+            {% if extra.key == 'pii' and option[0] == extra.value %}
+              selected="selected"
+            {% endif %}
+          {% endfor %}
+          >{{ option[1] }}</option>
       {% endfor %}
     </select>
   </div>
@@ -184,8 +190,14 @@
   <label for="field-anon" class="control-label">{{ _('Anonymization needed') }}</label>
   <div class="controls">
     <select id="field-anon" name="anon" class="form-control">
-      {% for option in [('True', _('Yes')), ('False', _('No'))] %}
-      <option value="{{ option[0] }}" {% if option[0] == data.anon|trim %}selected="selected"{% endif %}>{{ option[1] }}</option>
+      {% for option in [('Yes', _('Yes')), ('No', _('No'))] %}
+          <option value="{{ option[0] }}"
+          {% for extra in data.get('extras', []) %}
+            {% if extra.key == 'anon' and option[0] == extra.value %}
+              selected="selected"
+            {% endif %}
+          {% endfor %}
+          >{{ option[1] }}</option>
       {% endfor %}
     </select>
   </div>
