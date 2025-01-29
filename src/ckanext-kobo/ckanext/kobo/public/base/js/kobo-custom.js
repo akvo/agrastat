@@ -68,7 +68,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  kfUrlField.addEventListener("change", logConstructedUrl);
-  assetUidField.addEventListener("input", logConstructedUrl);
-  validateKoboButton.addEventListener("click", getInfo);
+  if (kfUrlField && assetUidField && tokenField) {
+    kfUrlField.addEventListener("change", logConstructedUrl);
+    assetUidField.addEventListener("input", logConstructedUrl);
+    validateKoboButton.addEventListener("click", getInfo);
+  }
 });

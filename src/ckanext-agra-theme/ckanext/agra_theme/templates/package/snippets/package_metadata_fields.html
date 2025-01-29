@@ -18,14 +18,14 @@
   {% endblock %}
   {% block package_metadata_author %}
     {{
-    form.input('author', label=_('Author'),
+    form.input('author', label=_('Data Owner'),
     id='field-author', placeholder=_('Joe Bloggs'),
-    value=data.author or c.user, error=errors.author, classes=['control-medium hidden']) }}
+    value=data.author or c.user, error=errors.author, classes=['control-medium']) }}
     {{
-    form.input('author_email', label=_('Author Email'),
+    form.input('author_email', label=_('Email'),
     id='field-author-email', placeholder=_('joe@example.com'),
     value=data.author_email or c.userobj.email if c.userobj else '',
-    error=errors.author_email, classes=['control-medium hidden'])
+    error=errors.author_email, classes=['control-medium'])
     }}
   {% endblock %}
   {% block package_metadata_fields_maintainer %}

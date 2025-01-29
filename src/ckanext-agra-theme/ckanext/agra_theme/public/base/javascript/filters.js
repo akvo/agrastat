@@ -45,22 +45,6 @@ if (
   window.location.pathname === "/dataset/new"
 ) {
   $(document).ready(function () {
-    var countryDropdown = $("#field-country");
-
-    /* Country list */
-    fetch("/api/2/util/countries")
-      .then((response) => response.json())
-      .then((data) => {
-        // Populate the dropdown with countries
-        data.forEach((country) => {
-          var option = document.createElement("option");
-          option.value = country.code;
-          option.textContent = country.name;
-          countryDropdown.append(option);
-        });
-      });
-    /* End of Country list */
-
     /* Agrovoc tags */
     $("#field-title").on("change", function () {
       /* use title as suggestion if tag is empty */
