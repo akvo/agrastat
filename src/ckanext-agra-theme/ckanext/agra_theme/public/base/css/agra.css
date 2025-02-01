@@ -252,3 +252,21 @@ span.private-views {
 .padding-top-20 {
     padding-top: 20px;
 }
+
+table.package-custom-info {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: None
+    margin-bottom: 20px;
+}
+
+table.package-custom-info td,
+table.package-custom-info td.key-name {
+    padding: 5px;
+    border: None;
+}
+table.package-custom-info td.key-name {
+    width: 120px;
+    font-weight: 600;
+}

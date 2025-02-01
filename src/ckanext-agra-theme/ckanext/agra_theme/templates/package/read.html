@@ -1,0 +1,17 @@
+{% ckan_extends %}
+
+{% block package_notes %}
+    {% if pkg.notes %}
+    <div class="notes embedded-content">
+        {{ h.render_markdown(h.get_translated(pkg, 'notes')) }}
+    </div>
+    {% endif %}
+    <table class="package-custom-info">
+    <tbody>
+    <td class="key-name">Countries</td><td>{{ pkg.countries }}</td></tr>
+    <td class="key-name">Business Line</td><td>{{ pkg.business_line }}</td></tr>
+    <td class="key-name">Methodology</td><td>{{ pkg.methodology }}</td></tr>
+    <td class="key-name">Data Source</td><td>{{ pkg.data_source }}</td></tr>
+    </tbody>
+    </table>
+{% endblock %}

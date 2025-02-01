@@ -13,11 +13,11 @@ api_agrovoc(agra_blueprint)
 api_countries(agra_blueprint)
 page_statistic(agra_blueprint)
 
-extra_fields = [
+schema_names = [
     "business_line",
-    "source",
-    "country",
+    "data_source",
     "methodology",
+    "countries",
     "pii",
     "anon",
 ]
@@ -29,7 +29,7 @@ class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
     plugins.implements(plugins.IBlueprint)
     plugins.implements(plugins.IRoutes, inherit=True)
     plugins.implements(plugins.ITemplateHelpers)
-    plugins.implements(plugins.IDatasetForm, inherit=False)
+    plugins.implements(plugins.IDatasetForm)
 
     def get_helpers(self):
         return {
@@ -78,11 +78,11 @@ class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
         """Specify the package types that this form should handle."""
         return ["dataset"]
 
-    def _modify_schema(self, schema):
-        for new_field in extra_fields:
+    def _modify_package_schema(self, schema):
+        for schema_name in schema_names:
             schema.update(
                 {
-                    new_field: [
+                    schema_name: [
                         toolkit.get_validator("ignore_missing"),
                         toolkit.get_converter("convert_to_extras"),
                     ]
@@ -93,14 +93,25 @@ class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
     def create_package_schema(self):
         """Return the schema for package creation."""
         schema = super(AgraThemePlugin, self).create_package_schema()
-        return self._modify_schema(schema)
+        schema = self._modify_package_schema(schema)
+        return schema
 
     def update_package_schema(self):
         """Return the schema for package updates."""
         schema = super(AgraThemePlugin, self).update_package_schema()
-        return self._modify_schema(schema)
+        schema = self._modify_package_schema(schema)
+        return schema
 
     def show_package_schema(self):
         """Return the schema for package display."""
         schema = super(AgraThemePlugin, self).show_package_schema()
-        return self._modify_schema(schema)
+        for schema_name in schema_names:
+            schema.update(
+                {
+                    schema_name: [
+                        toolkit.get_converter("convert_from_extras"),
+                        toolkit.get_validator("ignore_missing"),
+                    ]
+                }
+            )
+        return schema

@@ -8,11 +8,9 @@
     <select id="bussines-line" name="business_line" class="form-control">
       {% for business_line in h.business_lines %}
         <option value="{{ business_line }}"
-          {% for extra in data.get('extras', []) %}
-            {% if extra.key == 'business_line' and business_line == extra.value %}
+            {% if data.business_line == business_line %}
               selected="selected"
-            {% endif %}
-          {% endfor %}>
+            {% endif %}>
           {{ business_line }}
         </option>
       {% endfor %}
@@ -20,16 +18,14 @@
   </div>
 </div>
 <div class="form-group control-medium">
-  <label class="control-label" for="source">{{ _("Data Source") }}</label>
+  <label class="control-label" for="data-source">{{ _("Data Source") }}</label>
   <div class="controls">
-    <select id="source" name="source" class="form-control">
+    <select id="data-source" name="data_source" class="form-control">
       {% for source in h.data_sources %}
         <option value="{{ source }}"
-          {% for extra in data.get('extras', []) %}
-            {% if extra.key == 'source' and source == extra.value %}
-              selected="selected"
-            {% endif %}
-          {% endfor %}>
+          {% if data.data_source == source %}
+            selected="selected"
+          {% endif %}>
           {{ source }}
         </option>
       {% endfor %}
@@ -37,16 +33,14 @@
   </div>
 </div>
 <div class="form-group control-medium">
-  <label class="control-label" for="country">{{ _("Originating Countries") }}</label>
+  <label class="control-label" for="countries">{{ _("Originating Countries") }}</label>
   <div class="controls">
-    <select id="country" name="country" data-module="autocomplete">
+    <select id="countries" name="countries" data-module="autocomplete">
       {% for country in h.countries  %}
         <option value="{{ country }}"
-          {% for extra in data.get('extras', []) %}
-            {% if extra.key == 'country' and country == extra.value %}
-              selected="selected"
-            {% endif %}
-          {% endfor %}>
+          {% if data.countries == country %}
+            selected="selected"
+          {% endif %}>
           {{ country }}
         </option>
       {% endfor %}
@@ -59,11 +53,9 @@
     <select id="methodology" name="methodology" class="form-control">
       {% for methodology in h.methodologies %}
         <option value="{{ methodology }}"
-          {% for extra in data.get('extras', []) %}
-            {% if extra.key == 'methodology' and methodology == extra.value %}
-              selected="selected"
-            {% endif %}
-          {% endfor %}>
+          {% if data.methodology == methodology %}
+            selected="selected"
+          {% endif %}>
           {{ methodology }}
         </option>
       {% endfor %}
@@ -176,12 +168,11 @@
     <select id="field-pii" name="pii" class="form-control">
       {% for option in [('Yes', _('Yes')), ('No', _('No'))] %}
           <option value="{{ option[0] }}"
-          {% for extra in data.get('extras', []) %}
-            {% if extra.key == 'pii' and option[0] == extra.value %}
-              selected="selected"
-            {% endif %}
-          {% endfor %}
-          >{{ option[1] }}</option>
+          {% if data.pii == option[0] %}
+            selected="selected"
+          {% endif %}>
+          {{ option[1] }}
+          </option>
       {% endfor %}
     </select>
   </div>
@@ -192,12 +183,11 @@
     <select id="field-anon" name="anon" class="form-control">
       {% for option in [('Yes', _('Yes')), ('No', _('No'))] %}
           <option value="{{ option[0] }}"
-          {% for extra in data.get('extras', []) %}
-            {% if extra.key == 'anon' and option[0] == extra.value %}
-              selected="selected"
-            {% endif %}
-          {% endfor %}
-          >{{ option[1] }}</option>
+          {% if data.anon == option[0] %}
+          selected="selected"
+          {% endif %}>
+          {{ option[1] }}
+          </option>
       {% endfor %}
     </select>
   </div>
