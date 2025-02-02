@@ -8,9 +8,30 @@
     {% endif %}
     <table class="package-custom-info">
     <tbody>
-    <td class="key-name">Countries</td><td>{{ pkg.countries }}</td></tr>
+    <tr>
+    <td class="key-name">Countries</td>
+    <td>
+        {% set country_names = [] %}
+        {% for selected_country in pkg.countries %}
+            {% for country in h.countries %}
+                {% if country.value == selected_country %}
+                    {% do country_names.append(country.name) %}
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+        {% if country_names %}
+            {% for name in country_names %}
+                {%- if loop.last and loop.index > 1 %} and {% elif not loop.first %}, {% endif -%}
+                {{ name }}
+            {% endfor %}
+        {% endif %}
+    </td>
+    </tr>
+    <tr>
     <td class="key-name">Business Line</td><td>{{ pkg.business_line }}</td></tr>
+    <tr>
     <td class="key-name">Methodology</td><td>{{ pkg.methodology }}</td></tr>
+    <tr>
     <td class="key-name">Data Source</td><td>{{ pkg.data_source }}</td></tr>
     </tbody>
     </table>

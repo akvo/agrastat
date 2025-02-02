@@ -5,7 +5,7 @@ from .routes.api.agrovoc import api_agrovoc
 from .routes.api.countries import api_countries
 from .routes.pages.statistic import page_statistic
 from .middleware import AgraThemeMiddleware
-from .data.countries import countries
+from .data.countries import country_list, create_countries
 
 # Blueprint
 agra_blueprint = Blueprint("agra", __name__)
@@ -17,10 +17,11 @@ schema_names = [
     "business_line",
     "data_source",
     "methodology",
-    "countries",
     "pii",
     "anon",
 ]
+
+create_countries()
 
 
 class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
@@ -33,7 +34,7 @@ class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
 
     def get_helpers(self):
         return {
-            "countries": countries,
+            "countries": country_list,
             "business_lines": [
                 "Policy and Advocacy",
                 "Sustainable Farming",
@@ -79,6 +80,14 @@ class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
         return ["dataset"]
 
     def _modify_package_schema(self, schema):
+        schema.update(
+            {
+                "countries": [
+                    toolkit.get_validator("ignore_missing"),
+                    toolkit.get_converter("convert_to_tags")("countries"),
+                ]
+            }
+        )
         for schema_name in schema_names:
             schema.update(
                 {
@@ -105,6 +114,20 @@ class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
     def show_package_schema(self):
         """Return the schema for package display."""
         schema = super(AgraThemePlugin, self).show_package_schema()
+        # (e.g. on dataset pages, or on the search page)
+        schema["tags"]["__extras"].append(
+            toolkit.get_converter("free_tags_only")
+        )
+
+        # Add our custom country_code metadata field to the schema.
+        schema.update(
+            {
+                "countries": [
+                    toolkit.get_converter("convert_from_tags")("countries"),
+                    toolkit.get_validator("ignore_missing"),
+                ]
+            }
+        )
         for schema_name in schema_names:
             schema.update(
                 {
