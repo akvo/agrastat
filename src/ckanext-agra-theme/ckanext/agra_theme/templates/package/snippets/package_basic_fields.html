@@ -1,52 +1,86 @@
-{% import 'macros/form.html' as form %}
+{% ckan_extends %}
 
-{% block package_basic_fields_title %}
-{{ form.input('title', id='field-title', label=_('Title'), placeholder=_('eg. A descriptive title'), value=data.title, error=errors.title, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target', 'class': 'form-control'}) }}
+{% block package_basic_fields_description %}
+{{ form.markdown('notes', id='field-notes', label=_('Description'), placeholder=_('eg. Some useful notes about the data'), value=data.notes, error=errors.notes) }}
+<div class="form-group control-medium">
+  <label class="control-label" for="business-line">{{ _("Business Lines") }}</label>
+  <div class="controls">
+    <select id="bussines-line" name="business_line" class="form-control">
+      {% for business_line in h.business_lines %}
+        <option value="{{ business_line }}"
+            {% if data.business_line == business_line %}
+              selected="selected"
+            {% endif %}>
+          {{ business_line }}
+        </option>
+      {% endfor %}
+    </select>
+  </div>
+</div>
+<div class="form-group control-medium">
+  <label class="control-label" for="data-source">{{ _("Data Source") }}</label>
+  <div class="controls">
+    <select id="data-source" name="data_source" class="form-control">
+      {% for source in h.data_sources %}
+        <option value="{{ source }}"
+          {% if data.data_source == source %}
+            selected="selected"
+          {% endif %}>
+          {{ source }}
+        </option>
+      {% endfor %}
+    </select>
+  </div>
+</div>
+<div class="form-group control-medium">
+  <label class="control-label" for="countries">{{ _("Originating Countries") }}</label>
+  <div class="controls">
+    <select id="countries" name="countries" data-module="autocomplete" multiple="multiple">
+      {% for country in h.countries  %}
+        <option value="{{ country.value }}"
+          {% for selected_country in data.countries  %}
+          {% if selected_country == country.value %}
+            selected
+          {% endif %}
+          {% endfor %}>
+          {{ country.name }}
+        </option>
+      {% endfor %}
+    </select>
+  </div>
+</div>
+<div class="form-group control-medium">
+  <label class="control-label" for="methodology">{{ _("Methodology of Data Collection") }}</label>
+  <div class="controls">
+    <select id="methodology" name="methodology" class="form-control">
+      {% for methodology in h.methodologies %}
+        <option value="{{ methodology }}"
+          {% if data.methodology == methodology %}
+            selected="selected"
+          {% endif %}>
+          {{ methodology }}
+        </option>
+      {% endfor %}
+    </select>
+  </div>
+</div>
 {% endblock %}
 
-{% block package_basic_fields_url %}
-{% set prefix = h.url_for('dataset.read', id='') %}
-{% set domain = h.url_for('dataset.read', id='', qualified=true) %}
-{% set domain = domain|replace("http://", "")|replace("https://", "") %}
-{% set attrs = {'data-module': 'slug-preview-slug', 'data-module-prefix': domain, 'data-module-placeholder': '<dataset>', 'class': 'form-control input-sm'} %}
 
-  {{ form.prepend('name', id='field-name', label=_('URL'), prepend=prefix, placeholder=_('eg. my-dataset'), value=data.name, error=errors.name, attrs=attrs, is_required=true) }}
-  {% endblock %}
 
-  {% block package_basic_fields_custom %}
-  <div class="control-group">
-    <label class="control-label" for="country">{{ _("Country") }}</label>
-    <div class="controls">
-      <select id="country" name="country" data-module="autocomplete">
-        {% for country in h.countries  %}
-          <option value="{{ country }}"
-            {% for extra in data.get('extras', []) %}
-              {% if extra.key == 'country' and country == extra.value %}
-                selected="selected"
-              {% endif %}
-            {% endfor %}>
-            {{ country }}
-          </option>
-        {% endfor %}
-      </select>
-    </div>
-  </div>
-	{% endblock %}
+{% block package_basic_fields_custom %}
+{% endblock %}
 
-  {% block package_basic_fields_description %}
-  {{ form.markdown('notes', id='field-notes', label=_('Description'), placeholder=_('eg. Some useful notes about the data'), value=data.notes, error=errors.notes) }}
-  {% endblock %}
-
-  {% block package_basic_fields_tags %}
+{% block package_basic_fields_tags %}
   {% set tag_attrs = {'data-module': 'autocomplete', 'data-module-tags': '', 'data-module-source': '/api/2/util/tag/autocomplete?incomplete=?'} %}
-  {{ form.input('tag_string', id='field-tags', label=_('Tags'), placeholder=_('eg. economy, mental health, government'), value=data.tag_string, error=errors.tags, classes=['control-full'], attrs=tag_attrs) }}
+  {{ form.input('tag_string', id='field-tags', label=_('Tags'), placeholder=_('eg. economy, mental health, government'), value=data.tag_string, error=errors.tags, classes=['control-full '], attrs=tag_attrs) }}
   <div id="tag-suggestions"></div>
-  {% endblock %}
+{% endblock %}
 
-  {% block package_basic_fields_license %}
-  <div class="form-group">
+{% block package_basic_fields_license %}
+  <div class="form-group padding-top-20">
     {% set error = errors.license_id %}
-    <label class="control-label" for="field-license">{{ _("License") }}</label>
+    <label class="control-label" for="field-license">{{ _("Sharing Agreement / License") }}</label>
     <div class="controls">
       <div class="row">
         <div class="col-md-6">
@@ -72,9 +106,9 @@
       </div>
     </div>
   </div>
-  {% endblock %}
+{% endblock %}
 
-  {% block package_basic_fields_org %}
+{% block package_basic_fields_org %}
   {# if we have a default group then this wants remembering #}
   {% if data.group_id %}
   <input type="hidden" name="groups__0__id" value="{{ data.group_id }}" />
@@ -88,50 +122,81 @@
   {% set show_organizations_selector = organizations_available and user_can_update_owner_org %}
   {% set show_visibility_selector = dataset_has_organization or (organizations_available and (user_is_sysadmin or dataset_is_draft)) %}
 
-  {% if show_organizations_selector and show_visibility_selector %}
-  <div data-module="dataset-visibility">
-    {% endif %}
-
-    {% if show_organizations_selector %}
-    {% set existing_org = data.owner_org or data.group_id %}
-    <div class="form-group control-medium">
-      <label for="field-organizations" class="control-label">{{ _('Organization') }}</label>
-      <div class="controls">
-        <select id="field-organizations" name="owner_org" data-module="autocomplete">
-          {% if h.check_config_permission('create_unowned_dataset') %}
-          <option value="" {% if not selected_org and data.id %} selected="selected" {% endif %}>{{ _('No organization') }}</option>
-          {% endif %}
-          {% for organization in organizations_available %}
-          {# get out first org from users list only if there is not an existing org #}
-          {% set selected_org = (existing_org and existing_org == organization.id) or (not existing_org and not data.id and organization.id == organizations_available[0].id) %}
-          <option value="{{ organization.id }}" {% if selected_org %} selected="selected" {% endif %}>{{ organization.display_name }}</option>
-          {% endfor %}
-        </select>
-      </div>
-    </div>
-    {% endif %}
-
-    {% if show_visibility_selector %}
-    {% block package_metadata_fields_visibility %}
-    <div class="form-group control-medium">
-      <label for="field-private" class="control-label">{{ _('Visibility') }}</label>
-      <div class="controls">
-        <select id="field-private" name="private" class="form-control">
-          {% for option in [('True', _('Private')), ('False', _('Public'))] %}
-          <option value="{{ option[0] }}" {% if option[0] == data.private|trim %}selected="selected"{% endif %}>{{ option[1] }}</option>
-          {% endfor %}
-        </select>
-      </div>
-    </div>
-    {% endblock %}
-    {% endif %}
-
-    {% if show_organizations_selector and show_visibility_selector %}
-  </div>
+{% if show_organizations_selector and show_visibility_selector %}
+<div data-module="dataset-visibility">
   {% endif %}
 
+  {% if show_organizations_selector %}
+  {% set existing_org = data.owner_org or data.group_id %}
+  <div class="form-group control-medium">
+    <label for="field-organizations" class="control-label">{{ _('Organization') }}</label>
+    <div class="controls">
+      <select id="field-organizations" name="owner_org" data-module="autocomplete">
+        {% if h.check_config_permission('create_unowned_dataset') %}
+        <option value="" {% if not selected_org and data.id %} selected="selected" {% endif %}>{{ _('No organization') }}</option>
+        {% endif %}
+        {% for organization in organizations_available %}
+        {# get out first org from users list only if there is not an existing org #}
+        {% set selected_org = (existing_org and existing_org == organization.id) or (not existing_org and not data.id and organization.id == organizations_available[0].id) %}
+        <option value="{{ organization.id }}" {% if selected_org %} selected="selected" {% endif %}>{{ organization.display_name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+{% endif %}
 
-  {% if data.id and h.check_access('package_delete', {'id': data.id}) and data.state != 'active' %}
+{% if show_visibility_selector %}
+{% block package_metadata_fields_visibility %}
+<div class="form-group control-medium">
+  <label for="field-private" class="control-label">{{ _('Data Visibility') }}</label>
+  <div class="controls">
+    <select id="field-private" name="private" class="form-control">
+      {% for option in [('True', _('Private')), ('False', _('Public'))] %}
+      <option value="{{ option[0] }}" {% if option[0] == data.private|trim %}selected="selected"{% endif %}>{{ option[1] }}</option>
+      {% endfor %}
+    </select>
+  </div>
+</div>
+{% endblock %}
+{% endif %}
+{% if show_organizations_selector and show_visibility_selector %}
+  </div>
+{% endif %}
+
+{% block package_other_custom_metadata %}
+<div class="form-group control-medium">
+  <label for="field-pii" class="control-label">{{ _('Does the dataset contain PII ?') }}</label>
+  <div class="controls">
+    <select id="field-pii" name="pii" class="form-control">
+      {% for option in [('Yes', _('Yes')), ('No', _('No'))] %}
+          <option value="{{ option[0] }}"
+          {% if data.pii == option[0] %}
+            selected="selected"
+          {% endif %}>
+          {{ option[1] }}
+          </option>
+      {% endfor %}
+    </select>
+  </div>
+</div>
+<div class="form-group control-medium">
+  <label for="field-anon" class="control-label">{{ _('Anonymization needed') }}</label>
+  <div class="controls">
+    <select id="field-anon" name="anon" class="form-control">
+      {% for option in [('Yes', _('Yes')), ('No', _('No'))] %}
+          <option value="{{ option[0] }}"
+          {% if data.anon == option[0] %}
+          selected="selected"
+          {% endif %}>
+          {{ option[1] }}
+          </option>
+      {% endfor %}
+    </select>
+  </div>
+</div>
+{% endblock %}
+
+{% if data.id and h.check_access('package_delete', {'id': data.id}) and data.state != 'active' %}
   <div class="form-group control-medium">
     <label for="field-state" class="control-label">{{ _('State') }}</label>
     <div class="controls">
@@ -141,6 +206,5 @@
       </select>
     </div>
   </div>
-  {% endif %}
-
-  {% endblock %}
+{% endif %}
+{% endblock %}

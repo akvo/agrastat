@@ -1,11 +1,11 @@
-{% import 'macros/form.html' as form %}
+{% ckan_extends %}
 {% block package_metadata_fields %}
   {% block package_metadata_fields_url %}
     {{
     form.input('url', label=_('Source'),
     id='field-url', placeholder=_('http://example.com/dataset.json'),
     value=data.url, error=errors.url,
-    classes=['control-medium hidden'])
+    classes=['control-medium'])
     }}
   {% endblock %}
   {% block package_metadata_fields_version %}
