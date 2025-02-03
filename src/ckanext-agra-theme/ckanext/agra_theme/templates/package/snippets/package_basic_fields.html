@@ -1,11 +1,12 @@
 {% ckan_extends %}
 
 {% block package_basic_fields_description %}
-{{ form.markdown('notes', id='field-notes', label=_('Description'), placeholder=_('eg. Some useful notes about the data'), value=data.notes, error=errors.notes) }}
+{{ form.markdown('notes', id='field-notes', label=_('Related Knowledge Management Products'), placeholder=_('eg. Some useful notes about the data'), value=data.notes, error=errors.notes) }}
 <div class="form-group control-medium">
-  <label class="control-label" for="business-line">{{ _("Business Lines") }}</label>
+  <label class="control-label is-required" for="business-line">{{ _("Business Lines") }}</label>
   <div class="controls">
     <select id="bussines-line" name="business_line" class="form-control">
+      <option value="">Please Select</option>
       {% for business_line in h.business_lines %}
         <option value="{{ business_line }}"
             {% if data.business_line == business_line %}
@@ -18,9 +19,10 @@
   </div>
 </div>
 <div class="form-group control-medium">
-  <label class="control-label" for="data-source">{{ _("Data Source") }}</label>
+  <label class="control-label is-required" for="data-source">{{ _("Data Source") }}</label>
   <div class="controls">
     <select id="data-source" name="data_source" class="form-control">
+      <option value="">Please Select</option>
       {% for source in h.data_sources %}
         <option value="{{ source }}"
           {% if data.data_source == source %}
@@ -33,7 +35,7 @@
   </div>
 </div>
 <div class="form-group control-medium">
-  <label class="control-label" for="countries">{{ _("Originating Countries") }}</label>
+  <label class="control-label is-required" for="countries">{{ _("Originating Countries") }}</label>
   <div class="controls">
     <select id="countries" name="countries" data-module="autocomplete" multiple="multiple">
       {% for country in h.countries  %}
@@ -49,10 +51,21 @@
     </select>
   </div>
 </div>
+{{
+  form.input('author', label=_('Data Owner'),
+  id='field-author', placeholder=_('Joe Bloggs'),
+  value=data.author or c.user, error=errors.author, classes=['control-medium']) }}
+{{
+  form.input('author_email', label=_('Email'),
+  id='field-author-email', placeholder=_('joe@example.com'),
+  value=data.author_email or c.userobj.email if c.userobj else '',
+  error=errors.author_email, classes=['control-medium'])
+}}
 <div class="form-group control-medium">
   <label class="control-label" for="methodology">{{ _("Methodology of Data Collection") }}</label>
   <div class="controls">
     <select id="methodology" name="methodology" class="form-control">
+      <option value="">Please Select</option>
       {% for methodology in h.methodologies %}
         <option value="{{ methodology }}"
           {% if data.methodology == methodology %}
@@ -86,8 +99,8 @@
         <div class="col-md-6">
           <select id="field-license" name="license_id" data-module="autocomplete">
             {% set existing_license_id = data.get('license_id') %}
-            {% set empty_license = _('Please select the license') %}
-            <option value="">{{ empty_license }}</option>
+            {% set empty_license = _('Select license') %}
+            <option value="">Please Select</option>
             {% for license_id, license_desc in h.license_options(existing_license_id) %}
             <option value="{{ license_id }}" {% if existing_license_id == license_id %}selected="selected"{% endif %}>{{ license_desc }}</option>
             {% endfor %}
@@ -165,9 +178,10 @@
 
 {% block package_other_custom_metadata %}
 <div class="form-group control-medium">
-  <label for="field-pii" class="control-label">{{ _('Does the dataset contain PII ?') }}</label>
+  <label for="field-pii" class="control-label is-required">{{ _('Does the dataset contain PII ?') }}</label>
   <div class="controls">
     <select id="field-pii" name="pii" class="form-control">
+      <option value="">Please Select</option>
       {% for option in [('Yes', _('Yes')), ('No', _('No'))] %}
           <option value="{{ option[0] }}"
           {% if data.pii == option[0] %}

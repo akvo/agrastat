@@ -267,6 +267,12 @@ table.package-custom-info td.key-name {
     border: None;
 }
 table.package-custom-info td.key-name {
-    width: 120px;
+    width: 200px;
     font-weight: 600;
+}
+
+.control-label.is-required:before{
+    content: "*";
+    color: #c6898b;
+    padding-right: 5px;
 }

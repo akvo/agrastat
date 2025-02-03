@@ -9,7 +9,11 @@
     <table class="package-custom-info">
     <tbody>
     <tr>
-    <td class="key-name">Countries</td>
+    <td class="key-name">Business Line</td><td>{{ pkg.business_line }}</td></tr>
+    <tr>
+    <td class="key-name">Data Source</td><td>{{ pkg.data_source }}</td></tr>
+    <tr>
+    <td class="key-name">Originating Countries</td>
     <td>
         {% set country_names = [] %}
         {% for selected_country in pkg.countries %}
@@ -28,11 +32,35 @@
     </td>
     </tr>
     <tr>
-    <td class="key-name">Business Line</td><td>{{ pkg.business_line }}</td></tr>
+    <td class="key-name">Methodology</td>
+    <td>
+    {% if pkg.methodology %}{{ pkg.methodology }}{% else %} - {% endif %}
+    </td>
+    </tr>
     <tr>
-    <td class="key-name">Methodology</td><td>{{ pkg.methodology }}</td></tr>
+    <td class="key-name">Legal</td>
+    <td>
+    {% if pkg.legal %}{{ pkg.legal }}{% else %} - {% endif %}
+    </td>
+    </tr>
     <tr>
-    <td class="key-name">Data Source</td><td>{{ pkg.data_source }}</td></tr>
+    <td class="key-name">Licenses</td>
+    <td>
+    {% if pkg.licenses %}{{ pkg.licenses }}{% else %} - {% endif %}
+    </td>
+    </tr>
+    <tr>
+    <td class="key-name">PII</td>
+    <td>
+    {% if pkg.pii %}{{ pkg.pii }}{% else %} - {% endif %}
+    </td>
+    </tr>
+    <tr>
+    <td class="key-name">Anonymization</td>
+    <td>
+    {% if pkg.anon %}{{ pkg.anon }}{% else %} - {% endif %}
+    </td>
+    </tr>
     </tbody>
     </table>
 {% endblock %}

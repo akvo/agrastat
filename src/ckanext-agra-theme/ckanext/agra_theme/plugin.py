@@ -14,11 +14,32 @@ api_countries(agra_blueprint)
 page_statistic(agra_blueprint)
 
 schema_names = [
-    "business_line",
-    "data_source",
-    "methodology",
-    "pii",
-    "anon",
+    {"name": "business_line", "required": True},
+    {"name": "data_source", "required": True},
+    {
+        "name": "methodology",
+        "required": False,
+    },
+    {
+        "name": "legal",
+        "required": False,
+    },
+    {
+        "name": "sharing_agreement",
+        "required": False,
+    },
+    {
+        "name": "pii",
+        "required": True,
+    },
+    {
+        "name": "anon",
+        "required": True,
+    },
+    {
+        "name": "updating_schedule",
+        "required": False,
+    },
 ]
 
 create_countries()
@@ -83,7 +104,7 @@ class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
         schema.update(
             {
                 "countries": [
-                    toolkit.get_validator("ignore_missing"),
+                    toolkit.get_validator("not_empty"),
                     toolkit.get_converter("convert_to_tags")("countries"),
                 ]
             }
@@ -91,8 +112,10 @@ class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
         for schema_name in schema_names:
             schema.update(
                 {
-                    schema_name: [
-                        toolkit.get_validator("ignore_missing"),
+                    schema_name["name"]: [
+                        toolkit.get_validator("not_empty")
+                        if schema_name["required"]
+                        else toolkit.get_validator("ignore_missing"),
                         toolkit.get_converter("convert_to_extras"),
                     ]
                 }
@@ -131,7 +154,7 @@ class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
         for schema_name in schema_names:
             schema.update(
                 {
-                    schema_name: [
+                    schema_name["name"]: [
                         toolkit.get_converter("convert_from_extras"),
                         toolkit.get_validator("ignore_missing"),
                     ]
