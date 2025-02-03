@@ -1,13 +1,38 @@
 {% ckan_extends %}
 
 {% block basic_fields_url %}
-  {{ super() }}
-  <div class="kobo-input">
+  <div class="alert-label" id="info-alert">Test</div>
+
+  {{ form.input('url', label='', id='field-resource-url', type='url', placeholder=placeholder, value=data.get('url'), error=errors.get('url'), classes=['control-full']) }}
+
+
+  <div class="resource-type-block">
+    <div class="btn btn-info active" id="button-upload">
+      <i class="fa fa-cloud-upload"></i>
+      Upload
+    </div>
+    <div class="btn btn-label" id="button-kobo">
+      <i class="fa fa-archive"></i>
+      Kobo Toolbox
+    </div>
+  </div>
+
+  <div class="form-group control-full" id="field-resource-upload-block">
+    <div class="controls ">
+      <input id="field-resource-upload" type="file" name="upload" value="" placeholder="" class="form-control">
+      <label for="field-resource-upload" class="browse-upload">Upload</label>
+      <div class="remove-upload" id="remove-upload">Remove</div>
+    </div>
+  </div>
+
+
+  <div class="kobo-input" id="kobo-inputs">
     <span class="border-text">Kobo Settings</span>
-  {{ form.select('kf_url', id='field-kf-url', label=_('KF URL'), options=[{'value': 'https://kf.kobotoolbox.org', 'text':'kf.kobotoolbox.org'},{'value':'https://eu.kobotoolbox.org','text':'eu.kobotoolbox.org'}], selected=data.kf_url, error=errors.kf_url, classes=['control-full']) }}
+  {{ form.select('kf_url', id='field-kf-url', label=_('KF URL'), options=[{'value':'', 'text': 'Please Select'},{'value': 'https://kf.kobotoolbox.org', 'text':'kf.kobotoolbox.org'},{'value':'https://eu.kobotoolbox.org','text':'eu.kobotoolbox.org'}], selected=data.kf_url, error=errors.kf_url, classes=['control-full']) }}
   {{ form.input('asset_uid', id='field-asset-uid', label=_('Asset UID'), placeholder=_('eg. yoiufas79834J'), value=data.asset_uid, error=errors.asset_uid, classes=['control-full']) }}
   {{ form.input('hash', id='field-hash', label=_('Hash'), value=data.hash, error=errors.hash, classes=['hidden']) }}
   {{ form.input('kobo_token', id='field-kobo-token', label=_('API Token'), placeholder=_('eg. yoiufas79834J'), type='password',value=data.kobo_token, error=errors.kobo_token, classes=['control-full']) }}
   <a class="btn btn-info" id="validate-kobo">Validate</a>
   </div>
+
 {% endblock %}
