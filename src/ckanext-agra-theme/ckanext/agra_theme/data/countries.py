@@ -4,7 +4,27 @@ import ckan.plugins.toolkit as toolkit
 countries_data = requests.get(
     "https://gist.githubusercontent.com/almost/7748738/raw/575f851d945e2a9e6859fb2308e95a3697bea115/countries.json"
 ).json()
-country_list = [{"name": c["name"], "value": c["code"]} for c in countries_data]
+agra_countries = [
+    "Malawi",
+    "Zambia",
+    "Ghana",
+    "Senegal",
+    "Rwanda",
+    "Kenya",
+    "Uganda",
+    "Mali",
+    'Cote D"Ivoire',
+    "Mozambique",
+    "Nigeria",
+    "Ethiopia",
+    "Tanzania",
+    "Burkina Faso",
+    "Togo",
+]
+filtered_list = list(
+    filter(lambda x: x["name"] in agra_countries, countries_data)
+)
+country_list = [{"name": c["name"], "value": c["code"]} for c in filtered_list]
 
 
 def create_countries():
