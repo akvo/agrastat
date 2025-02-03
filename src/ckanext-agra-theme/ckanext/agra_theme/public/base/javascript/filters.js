@@ -71,6 +71,15 @@ if (
       loading_suggestions.className = "text-muted";
       loading_suggestions.textContent = "Loading suggestions...";
       tag_suggestions.append(loading_suggestions);
+      if (field_tags_is_empty) {
+        loading_suggestions.remove();
+        var field_titles = $("#field-title").val();
+        field_titles.split(" ").forEach((title) => {
+          if (title.length > 3) {
+            appendTags(title);
+          }
+        });
+      }
       var tags = selectedTags.split(",");
       if (tags.length) {
         var tag = tags[tags.length - 1];
