@@ -30,7 +30,7 @@
   </div>
 
   {% set filename = (data.url.split('/')[-1] if data.url else '') %}
-  <div id="filename" style="display:{% if is_kobo %}none{%else%}block{% endif %};>
+  <div id="filename" style="display:{% if is_kobo %}none{%else%}block{% endif %};">
     {{filename}}
   </div>
 
