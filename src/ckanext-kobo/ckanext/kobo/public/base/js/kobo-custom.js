@@ -72,12 +72,14 @@ document.addEventListener("DOMContentLoaded", () => {
   if (kfUrlField && assetUidField && tokenField) {
     kfUrlField.addEventListener("change", logConstructedUrl);
     assetUidField.addEventListener("input", logConstructedUrl);
+    tokenField.addEventListener("input", logConstructedUrl);
     validateKoboButton.addEventListener("click", getInfo);
   }
 });
 
 document.addEventListener("DOMContentLoaded", () => {
   const uploadDiv = document.getElementById("field-resource-upload-block");
+  const urlTypeField = document.getElementById("field-url-type");
 
   const uploadField = document.getElementById("field-resource-upload");
   const urlField = document.getElementById("field-resource-url");
@@ -90,6 +92,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const buttonKobo = document.getElementById("button-kobo");
 
   const showUpload = () => {
+    urlField.style.display = "block";
+    urlTypeField.value = "upload";
     uploadDiv.style.display = "block";
     urlKoboFields.style.display = "none";
     buttonUpload.classList.add("active");
@@ -101,10 +105,12 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const showKobo = () => {
-    if (uploadField.value) {
+    if (uploadField.value || urlField.value) {
       alertDiv.innerHTML = `You have already uploaded a file. If you want to use Kobo, please remove the file first.`;
       alertDiv.style.display = "block";
     } else {
+      urlField.style.display = "none";
+      urlTypeField.value = "kobo";
       uploadDiv.style.display = "none";
       urlKoboFields.style.display = "block";
       buttonKobo.classList.add("active");
@@ -136,6 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Upload File change event
   const uploadField = document.getElementById("field-resource-upload");
   const nameField = document.getElementById("field-name");
+  const urlField = document.getElementById("field-resource-url");
 
   if (uploadField) {
     uploadField.addEventListener("change", (event) => {
@@ -144,6 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (nameField.value === "") {
           nameField.value = file.name;
         }
+        urlField.value = file.name;
       }
     });
   }
