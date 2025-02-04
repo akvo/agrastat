@@ -1,8 +1,11 @@
-#!/bin/bash
+#!/bin/sh
 
-if [[ $CKAN__PLUGINS == *"harvest"* ]]; then
-      echo "Harvest db upgrade"
-      ckan --config=$CKAN_INI db upgrade -p harvest
-else
-   echo "Not configuring harvest"
-fi
+case "$CKAN__PLUGINS" in
+  *"harvest"*)
+    echo "Harvest db upgrade"
+    ckan --config="$CKAN_INI" db upgrade -p harvest
+    ;;
+  *)
+    echo "Not configuring harvest"
+    ;;
+esac
