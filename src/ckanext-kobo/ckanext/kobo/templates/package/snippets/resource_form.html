@@ -9,18 +9,14 @@
   <div class="alert-label" id="info-alert" style="display:none;"></div>
 
   <div class="resource-type-block">
-    {% if is_upload or is_new %}
     <div class='btn {% if is_upload or is_new%}btn-info active {% elif is_kobo %}btn-label{% else %}btn-label {% endif %}' id="button-upload">
       <i class="fa fa-cloud-upload"></i>
       Upload
     </div>
-    {% endif %}
-    {% if is_kobo or is_new %}
     <div class="btn {%if is_kobo%}btn-info active{%else%} btn-label {%endif%}" id="button-kobo">
       <i class="fa fa-archive"></i>
       Kobo Toolbox
     </div>
-    {% endif %}
   </div>
 
   <div class="form-group control-full">
@@ -29,7 +25,6 @@
     </div>
   </div>
 
-  {% if is_upload or is_new %}
   <div class="form-group control-full" id="field-resource-upload-block" style="display:{%if is_kobo%}none{%else%}block{%endif%};">
     <div class="controls ">
       <input id="field-resource-upload" type="file" name="upload" value="" placeholder="" class="form-control hidden">
@@ -37,12 +32,10 @@
       <div class="remove-upload" id="remove-upload">Remove</div>
     </div>
   </div>
-  {% endif %}
 
   {{ form.input('url_type', id='field-url-type', value=data.url_type, classes=['hidden']) }}
 
 
-  {% if is_kobo or is_new %}
   <div class="kobo-input" id="kobo-inputs" style="display:{%if is_kobo%}block{%else%}none{%endif%};">
     <span class="border-text">Kobo Settings</span>
   {{ form.select('kf_url', id='field-kf-url', label=_('KF URL'), options=[{'value':'', 'text': 'Please Select'},{'value': 'https://kf.kobotoolbox.org', 'text':'kf.kobotoolbox.org'},{'value':'https://eu.kobotoolbox.org','text':'eu.kobotoolbox.org'}], selected=data.kf_url, error=errors.kf_url, classes=['control-full']) }}
@@ -51,6 +44,5 @@
   {{ form.input('kobo_token', id='field-kobo-token', label=_('API Token'), placeholder=_('eg. yoiufas79834J'), type='password',value=data.kobo_token, error=errors.kobo_token, classes=['control-full']) }}
   <a class="btn btn-info disabled" id="validate-kobo">Validate</a>
   </div>
-  {% endif %}
 
 {% endblock %}
