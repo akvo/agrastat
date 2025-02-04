@@ -1,13 +1,49 @@
 {% ckan_extends %}
 
 {% block basic_fields_url %}
-  {{ super() }}
-  <div class="kobo-input">
+  {% set is_upload = (data.url_type == 'upload') %}
+  {% set errors = errors or {} %}
+  {% set is_new = (not data.name) %}
+  {% set is_kobo = (data.url_type == 'kobo') %}
+
+  <div class="alert-label" id="info-alert" style="display:none;"></div>
+
+  <div class="resource-type-block">
+    <div class='btn {% if is_upload or is_new%}btn-info active {% elif is_kobo %}btn-label{% else %}btn-label {% endif %}' id="button-upload">
+      <i class="fa fa-cloud-upload"></i>
+      Upload
+    </div>
+    <div class="btn {%if is_kobo%}btn-info active{%else%} btn-label {%endif%}" id="button-kobo">
+      <i class="fa fa-archive"></i>
+      Kobo Toolbox
+    </div>
+  </div>
+
+  <input id="field-resource-url" type="url" name="url" value="{{data.url}}" placeholder="" class="hidden">
+
+  <div class="form-group control-full" id="field-resource-upload-block" style="display:{%if is_kobo%}none{%else%}block{%endif%};">
+    <div class="controls ">
+      <input id="field-resource-upload" type="file" name="upload" value="" placeholder="" class="form-control hidden">
+      <label for="field-resource-upload" class="browse-upload">Upload</label>
+      <div class="remove-upload" id="remove-upload" style="display:{% if is_new or is_kobo%}none{%else%}block{%endif%};">Remove</div>
+    </div>
+  </div>
+
+  {% set filename = (data.url.split('/')[-1] if data.url else '') %}
+  <div id="filename" style="display:{% if is_kobo %}none{%else%}block{% endif %};">
+    {{filename}}
+  </div>
+
+  {{ form.input('url_type', id='field-url-type', value=data.url_type, classes=['hidden']) }}
+
+
+  <div class="kobo-input" id="kobo-inputs" style="display:{%if is_kobo%}block{%else%}none{%endif%};">
     <span class="border-text">Kobo Settings</span>
-  {{ form.select('kf_url', id='field-kf-url', label=_('KF URL'), options=[{'value': 'https://kf.kobotoolbox.org', 'text':'kf.kobotoolbox.org'},{'value':'https://eu.kobotoolbox.org','text':'eu.kobotoolbox.org'}], selected=data.kf_url, error=errors.kf_url, classes=['control-full']) }}
+  {{ form.select('kf_url', id='field-kf-url', label=_('KF URL'), options=[{'value':'', 'text': 'Please Select'},{'value': 'https://kf.kobotoolbox.org', 'text':'kf.kobotoolbox.org'},{'value':'https://eu.kobotoolbox.org','text':'eu.kobotoolbox.org'}], selected=data.kf_url, error=errors.kf_url, classes=['control-full']) }}
   {{ form.input('asset_uid', id='field-asset-uid', label=_('Asset UID'), placeholder=_('eg. yoiufas79834J'), value=data.asset_uid, error=errors.asset_uid, classes=['control-full']) }}
   {{ form.input('hash', id='field-hash', label=_('Hash'), value=data.hash, error=errors.hash, classes=['hidden']) }}
   {{ form.input('kobo_token', id='field-kobo-token', label=_('API Token'), placeholder=_('eg. yoiufas79834J'), type='password',value=data.kobo_token, error=errors.kobo_token, classes=['control-full']) }}
-  <a class="btn btn-info" id="validate-kobo">Validate</a>
+  <a class="btn btn-info disabled" id="validate-kobo">Validate</a>
   </div>
+
 {% endblock %}
