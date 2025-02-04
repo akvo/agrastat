@@ -18,6 +18,12 @@ RUN pip3 install -e 'git+https://github.com/ckan/ckanext-mapviews.git@master#egg
 # Copy custom initialization scripts
 COPY docker-entrypoint.d/* /docker-entrypoint.d/
 
+# Copy cron file
+COPY cron.txt ${APP_DIR}/
+
+# Import the crontab
+RUN crontab ${APP_DIR}/cron.txt
+
 # Apply any patches needed to CKAN core or any of the built extensions (not the
 # runtime mounted ones)
 COPY patches ${APP_DIR}/patches
