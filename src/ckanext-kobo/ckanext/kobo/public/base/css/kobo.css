@@ -45,13 +45,11 @@
 #field-resource-upload-block .controls{
     height: 36px;
 }
-#field-resource-url {
-    margin-bottom: -67px;
-    padding-left: 90px;
-}
-#field-resource-url:disabled {
-    background-color: #f5f5f5;
-    cursor: default;
+#filename {
+    font-size: 12px;
+    margin-bottom: 20px;
+    margin-top: -20px;
+    padding: 5px;
 }
 .controls .browse-upload,
 .controls .remove-upload {
@@ -72,8 +70,8 @@
     content: "";
 }
 .controls .remove-upload {
-    top: -31px;
-    left: calc(100% - 83px);
+    top: -30px;
+    left: 90px;
     background-color: #a94442;
     color: #fff;
 }

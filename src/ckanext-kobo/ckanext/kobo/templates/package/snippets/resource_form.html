@@ -19,18 +19,19 @@
     </div>
   </div>
 
-  <div class="form-group control-full">
-    <div class="controls">
-    <input id="field-resource-url" type="url" name="url" value="{{data.url}}" placeholder="" class="form-control" style="display:{%if is_upload or is_new %}block{%else%}none{%endif%};" disabled>
-    </div>
-  </div>
+  <input id="field-resource-url" type="url" name="url" value="{{data.url}}" placeholder="" class="hidden">
 
   <div class="form-group control-full" id="field-resource-upload-block" style="display:{%if is_kobo%}none{%else%}block{%endif%};">
     <div class="controls ">
       <input id="field-resource-upload" type="file" name="upload" value="" placeholder="" class="form-control hidden">
       <label for="field-resource-upload" class="browse-upload">Upload</label>
-      <div class="remove-upload" id="remove-upload">Remove</div>
+      <div class="remove-upload" id="remove-upload" style="display:{% if is_new or is_kobo%}none{%else%}block{%endif%};">Remove</div>
     </div>
+  </div>
+
+  {% set filename = (data.url.split('/')[-1] if data.url else '') %}
+  <div id="filename" style="display:{% if is_kobo %}none{%else%}block{% endif %};>
+    {{filename}}
   </div>
 
   {{ form.input('url_type', id='field-url-type', value=data.url_type, classes=['hidden']) }}

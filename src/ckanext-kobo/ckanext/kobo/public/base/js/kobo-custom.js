@@ -23,7 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
       validateKoboButton.classList.remove("disabled");
       const mergedUrl = `${window.location.protocol}//${window.location.host}/api/2/kobo/${assetUid}`;
       finalUrl.value = mergedUrl;
-      finalUrl.readOnly = true;
       hashField.value = assetUid;
     } else {
       validateKoboButton.classList.add("disabled");
@@ -79,6 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 document.addEventListener("DOMContentLoaded", () => {
   const uploadDiv = document.getElementById("field-resource-upload-block");
+  const filenameDiv = document.getElementById("filename");
   const urlTypeField = document.getElementById("field-url-type");
 
   const uploadField = document.getElementById("field-resource-upload");
@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const buttonKobo = document.getElementById("button-kobo");
 
   const showUpload = () => {
-    urlField.style.display = "block";
+    filenameDiv.style.display = "block";
     urlTypeField.value = "upload";
     uploadDiv.style.display = "block";
     urlKoboFields.style.display = "none";
@@ -109,7 +109,8 @@ document.addEventListener("DOMContentLoaded", () => {
       alertDiv.innerHTML = `You have already uploaded a file. If you want to use Kobo, please remove the file first.`;
       alertDiv.style.display = "block";
     } else {
-      urlField.style.display = "none";
+      filenameDiv.style.display = "none";
+      filenameDiv.innerHTML = "";
       urlTypeField.value = "kobo";
       uploadDiv.style.display = "none";
       urlKoboFields.style.display = "block";
@@ -125,10 +126,12 @@ document.addEventListener("DOMContentLoaded", () => {
   if (removeUpload) {
     removeUpload.addEventListener("click", () => {
       uploadField.value = "";
+      filenameDiv.innerHTML = "";
       urlField.value = "";
       const nameField = document.getElementById("field-name");
       nameField.value = "";
       alertDiv.style.display = "none";
+      removeUpload.style.display = "none";
     });
   }
 
@@ -142,7 +145,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // Upload File change event
   const uploadField = document.getElementById("field-resource-upload");
   const nameField = document.getElementById("field-name");
-  const urlField = document.getElementById("field-resource-url");
+  const removeUpload = document.getElementById("remove-upload");
+
+  const filenameDiv = document.getElementById("filename");
 
   if (uploadField) {
     uploadField.addEventListener("change", (event) => {
@@ -151,7 +156,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (nameField.value === "") {
           nameField.value = file.name;
         }
-        urlField.value = file.name;
+        filenameDiv.innerHTML = "File: " + file.name;
+        removeUpload.style.display = "block";
       }
     });
   }
