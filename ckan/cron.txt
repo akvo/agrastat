@@ -1,0 +1,1 @@
+@hourly ckan tracking update && ckan search-index rebuild -r
