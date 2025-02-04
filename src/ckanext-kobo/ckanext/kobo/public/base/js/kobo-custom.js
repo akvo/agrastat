@@ -83,6 +83,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const urlField = document.getElementById("field-resource-url");
   const urlKoboFields = document.getElementById("kobo-inputs");
 
+  const removeUpload = document.getElementById("remove-upload");
+  const alertDiv = document.getElementById("info-alert");
+
   const buttonUpload = document.getElementById("button-upload");
   const buttonKobo = document.getElementById("button-kobo");
 
@@ -99,7 +102,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const showKobo = () => {
     if (uploadField.value) {
-      const alertDiv = document.getElementById("info-alert");
       alertDiv.innerHTML = `You have already uploaded a file. If you want to use Kobo, please remove the file first.`;
       alertDiv.style.display = "block";
     } else {
@@ -113,6 +115,16 @@ document.addEventListener("DOMContentLoaded", () => {
       buttonUpload.classList.remove("btn-info");
     }
   };
+
+  if (removeUpload) {
+    removeUpload.addEventListener("click", () => {
+      uploadField.value = "";
+      urlField.value = "";
+      const nameField = document.getElementById("field-name");
+      nameField.value = "";
+      alertDiv.style.display = "none";
+    });
+  }
 
   if (buttonUpload && buttonKobo) {
     buttonUpload.addEventListener("click", showUpload);

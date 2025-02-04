@@ -1,7 +1,7 @@
 {% ckan_extends %}
 
 {% block basic_fields_url %}
-  <div class="alert-label" id="info-alert">Test</div>
+  <div class="alert-label" id="info-alert" style="display:none;"></div>
 
   {{ form.input('url', label='', id='field-resource-url', type='url', placeholder=placeholder, value=data.get('url'), error=errors.get('url'), classes=['control-full']) }}
 
