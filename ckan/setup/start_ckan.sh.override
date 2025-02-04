@@ -62,6 +62,8 @@ if [ $? -eq 0 ]
 then
     # Start supervisord
     supervisord --configuration /etc/supervisord.conf &
+    # Start cron
+    crond &
     # Start uwsgi
     uwsgi $UWSGI_OPTS
 else
