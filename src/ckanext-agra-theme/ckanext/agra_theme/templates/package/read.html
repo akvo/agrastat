@@ -34,18 +34,10 @@
     <tr>
     <td class="key-name">Originating Countries</td>
     <td>
-        {% set country_names = [] %}
-        {% for selected_country in pkg.countries %}
-            {% for country in h.countries %}
-                {% if country.value == selected_country %}
-                    {% do country_names.append(country.name) %}
-                {% endif %}
-            {% endfor %}
-        {% endfor %}
-        {% if country_names %}
-            {% for name in country_names %}
+        {% if pkg.countries %}
+            {% for country in pkg.countries %}
                 {%- if loop.last and loop.index > 1 %} and {% elif not loop.first %}, {% endif -%}
-                {{ name }}
+                {{ country }}
             {% endfor %}
         {% endif %}
     </td>

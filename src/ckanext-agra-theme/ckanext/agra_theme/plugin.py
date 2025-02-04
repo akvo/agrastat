@@ -1,3 +1,4 @@
+import logging
 from flask import Blueprint, render_template, request, abort, jsonify
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
@@ -7,6 +8,9 @@ from .routes.pages.statistic import page_statistic
 from .middleware import AgraThemeMiddleware
 from .data.countries import country_list, create_countries
 from .data.value_chain import value_chain_list, create_value_chains
+from .cli import agra as agra_cli
+
+log = logging.getLogger(__name__)
 
 # Blueprint
 agra_blueprint = Blueprint("agra", __name__)
@@ -54,6 +58,31 @@ class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
     plugins.implements(plugins.IRoutes, inherit=True)
     plugins.implements(plugins.ITemplateHelpers)
     plugins.implements(plugins.IDatasetForm)
+    plugins.implements(plugins.IPackageController, inherit=True)
+    plugins.implements(plugins.IFacets, inherit=True)
+    plugins.implements(plugins.IClick)
+
+    # IClick (CLI)
+    def get_commands(self):
+        return [agra_cli]
+
+    def before_index(self, data_dict):
+        extras = data_dict.get("extras", {})
+        log.info(f"Before index - Original Extras: {extras}")
+        for key, value in extras.items():
+            if key == "business_line":
+                data_dict[f"business_lines"] = [value]
+            data_dict[f"extras_{key}"] = value
+        return data_dict
+
+    def dataset_facets(self, facets_dict, package_type):
+        """Modify facets to include package_extras and vocabularies."""
+        facets_dict["vocab_countries"] = toolkit._("Countries")
+        facets_dict["vocab_value_chains"] = toolkit._("Value Chains")
+        facets_dict["business_lines"] = toolkit._(
+            "Business Line"
+        )  # Custom fixed list
+        return facets_dict
 
     def get_helpers(self):
         return {
@@ -78,6 +107,7 @@ class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
                 "Monthly",
                 "Daily",
             ],
+            "facet_disabled": ["license_id"],
         }
 
     def get_blueprint(self):

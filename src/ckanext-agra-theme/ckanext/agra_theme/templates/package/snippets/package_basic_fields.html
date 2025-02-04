@@ -56,13 +56,13 @@
   <div class="controls">
     <select id="countries" name="countries" data-module="autocomplete" multiple="multiple" placeholder="Please Select">
       {% for country in h.countries  %}
-        <option value="{{ country.value }}"
+        <option value="{{ country }}"
           {% for selected_country in data.countries  %}
-          {% if selected_country == country.value %}
+          {% if selected_country == country %}
             selected
           {% endif %}
           {% endfor %}>
-          {{ country.name }}
+          {{ country }}
         </option>
       {% endfor %}
     </select>
