@@ -19,6 +19,23 @@
   </div>
 </div>
 <div class="form-group control-medium">
+  <label class="control-label is-required" for="value_chains">{{ _("Linked Value Chains") }}</label>
+  <div class="controls">
+    <select id="value_chains" name="value_chains" data-module="autocomplete" multiple="multiple" placeholder="Please Select">
+      {% for value_chain in h.value_chains %}
+        <option value="{{ value_chain }}"
+          {% for selected_value_chain in data.value_chains %}
+            {% if selected_value_chain == value_chain.value %}
+              selected
+            {% endif %}
+          {% endfor %}>
+          {{ value_chain }}
+        </option>
+      {% endfor %}
+    </select>
+  </div>
+</div>
+<div class="form-group control-medium">
   <label class="control-label is-required" for="data-source">{{ _("Data Source") }}</label>
   <div class="controls">
     <select id="data-source" name="data_source" class="form-control">
@@ -37,7 +54,7 @@
 <div class="form-group control-medium">
   <label class="control-label is-required" for="countries">{{ _("Originating Countries") }}</label>
   <div class="controls">
-    <select id="countries" name="countries" data-module="autocomplete" multiple="multiple">
+    <select id="countries" name="countries" data-module="autocomplete" multiple="multiple" placeholder="Please Select">
       {% for country in h.countries  %}
         <option value="{{ country.value }}"
           {% for selected_country in data.countries  %}

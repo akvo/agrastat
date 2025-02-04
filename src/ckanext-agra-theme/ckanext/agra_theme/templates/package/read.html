@@ -11,6 +11,25 @@
     <tr>
     <td class="key-name">Business Line</td><td>{{ pkg.business_line }}</td></tr>
     <tr>
+    <td class="key-name">Linked Value Chains</td>
+    <td>
+        {% set value_chain_names = [] %}
+        {% for selected_value_chain in pkg.value_chains %}
+            {% for value_chain in h.value_chains %}
+                {% if value_chain == selected_value_chain %}
+                    {% do value_chain_names.append(value_chain) %}
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+        {% if value_chain_names %}
+            {% for name in value_chain_names %}
+                {%- if loop.last and loop.index > 1 %} and {% elif not loop.first %}, {% endif -%}
+                {{ name }}
+            {% endfor %}
+        {% endif %}
+    </td>
+    </tr>
+    <tr>
     <td class="key-name">Data Source</td><td>{{ pkg.data_source }}</td></tr>
     <tr>
     <td class="key-name">Originating Countries</td>

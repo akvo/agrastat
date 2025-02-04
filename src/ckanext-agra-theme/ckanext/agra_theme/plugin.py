@@ -6,6 +6,7 @@ from .routes.api.countries import api_countries
 from .routes.pages.statistic import page_statistic
 from .middleware import AgraThemeMiddleware
 from .data.countries import country_list, create_countries
+from .data.value_chain import value_chain_list, create_value_chains
 
 # Blueprint
 agra_blueprint = Blueprint("agra", __name__)
@@ -43,6 +44,7 @@ schema_names = [
 ]
 
 create_countries()
+create_value_chains()
 
 
 class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
@@ -56,6 +58,7 @@ class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
     def get_helpers(self):
         return {
             "countries": country_list,
+            "value_chains": value_chain_list,
             "business_lines": [
                 "Policy and Advocacy",
                 "Sustainable Farming",
@@ -106,7 +109,11 @@ class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
                 "countries": [
                     toolkit.get_validator("not_empty"),
                     toolkit.get_converter("convert_to_tags")("countries"),
-                ]
+                ],
+                "value_chains": [
+                    toolkit.get_validator("not_empty"),
+                    toolkit.get_converter("convert_to_tags")("value_chains"),
+                ],
             }
         )
         for schema_name in schema_names:
@@ -148,7 +155,11 @@ class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
                 "countries": [
                     toolkit.get_converter("convert_from_tags")("countries"),
                     toolkit.get_validator("ignore_missing"),
-                ]
+                ],
+                "value_chains": [
+                    toolkit.get_converter("convert_from_tags")("value_chains"),
+                    toolkit.get_validator("ignore_missing"),
+                ],
             }
         )
         for schema_name in schema_names:
