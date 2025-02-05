@@ -82,7 +82,7 @@ class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
         facets_dict.pop("license_id", None)
         facets_dict["vocab_countries"] = toolkit._("Countries")
         facets_dict["vocab_value_chains"] = toolkit._("Value Chains")
-        facets_dict["business_lines"] = toolkit._("Business Lines")
+        facets_dict["vocab_business_lines"] = toolkit._("Business Lines")
         return facets_dict
 
     def dataset_facets(self, facets_dict, package_type):
