@@ -8,6 +8,7 @@ from .routes.pages.statistic import page_statistic
 from .middleware import AgraThemeMiddleware
 from .data.countries import country_list, create_countries
 from .data.value_chain import value_chain_list, create_value_chains
+from .data.business_line import business_line_list, create_business_lines
 from .cli import agra as agra_cli
 
 log = logging.getLogger(__name__)
@@ -19,7 +20,6 @@ api_countries(agra_blueprint)
 page_statistic(agra_blueprint)
 
 schema_names = [
-    {"name": "business_line", "required": True},
     {"name": "data_source", "required": True},
     {
         "name": "methodology",
@@ -49,6 +49,7 @@ schema_names = [
 
 create_countries()
 create_value_chains()
+create_business_lines()
 
 
 class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
@@ -70,8 +71,6 @@ class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
         extras = data_dict.get("extras", {})
         log.info(f"Before index - Original Extras: {extras}")
         for key, value in extras.items():
-            if key == "business_line":
-                data_dict[f"business_lines"] = [value]
             data_dict[f"extras_{key}"] = value
         return data_dict
 
@@ -79,23 +78,14 @@ class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
         """Modify facets to include package_extras and vocabularies."""
         facets_dict["vocab_countries"] = toolkit._("Countries")
         facets_dict["vocab_value_chains"] = toolkit._("Value Chains")
-        facets_dict["business_lines"] = toolkit._(
-            "Business Line"
-        )  # Custom fixed list
+        facets_dict["business_lines"] = toolkit._("Business Lines")
         return facets_dict
 
     def get_helpers(self):
         return {
             "countries": country_list,
             "value_chains": value_chain_list,
-            "business_lines": [
-                "Policy and Advocacy",
-                "Sustainable Farming",
-                "Gender and Youth",
-                "Cessa",
-                "IMTF",
-                "Monitoring and Evaluation",
-            ],
+            "business_lines": business_line_list,
             "data_sources": ["Internal", "External"],
             "methodologies": [
                 "Primary Data Collection",
@@ -144,6 +134,10 @@ class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
                     toolkit.get_validator("not_empty"),
                     toolkit.get_converter("convert_to_tags")("value_chains"),
                 ],
+                "business_lines": [
+                    toolkit.get_validator("not_empty"),
+                    toolkit.get_converter("convert_to_tags")("business_lines"),
+                ],
             }
         )
         for schema_name in schema_names:
@@ -188,6 +182,12 @@ class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
                 ],
                 "value_chains": [
                     toolkit.get_converter("convert_from_tags")("value_chains"),
+                    toolkit.get_validator("ignore_missing"),
+                ],
+                "business_lines": [
+                    toolkit.get_converter("convert_from_tags")(
+                        "business_lines"
+                    ),
                     toolkit.get_validator("ignore_missing"),
                 ],
             }

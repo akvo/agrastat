@@ -3,15 +3,17 @@
 {% block package_basic_fields_description %}
 {{ form.markdown('notes', id='field-notes', label=_('Related Knowledge Management Products'), placeholder=_('eg. Some useful notes about the data'), value=data.notes, error=errors.notes) }}
 <div class="form-group control-medium">
-  <label class="control-label is-required" for="business-line">{{ _("Business Lines") }}</label>
+  <label class="control-label is-required" for="business-lines">{{ _("Business Line") }}</label>
   <div class="controls">
-    <select id="bussines-line" name="business_line" class="form-control">
+    <select id="bussines-lines" name="business_lines" class="form-control">
       <option value="">Please Select</option>
       {% for business_line in h.business_lines %}
         <option value="{{ business_line }}"
-            {% if data.business_line == business_line %}
-              selected="selected"
-            {% endif %}>
+            {% for selected_business_line in data.business_lines %}
+              {% if selected_business_line == business_line %}
+                selected="selected"
+              {% endif %}
+            {% endfor %}>
           {{ business_line }}
         </option>
       {% endfor %}
@@ -25,7 +27,7 @@
       {% for value_chain in h.value_chains %}
         <option value="{{ value_chain }}"
           {% for selected_value_chain in data.value_chains %}
-            {% if selected_value_chain == value_chain.value %}
+            {% if selected_value_chain == value_chain %}
               selected
             {% endif %}
           {% endfor %}>

@@ -9,7 +9,15 @@
     <table class="package-custom-info">
     <tbody>
     <tr>
-    <td class="key-name">Business Line</td><td>{{ pkg.business_line }}</td></tr>
+    <td class="key-name">Business Line</td>
+    <td>
+        {% if pkg.business_lines %}
+        {% for business_line in pkg.business_lines %}
+            {{business_line}}
+        {% endfor %}
+        {% endif %}
+    </td>
+    </tr>
     <tr>
     <td class="key-name">Linked Value Chains</td>
     <td>
