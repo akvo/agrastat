@@ -74,12 +74,25 @@ class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
             data_dict[f"extras_{key}"] = value
         return data_dict
 
-    def dataset_facets(self, facets_dict, package_type):
-        """Modify facets to include package_extras and vocabularies."""
+    def modify_facets(self, facets_dict, unlisted=[]):
+        if not facets_dict:
+            facets_dict = {}
+        for filter_facet in unlisted:
+            facets_dict.pop(filter_facet, None)
+        facets_dict.pop("license_id", None)
         facets_dict["vocab_countries"] = toolkit._("Countries")
         facets_dict["vocab_value_chains"] = toolkit._("Value Chains")
         facets_dict["business_lines"] = toolkit._("Business Lines")
         return facets_dict
+
+    def dataset_facets(self, facets_dict, package_type):
+        return self.modify_facets(facets_dict)
+
+    def organization_facets(self, facets_dict, organization_type, package_type):
+        return self.modify_facets(facets_dict, unlisted=["organization"])
+
+    def group_facets(self, facets_dict, group_type, package_type):
+        return self.modify_facets(facets_dict, unlisted=["groups"])
 
     def get_helpers(self):
         return {
