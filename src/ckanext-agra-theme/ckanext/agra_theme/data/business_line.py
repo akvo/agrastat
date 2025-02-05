@@ -1,34 +1,24 @@
-import requests
 import ckan.plugins.toolkit as toolkit
 
-country_list = [
-    "Malawi",
-    "Zambia",
-    "Ghana",
-    "Senegal",
-    "Rwanda",
-    "Kenya",
-    "Uganda",
-    "Mali",
-    "Cote d Ivoire",
-    "Mozambique",
-    "Nigeria",
-    "Ethiopia",
-    "Tanzania",
-    "Burkina Faso",
-    "Togo",
+business_line_list = [
+    "Policy and Advocacy",
+    "Sustainable Farming",
+    "Gender and Youth",
+    "Cessa",
+    "IMTF",
+    "Monitoring and Evaluation",
 ]
 
 
-def create_countries():
+def create_business_lines():
     user = toolkit.get_action("get_site_user")({"ignore_auth": True}, {})
     context = {"user": user["name"]}
     try:
-        data = {"id": "countries"}
+        data = {"id": "business_lines"}
         toolkit.get_action("vocabulary_show")(context, data)
     except toolkit.ObjectNotFound:
-        data = {"name": "countries"}
+        data = {"name": "business_lines"}
         vocab = toolkit.get_action("vocabulary_create")(context, data)
-        for tag in country_list:
+        for tag in business_line_list:
             data = {"name": tag, "vocabulary_id": vocab["id"]}
             toolkit.get_action("tag_create")(context, data)
