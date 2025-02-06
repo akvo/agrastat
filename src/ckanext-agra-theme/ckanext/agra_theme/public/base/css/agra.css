@@ -1,7 +1,10 @@
 body {
     background: url("../../../base/images/agra-bg.jpg");
-    background-size: cover;
-    background-position: right;
+}
+.home-video-bg {
+    position: fixed;
+    top: 0;
+    z-index: -1;
 }
 .row-flex {
     display: flex;
@@ -10,6 +13,19 @@ body {
 }
 .hero {
     background: none;
+}
+.navbar-static-top {
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+.navbar-static-top.sticky {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.row.wrapper {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 .navbar-nav > li > a {
     padding-top: 10px;
@@ -295,6 +311,11 @@ table.package-custom-info td.key-name {
     padding: 0px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+}
+.statistic-box:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    moz-box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 .statistic-box .stat-title{
   text-align: center;
@@ -322,4 +343,10 @@ table.package-custom-info td.key-name {
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+    cursor: pointer;
+}
+.home-content.video-content .video-frame:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    moz-box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }

@@ -112,11 +112,10 @@ function createRadarOption(data) {
 if (window.location.pathname === "/") {
   const header = document.querySelector(".masthead");
   const navLinks = document.querySelectorAll(".masthead .nav > li > a");
-  header.style.backgroundColor = "transparent";
+  header.style.backgroundColor = "rgba(114,191,68,.7)";
   navLinks.forEach((link) => {
     link.style.color = "white";
   });
-
   // fetch stat data from the api api/2/statistic/countries
   fetch("/api/2/statistic/countries?limit=10")
     .then((response) => response.json())
@@ -146,4 +145,13 @@ if (window.location.pathname === "/") {
       const chart = echarts.init(document.getElementById("chart-value-chains"));
       chart.setOption(createRadarOption(data));
     });
+} else {
+  window.addEventListener("scroll", () => {
+    const navbar = document.querySelector(".navbar-static-top");
+    if (window.scrollY > 0) {
+      navbar.classList.add("sticky");
+    } else {
+      navbar.classList.remove("sticky");
+    }
+  });
 }

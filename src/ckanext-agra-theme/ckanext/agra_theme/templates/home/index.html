@@ -1,6 +1,9 @@
 {% extends "page.html" %}{% block subtitle %}{{ _("Welcome") }}{% endblock %} {%
 block maintag %}{% endblock %} {% block toolbar %}{% endblock %} {% block
 content %}
+<video autoplay loop muted playsinline data-spai=1 class='home-video-bg' src="https://agra.org/wp-content/themes/agra/assets/videos/agra-002-1.mp4"
+poster="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxOTIwIDEwODAiIHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIGRhdGEtdT0iaHR0cHMlM0ElMkYlMkZhZ3JhLm9yZyUyRndwLWNvbnRlbnQlMkZ0aGVtZXMlMkZhZ3JhJTJGYXNzZXRzJTJGaW1nJTJGZGVmYXVsdC1iZy5qcGciIGRhdGEtdz0iMTkyMCIgZGF0YS1oPSIxMDgwIiBkYXRhLWJpcD0iIj48L3N2Zz4="
+       ></video>
 <div id="home" class="homepage">
   <div id="content" class="container">{{ self.flash() }}</div>
   {% block primary_content %}
