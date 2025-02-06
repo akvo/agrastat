@@ -1,15 +1,13 @@
 // if landing page .masthead backgroun should be transparent
 
 function createBarOption(data, override = {}) {
+  data = data.sort((a, b) => a.value - b.value);
   return {
     tooltip: {
       trigger: "axis",
       axisPointer: {
         type: "shadow",
       },
-    },
-    legend: {
-      data: ["Datasets"],
     },
     grid: {
       left: "3%",
@@ -41,7 +39,7 @@ function createBarOption(data, override = {}) {
     },
     series: [
       {
-        name: "Cases",
+        name: "Datasets",
         type: "bar",
         data: data.map((x) => x.value),
         label: {
@@ -69,7 +67,7 @@ function createRadarOption(data) {
     radar: {
       // shape: 'circle',
       indicator: data.map((x) => ({
-        name: x.name,
+        name: `${x.name}[${x.value}]`,
         max: max,
       })),
       axisName: {
@@ -120,7 +118,7 @@ if (window.location.pathname === "/") {
   });
 
   // fetch stat data from the api api/2/statistic/countries
-  fetch("/api/2/statistic/countries")
+  fetch("/api/2/statistic/countries?limit=10")
     .then((response) => response.json())
     .then((data) => {
       /* example of response {name:'uganda', value: 1}  */
