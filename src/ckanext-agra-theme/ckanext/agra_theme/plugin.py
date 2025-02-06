@@ -4,6 +4,7 @@ import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 from .routes.api.agrovoc import api_agrovoc
 from .routes.api.countries import api_countries
+from .routes.api.stats import api_stats
 from .routes.pages.statistic import page_statistic
 from .middleware import AgraThemeMiddleware
 from .data.countries import country_list, create_countries
@@ -17,6 +18,7 @@ log = logging.getLogger(__name__)
 agra_blueprint = Blueprint("agra", __name__)
 api_agrovoc(agra_blueprint)
 api_countries(agra_blueprint)
+api_stats(agra_blueprint)
 page_statistic(agra_blueprint)
 
 schema_names = [

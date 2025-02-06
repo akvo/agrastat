@@ -248,6 +248,11 @@ span.private-views {
     text-align: center;
     color: #08743f;
 }
+#home .home-content h1 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
 
 .padding-top-20 {
     padding-top: 20px;
@@ -275,4 +280,26 @@ table.package-custom-info td.key-name {
     content: "*";
     color: #c6898b;
     padding-right: 5px;
+}
+
+/* Statistics Home */
+.statistic-box {
+    background: #ebebeb;
+    border-radius: 5px;
+    border: 1px solid #e5e5e5;
+    margin-bottom: 20px;
+    padding: 0px;
+}
+.statistic-box .stat-title{
+  text-align: center;
+  font-weight: bold;
+  padding: 10px;
+  background: #08743f;
+  color: #fff;
+  border-radius: 5px 5px 0px 0px;
+  border: solid 1px #02592e;
+}
+.statistic-box .stat-chart{
+    margin: 10px;
+    height: 400px;
 }
