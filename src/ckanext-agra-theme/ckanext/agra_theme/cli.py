@@ -2,6 +2,7 @@ import click
 import subprocess
 from ckan.model import Session, Vocabulary, Tag, PackageTag
 from .data.countries import country_list, create_countries
+from .dev.fixer import fixer
 
 
 @click.group(name="agra")
@@ -13,6 +14,7 @@ def agra():
 @agra.command(name="fixer-dev")
 def fixer_dev():
     """Runs the fixer-dev command"""
+    fixer()
     click.echo("Running fixer-dev for Agra!")
 
 
