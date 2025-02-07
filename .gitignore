@@ -10,3 +10,4 @@ _solr/schema.xml
 _src/*
 local/*
 .env
+scripts/*
