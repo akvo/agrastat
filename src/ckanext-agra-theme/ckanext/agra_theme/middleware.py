@@ -33,6 +33,7 @@ class AgraThemeMiddleware:
             ".xlsx",
             ".tsv",
             ".json",
+            ".mp4",
         ]
 
         if path.startswith(tuple(resource_paths)) or path.endswith(
