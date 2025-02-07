@@ -1,4 +1,5 @@
 import logging
+from collections import OrderedDict
 from flask import Blueprint, render_template, request, abort, jsonify
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
@@ -79,13 +80,32 @@ class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
     def modify_facets(self, facets_dict, unlisted=[]):
         if not facets_dict:
             facets_dict = {}
+
+        # Remove unwanted facets
         for filter_facet in unlisted:
             facets_dict.pop(filter_facet, None)
         facets_dict.pop("license_id", None)
-        facets_dict["vocab_countries"] = toolkit._("Countries")
-        facets_dict["vocab_value_chains"] = toolkit._("Value Chains")
-        facets_dict["vocab_business_lines"] = toolkit._("Business Lines")
-        return facets_dict
+
+        # Define the new order
+        vocab_keys = {  # Ensure vocab keys come first
+            "vocab_business_lines": toolkit._("Business Lines"),
+            "vocab_value_chains": toolkit._("Value Chains"),
+            "vocab_countries": toolkit._("Countries"),
+            "tags": facets_dict.get("tags"),
+        }
+
+        # Create an ordered dictionary
+        ordered_facets = OrderedDict()
+
+        # Add vocab facets first
+        ordered_facets.update(vocab_keys)
+
+        # Add remaining facets (except tags) in the original order
+        for key, value in facets_dict.items():
+            if key not in vocab_keys and key != "tags":
+                ordered_facets[key] = value
+
+        return ordered_facets
 
     def dataset_facets(self, facets_dict, package_type):
         return self.modify_facets(facets_dict)
