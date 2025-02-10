@@ -32,6 +32,7 @@ class AgraThemeMiddleware:
             ".xls",
             ".xlsx",
             ".tsv",
+            ".dta",
             ".json",
             ".mp4",
         ]
