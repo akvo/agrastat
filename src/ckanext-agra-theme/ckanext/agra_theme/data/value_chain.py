@@ -5,7 +5,7 @@ value_chain_list = [
     "Soya Beans",
     "Avocado",
     "Chili",
-    "Poutry",
+    "Poultry",
     "Maize",
     "Wheat",
 ]
