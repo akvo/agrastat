@@ -7,6 +7,7 @@ from .routes.api.agrovoc import api_agrovoc
 from .routes.api.countries import api_countries
 from .routes.api.stats import api_stats
 from .routes.pages.statistic import page_statistic
+from .routes.pages.external import page_external
 from .middleware import AgraThemeMiddleware
 from .data.countries import country_list, create_countries
 from .data.value_chain import value_chain_list, create_value_chains
@@ -21,6 +22,7 @@ api_agrovoc(agra_blueprint)
 api_countries(agra_blueprint)
 api_stats(agra_blueprint)
 page_statistic(agra_blueprint)
+page_external(agra_blueprint)
 
 schema_names = [
     {"name": "data_source", "required": True},

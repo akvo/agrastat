@@ -40,10 +40,17 @@
       {% block header_site_navigation %}
       <nav class="section navigation">
         <ul class="nav nav-pills">
-          {% if c.userobj %} {% block header_site_navigation_tabs %} {{
-          h.build_nav_main( ('dataset.search', _('Datasets')),
-          ('organization.index', _('Organizations')), ('group.index',
-          _('Groups')), ('home.about', _('About')) ) }} {% endblock %}
+          {% if c.userobj %}
+            {% block header_site_navigation_tabs %} {{
+              h.build_nav_main(
+                ('dataset.search', _('Datasets')),
+                ('organization.index', _('Organizations')),
+                ('group.index', _('Groups')),
+                ('home.about', _('About')),
+                ('agra.faostat_page', _('FAOSTAT'))
+              )
+            }}
+          {% endblock %}
           <!-- New Account dropdown menu -->
           <li class="dropdown account-dropdown">
             <a

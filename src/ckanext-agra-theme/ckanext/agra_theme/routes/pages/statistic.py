@@ -1,19 +1,6 @@
 import requests
 import ckan.plugins.toolkit as toolkit
 
-# Extra Dataset
-ignore_missing = toolkit.get_validator("ignore_missing")
-not_empty = toolkit.get_validator("not_empty")
-
-
-def dataset_schema():
-    schema = {
-        "extras": {
-            "country": [ignore_missing],
-        },
-    }
-    return schema
-
 
 def page_statistic(blueprint):
     @blueprint.route("/dataset/<dataset_id>/file_size")

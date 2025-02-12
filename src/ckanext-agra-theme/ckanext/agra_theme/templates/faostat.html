@@ -1,0 +1,11 @@
+{% extends "page.html" %}
+{% block subtitle %}{{ _('About') }}{% endblock %}
+{% block breadcrumb_content %}
+<li class="active">{% link_for _('FAOSTAT'), 'home.index' %}</li>
+{% endblock %}
+{% block primary %}
+  <iframe src="https://www.fao.org/faostat/en/#data" width="100%" height="560px">
+  </iframe>
+{% endblock %}
+{% block secondary %}
+{% endblock %}
