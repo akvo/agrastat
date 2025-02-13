@@ -1,13 +1,19 @@
-{% extends "base.html" %} {%- block page -%} {% block skip %}
+{% extends "base.html" %}
+{%- block page -%}
+  {% block skip %}
 <div class="sr-only sr-only-focusable">
   <a href="#content">{{ _('Skip to content') }}</a>
 </div>
 {% endblock %} {# Override the header on a page by page basis by extending this
 block. If making sitewide header changes it is preferable to override the
-header.html file. #} {%- block header %} {% include "header.html" %} {% endblock
--%} {# The content block allows you to replace the content of the page if needed
-#} {%- block content %} {% block maintag %}
-<div class="main">
+header.html file. #}
+{%- block header %}
+  {% include "header.html" %}
+{% endblock -%}
+{# The content block allows you to replace the content of the page if needed #}
+{%- block content %}
+  {% block maintag %}
+    <div class="main">
   {% endblock %}
   <div id="content" class="container">
     {% block main_content %} {% block flash %}
@@ -79,9 +85,17 @@ header.html file. #} {%- block header %} {% include "header.html" %} {% endblock
     {% endblock %}
   </div>
 </div>
-{% endblock -%} {# Override the footer on a page by page basis by extending this
-block. If making sitewide header changes it is preferable to override the
-footer.html-u file. #} {%- block footer %} {% include "footer.html" %} {%
-endblock -%} {%- endblock -%} {%- block scripts %} {% asset 'base/main' %} {%
-asset 'base/ckan' %} {% if g.tracking_enabled %} {% asset 'base/tracking' %} {%
-endif %} {{ super() }} {% endblock -%}
+{% endblock -%}
+{# Override the footer on a page by page basis by extending this block. If making sitewide header changes it is preferable to override the footer.html-u file. #}
+{%- block footer %}
+  {% include "footer.html" %}
+  {% endblock -%}
+{%- endblock -%}
+{%- block scripts %}
+  {% asset 'base/main' %}
+  {% asset 'base/ckan' %}
+  {% if g.tracking_enabled %}
+    {% asset 'base/tracking' %}
+  {% endif %}
+  {{ super() }}
+{% endblock -%}

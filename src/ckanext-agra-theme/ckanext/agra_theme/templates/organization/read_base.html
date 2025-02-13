@@ -1,0 +1,6 @@
+{% ckan_extends %}
+
+{% block content_primary_nav %}
+  {{super()}}
+  {{ h.build_nav_icon(group_type + '.index', _('Statistic'), id=group_dict.name, icon='info-circle') }}
+{% endblock %}
