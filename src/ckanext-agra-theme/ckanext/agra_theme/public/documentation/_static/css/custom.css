@@ -1,0 +1,27 @@
+tr.row-even td {
+  background-color: none;
+}
+.wy-side-nav-search {
+  display: block;
+  width: 300px;
+  padding: 0.809em;
+  margin-bottom: 0.809em;
+  z-index: 200;
+  background-color: #eaeaea;
+  text-align: center;
+  color: #fcfcfc;
+}
+
+.wy-side-nav-search > .sidebar-admonition {
+  color: black;
+}
+.wy-side-nav-search .admonition .last {
+  text-align: left;
+  font-size: 85%;
+}
+.wy-side-nav-search input[type="text"] {
+  width: 100%;
+  border-radius: 5px;
+  padding: 6px 12px;
+  border-color: #0b753d;
+}

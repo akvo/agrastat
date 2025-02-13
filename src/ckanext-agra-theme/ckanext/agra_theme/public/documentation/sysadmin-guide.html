@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sysadmin guide &mdash; AGRASTAT  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="User guide" href="user-guide.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+	<a href="contents.html">
+	
+	<img src="_static/agrastatlogo.png" class="logo" alt="Logo"/>
+  </a>
+  
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="user-guide.html">User guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Sysadmin guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#creating-a-sysadmin-account">Creating a sysadmin account</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#customizing-look-and-feel">Customizing look and feel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#managing-organizations-and-datasets">Managing organizations and datasets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#moving-a-dataset-between-organizations">Moving a dataset between organizations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#permanently-deleting-datasets">Permanently deleting datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#managing-users">Managing users</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="contents.html">AGRASTAT</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="contents.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Sysadmin guide</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/sysadmin-guide.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="sysadmin-guide">
+<h1>Sysadmin guide<a class="headerlink" href="#sysadmin-guide" title="Permalink to this headline"></a></h1>
+<p>This guide covers the administration features of AGRASTAT, such as managing
+users and datasets. These features are available via the web user interface to
+a user with sysadmin rights. The guide assumes familiarity with the
+<a class="reference internal" href="user-guide.html"><span class="doc">User guide</span></a>.</p>
+<p>Certain administration tasks are not available through the web UI but need
+access to the server where AGRASTAT is installed. These include the range of
+configuration options using the site’s “config” file, documented in
+<span class="xref std std-doc">/maintaining/configuration</span>, and those available via
+<span class="xref std std-doc">/maintaining/cli</span>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>A sysadmin user can access and edit any organizations, view and change user
+details, and permanently delete datasets. You should carefully consider who has
+access to a sysadmin account on your AGRASTAT system.</p>
+</div>
+<section id="creating-a-sysadmin-account">
+<h2>Creating a sysadmin account<a class="headerlink" href="#creating-a-sysadmin-account" title="Permalink to this headline"></a></h2>
+<p>Normally, a sysadmin account is created as part of the process of setting up
+AGRASTAT. If one does not already exist, you will need to create a sysadmin user, or give sysadmin rights to an existing user. To do this you will need to ask Akvo Tech Person to create a sysadmin user.</p>
+<p>Adding more sysadmin accounts is done in the same way. It cannot be done via
+the web UI.</p>
+</section>
+<section id="customizing-look-and-feel">
+<span id="admin-page"></span><h2>Customizing look and feel<a class="headerlink" href="#customizing-look-and-feel" title="Permalink to this headline"></a></h2>
+<p>Some simple customizations to customize the ‘look and feel’ of your AGRASTAT site
+are available via the UI, at <code class="docutils literal notranslate"><span class="pre">https://agrastat.akvotest.org/ckan-admin/config/</span></code>.</p>
+<img alt="_images/customize_look_and_feel.jpg" src="_images/customize_look_and_feel.jpg" />
+<p>Here you can edit the following:</p>
+<dl class="simple">
+<dt>Site title</dt><dd><p>This title is used in the HTML &lt;title&gt; of pages served by AGRASTAT (which may
+be displayed on your browser’s title bar). For example if your site title is
+“AGRASTAT Demo”, the home page is called “Welcome - AGRASTAT Demo”. The site title is
+also used in a few other places, e.g. in the alt-text of the main site logo.</p>
+</dd>
+<dt>Style</dt><dd><p>Choose one of five colour schemes for the default theme.</p>
+</dd>
+<dt>Site tag line</dt><dd><p>This is not used in AGRASTAT’s current default themes, but may be used in
+future.</p>
+</dd>
+<dt>Site tag logo</dt><dd><p>A URL for the site logo, used at the head of every page of AGRASTAT.</p>
+</dd>
+<dt>About</dt><dd><p>Text that appears on the “about” page, <code class="docutils literal notranslate"><span class="pre">https://agrastat.akvotest.org/about</span></code>. You
+can use <a class="reference external" href="http://daringfireball.net/projects/markdown/basics">Markdown</a> here. If it is left empty, a standard text describing AGRASTAT
+will appear.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Intro text</dt><dd><p>This text appears prominently on the home page of your site.</p>
+</dd>
+<dt>Custom CSS</dt><dd><p>For simple style changes, you can add CSS code here which will be added to
+the <code class="docutils literal notranslate"><span class="pre">&lt;head&gt;</span></code> of every page.</p>
+</dd>
+</dl>
+</section>
+<section id="managing-organizations-and-datasets">
+<h2>Managing organizations and datasets<a class="headerlink" href="#managing-organizations-and-datasets" title="Permalink to this headline"></a></h2>
+<p>A sysadmin user has full access to user accounts, organizations and datasets.
+For example, you have access to every organization as if you were a member of
+that organization. Thus most management operations are done in exactly the same
+way as in the normal web interface.</p>
+<p>For example, to add or delete users to an organization, change a user’s role in
+the organization, delete the organization or edit its description, etc, visit
+the organization’s home page. You will see the ‘Admin’ button as if you were a
+member of the organization. You can use this to perform all organization admin
+functions. For details, see the <a class="reference internal" href="user-guide.html"><span class="doc">User guide</span></a>.</p>
+<p>Similarly, to edit, update or delete a dataset, go to the dataset page and use
+the ‘Edit’ button. As an admin user you can see all datasets including those
+that are private to an organization. They will show up when doing a dataset
+search.</p>
+<section id="moving-a-dataset-between-organizations">
+<h3>Moving a dataset between organizations<a class="headerlink" href="#moving-a-dataset-between-organizations" title="Permalink to this headline"></a></h3>
+<p>To move a dataset between organizations, visit the dataset’s Edit page. Choose
+the appropriate entry from the “organization” drop-down list, and press “Save”.</p>
+<img alt="_images/move_dataset_between_organizations.jpg" src="_images/move_dataset_between_organizations.jpg" />
+</section>
+</section>
+<section id="permanently-deleting-datasets">
+<h2>Permanently deleting datasets<a class="headerlink" href="#permanently-deleting-datasets" title="Permalink to this headline"></a></h2>
+<p>A dataset which has been deleted is not permanently removed from AGRASTAT; it is
+simply marked as ‘deleted’ and will no longer show up in search, etc. The
+dataset’s URL cannot be re-used for a new dataset.</p>
+<p>To permanently delete (“purge”) a dataset:</p>
+<ul class="simple">
+<li><p>Navigate to the dataset’s “Edit” page, and delete it.</p></li>
+<li><p>Visit <code class="docutils literal notranslate"><span class="pre">https://agrastat.akvotest.org/ckan-admin/trash/</span></code>.</p></li>
+</ul>
+<p>This page shows all deleted datasets and allows you to delete them permanently.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This operation cannot be reversed!</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>At present, it is not possible to purge organizations or groups using the
+web UI. This can only be done with access to the server, by directly deleting
+them from AGRASTAT’s database.</p>
+</div>
+</section>
+<section id="managing-users">
+<h2>Managing users<a class="headerlink" href="#managing-users" title="Permalink to this headline"></a></h2>
+<p>To find a user’s profile, go to <code class="docutils literal notranslate"><span class="pre">https://agrastat.akvotest.org/user/</span></code>. You can search
+for users in the search box provided.</p>
+<p>You can search by any part of the user profile, including their e-mail address.
+This is useful if, for example, a user has forgotten their user ID. For
+non-sysadmin users, the search on this page will only match public parts of the
+profile, so they cannot search by e-mail address.</p>
+<p>On their user profile, you will see a “Manage” button. AGRASTAT displays the user
+settings page. You can delete the user or change any of its settings, including
+their username, name and password.</p>
+<img alt="_images/manage_users.jpg" src="_images/manage_users.jpg" />
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 2.2: </span>Previous versions of AGRASTAT didn’t allow you to delete users through the
+web interface.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation"
+         aria-label="footer navigation">
+      
+      
+        <a href="user-guide.html" class="btn btn-neutral"
+           title="User guide">
+           <span class="icon fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr></hr>
+
+  <p class="copyright">
+      2024, Akvo
+  </p>
+
+  <p>
+    <a href="https://github.com/akvo/agrastat">Source</a>
+    &mdash;
+    <a href="https://github.com/akvo/agrastat/issues">Issues</a>
+  </p>
+
+  <p>
+    AGRASTAT Test Site:
+    <a href="https://agrastat.akvotest.org">agrastat.akvotest.org</a>
+  </p>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a>  provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
