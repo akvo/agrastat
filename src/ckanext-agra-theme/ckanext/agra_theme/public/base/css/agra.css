@@ -364,3 +364,13 @@ table.package-custom-info td.key-name {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     moz-box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
+
+/* Contact */
+.contact-form legend {
+    display: none;
+}
+.contact-form.form-horizontal .form-group.control-full,
+.contact-form.form-horizontal .form-group.control-medium {
+    margin-left: 0px;
+    margin-right: 0px;
+}
