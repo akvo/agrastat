@@ -47,10 +47,41 @@
                 ('organization.index', _('Organizations')),
                 ('group.index', _('Groups')),
                 ('home.about', _('About')),
-                ('agra.faostat_page', _('FAOSTAT'))
               )
             }}
           {% endblock %}
+
+          <li class="dropdown account-dropdown">
+            <a
+              href="#"
+              class="dropdown-toggle"
+              data-toggle="dropdown"
+              role="button"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <span class="username">{{ _('Support') }}</span>
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a
+                  href="/documentation/index.html"
+                  title="{{ _('Documentation') }}"
+                >
+                  <span class="text">{{ _('Documentation') }}</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/faostat"
+                  title="{{ _('FAOSTAT') }}"
+                >
+                  <span class="text">{{ _('FAOSTAT') }}</span>
+                </a>
+              </li>
+            </ul>
+          </li>
           <!-- New Account dropdown menu -->
           <li class="dropdown account-dropdown">
             <a

@@ -32,6 +32,21 @@ body {
     padding-bottom: 10px;
     line-height: 20px;
 }
+
+.dropdown-menu > li > a {
+  display: block;
+  padding: 10px 10px;
+  clear: both;
+  font-weight: 400;
+  line-height: 1.42857143;
+  color: #333333;
+  white-space: nowrap;
+}
+.dropdown-menu > li:not(:last-child) {
+  border-bottom: 1px solid #ddd;
+}
+
+
 .stages li.active .highlight {
     background: #08743f;
 }
@@ -330,7 +345,6 @@ table.package-custom-info td.key-name {
     margin: 10px;
     height: 400px;
 }
-
 /* Home Video Content*/
 .home-content.video-content {
     margin-top: 20px;
