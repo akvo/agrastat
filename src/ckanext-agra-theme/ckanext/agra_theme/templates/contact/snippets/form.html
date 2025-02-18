@@ -18,12 +18,9 @@
             {% block contact_form_legend %}
             {% endblock %}
             {% block contact_form_fields %}
-                <div class="form-group control-medium">
-                <label class="control-label" for="field-email"> Contact Email</label>
-                <div class="controls ">
-                <input id="field-name" type="text" name="email" value={{data.email}} placeholder="" class="form-control" disabled>
-                </div>
-                </div>
+                {{ form.input('email', label=_('Contect Email'), id='field-email', type='email',
+                              value=data.email, error=errors.email, classes=['control-medium'],
+                              is_required=true) }}
 
                 {{ form.input('name', label=_('Contact Name'), id='field-name', value=data.name, error=errors.name, classes=['control-medium'], is_required=true) }}
 
