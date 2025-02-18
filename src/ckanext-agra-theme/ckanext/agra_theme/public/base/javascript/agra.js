@@ -155,3 +155,28 @@ if (window.location.pathname === "/") {
     }
   });
 }
+
+if (window.location.pathname === "/contact") {
+  const form = document.querySelector("form");
+  const title = document.querySelector("#field-title");
+  const subject = document.querySelector("#field-subject");
+  const bussinessLine = document.querySelector("#field-business-line");
+
+  subject.value = bussinessLine.value;
+
+  bussinessLine.addEventListener("change", (e) => {
+    const titleValue = title.value;
+    const value = e.target.value;
+    if (titleValue === "") {
+      subject.value = value;
+    } else {
+      subject.value = `${titleValue} - ${value}`;
+    }
+  });
+
+  title.addEventListener("change", (e) => {
+    const value = e.target.value;
+    const businessLineValue = bussinessLine.value;
+    subject.value = `${value} - ${businessLineValue}`;
+  });
+}
