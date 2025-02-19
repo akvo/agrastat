@@ -92,38 +92,6 @@ possibility of a wiki-like datahub.
 Using AGRASTAT
 --------------
 
-Registering and logging in
-==========================
-
-.. note::
-
-    Registration is needed for most publishing features and for personalization
-    features, such as "following" datasets. It is not needed to search for and
-    download data.
-
-To create a user ID, use the "Register" link at the top of any page. AGRASTAT will
-ask for the following:
-
-* *Username* -- choose a username using only letters, numbers, - and _ characters.
-  For example, "jbloggs" or "joe_bloggs93".
-
-* *Full name* -- to be displayed on your user profile
-
-* *E-mail address* -- this will not be visible to other users
-
-* *Password* -- enter the same password in both boxes
-
-.. image:: /images/register_account.jpg
-
-If there are problems with any of the fields, AGRASTAT will tell you the problem
-and enable you to correct it. When the fields are filled in correctly, AGRASTAT
-will create your user account and automatically log you in.
-
-.. note::
-
-    It is perfectly possible to have more than one user account attached to the
-    same e-mail address. For this reason, choose a username you will remember, as
-    you will need it when logging in.
 
 Features for publishers
 =======================
@@ -157,16 +125,32 @@ actual data will be added in step 4.)
 * *Title* -- this title will be unique across AGRASTAT, so make it brief but specific.
   E.g. "UK population density by region" is better than "Population figures".
 
-* *Description* -- You can add a longer description of the dataset here, including
+* *Related Knowledge Management Products* -- You can add a longer description of the dataset here, including
   information such as where the data is from and any information that people will
   need to know when using the data.
+
+* *Business line* -- The specific industry or domain the dataset supports, defining its primary application and target users
+
+* *Linked value chain* -- The specific commodity or sector the dataset tracks, such as maize, beans, poultry, or fisheries.
+
+* *Data source* -- The origin of the dataset
+
+* *Originating country* --  The country where the dataset was first collected, processed, or maintained.
+
+* *Data owner* -- The name of the person or organization responsible for producing
+  the data.
+
+* *Email* -- an e-mail address for the data owner, to which queries about
+  the data should be sent.
 
 * *Tags* -- here you may add tags that will help people find the data and link it
   with other related data. Examples could be "population", "crime", "East
   Anglia". Hit the <return> key between tags. If you enter a tag wrongly, you can
   use its delete button to remove it before saving the dataset.
 
-* *License* -- it is important to include license information so that people know
+* *Legal* -- Outlines all legal requirements, regulatory compliance, licensing, and contractual terms associated with the dataset. It ensures that data usage adheres to applicable laws and protects the rights of all stakeholders
+
+* *License/sharing agreement* -- it is important to include license information so that people know
   how they can use the data. This field should be a drop-down box. If you need to
   use a license not on the list, contact your site administrator.
 
@@ -176,11 +160,19 @@ actual data will be added in step 4.)
   only one organization. If this is you, AGRASTAT will have chosen your organization
   by default and you need not do anything.)
 
+* *Data visibility* -- a ``Public`` dataset is public and can be seen by any user of the
+  site. A ``Private`` dataset can only be seen by members of the organization owning
+  the dataset and will not show up in searches by other users.
+
+* *PII Status* -- Indicates whether the dataset contains Personally Identifiable Information (PII) such as names, addresses, or ID numbers.
+
+* *Anonymization needed* -- Specifies if the dataset requires anonymization to protect sensitive or personal information before sharing
+
 .. image:: /images/add_dataset_1.jpg
 
 .. note::
 
-    By default, the only required field on this page is the title. However, it
+    The required fields are denoted by an asterik (*). However, it
     is good practice to include, at the minimum, a short description and, if
     possible, the license information. You should ensure that you choose the
     correct organization for the dataset, since at present, this cannot be changed
@@ -221,28 +213,7 @@ information, but it is good practice to add it:
 the "Save & add another" button. When you have finished adding resources,
 select "Next: Additional Info".
 
-**Step 7**. AGRASTAT displays the "Additional data" screen.
 
-* *Visibility* -- a ``Public`` dataset is public and can be seen by any user of the
-  site. A ``Private`` dataset can only be seen by members of the organization owning
-  the dataset and will not show up in searches by other users.
-
-* *Author* -- The name of the person or organization responsible for producing
-  the data.
-
-* *Author e-mail* -- an e-mail address for the author, to which queries about
-  the data should be sent.
-
-* *Maintainer / maintainer e-mail* -- If necessary, details for a second person
-  responsible for the data.
-
-* *Custom fields* -- If you want the dataset to have another field, you can add
-  the field name and value here. E.g. "Year of publication". Note that if there
-  is an extra field that is needed for a large number of datasets, you should
-  talk to your site administrator about changing the default schema and dataset
-  forms.
-
-.. image:: /images/add_dataset_3.jpg
 
 .. note::
 
@@ -273,7 +244,7 @@ organization, then any registered user can edit it.)
 
 #. Go to the dataset's page. You can find it by entering the title in the search box on any page.
 
-#. Select the "Edit" button, which you should see above the dataset title.
+#. Select the "Manage" button, which you should see above the dataset title.
 
 #. AGRASTAT displays the "Edit dataset" screen. You can edit any of the fields
    (Title, Description, Dataset, etc), change the visibility (Private/Public), and
@@ -299,6 +270,26 @@ Adding, deleting and editing resources
 #. When you have finished editing, select the button marked "Update resource"
    (or "Add", for a new resource) to save your changes. Alternatively, to delete
    the resource, select the "Delete resource" button.
+
+Adding, deleting and editing Kobo resources
+--------------------------------------------
+
+#. Go to the dataset's "Edit dataset" page (steps 1-2 above).
+
+#. In the left sidebar, there are options for editing resources. You can select
+   an existing resource (to edit or delete it), or select "Add new resource".
+
+#. If adding a new Kobo resource, Select the URL to Kobo Toolbox
+
+#. Provide the asset id from ypour kobo toolbox instance
+
+#. Provide the api key for the user from Kobo toolbox
+
+#. Click on validate to check if the asset id and api key are correct
+
+#. When you have finished, select the "Add" button to save your changes.
+
+.. image:: /images/add_kobo_data.jpg
 
 
 Deleting a dataset
