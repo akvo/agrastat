@@ -114,11 +114,10 @@ Provide an email address and select the role for the new user
 
 .. image:: /images/add_member_2.jpg
 
-Click on Add Member to complete the process. The user will receive an email to the just added address where they can verify their account and set a password
+Click on Add Member to complete the process.
 
 If there are problems with any of the fields, AGRASTAT will tell you the problem
-and enable you to correct it. When the fields are filled in correctly, AGRASTAT
-will create your user account and automatically log you in.
+and enable you to correct it. When the fields are filled in correctly, the user will receive an email to the just added address where they can verify their account and set a password
 
 
 
