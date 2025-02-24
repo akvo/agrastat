@@ -104,7 +104,7 @@ then
     done
 fi
 
-CKAN_RUN="/usr/bin/ckan -c $CKAN_INI run -H 0.0.0.0"
+CKAN_RUN="ckan -c $CKAN_INI run -H 0.0.0.0"
 CKAN_OPTIONS=""
 if [ "$USE_DEBUGPY_FOR_DEV" = true ] ; then
     CKAN_RUN="/usr/bin/python -m debugpy --listen 0.0.0.0:5678 $CKAN_RUN"
@@ -117,8 +117,11 @@ fi
 
 # Start the development server as the ckan user with automatic reload
 while true; do
-    #Start the crond
+    # Start cron
     crond &
+    # Start CKAN Worker
+    ckan jobs worker &
+    #Start the CKAN
     $CKAN_RUN $CKAN_OPTIONS
     echo Exit with status $?. Restarting.
     sleep 2
