@@ -86,7 +86,7 @@ possibility of a wiki-like datahub.
     may be slightly different or unavailable. For example, in an official AGRASTAT
     instance in a production setting, the site administrator will probably have
     made it impossible for users to create new organizations via the UI. You can
-    try out all the features described at http://demo.AGRASTAT.org.
+    try out all the features described at http://agrastat.akvotest.org.
 
 --------------
 Using AGRASTAT
@@ -679,3 +679,32 @@ Make the changes you require and then select the "Update Profile" button.
 
     If you change your username, AGRASTAT will log you out. You will need to log
     back in using your new username.
+
+
+Getting in touch
+================
+
+Contact
+--------------------------
+Contact page is designed to help you reach out to the support team quickly and efficiently. 
+Whether you have questions, feedback, or need assistance.
+
+To use the contact page, use the "Resources" link at the top of any page and select "Contact".
+
+.. image:: /images/contact_us_1.jpg
+
+ AGRASTAT will ask for the following:
+
+* Contact Email (Required)
+
+* Contact Name (Required)
+
+* Subject (Required)
+
+* Business Line (Optional)
+
+* Message (Required)
+
+.. image:: /images/contact_us_2.jpg
+
+Once all required fields are filled, click the Submit button to send your inquiry. You should receive a confirmation that your message has been sent.
