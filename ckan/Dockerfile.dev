@@ -1,4 +1,4 @@
-FROM ckan/ckan-dev:2.9.11
+FROM ckan/ckan-dev:2.11
 
 # Install any extensions needed by your CKAN instance
 # - Make sure to add the plugins to CKAN__PLUGINS in the .env file
@@ -34,10 +34,23 @@ FROM ckan/ckan-dev:2.9.11
 # Clone the extension(s) your are writing for your own project in the `src` folder
 # to get them mounted in this image at runtime
 
+USER root
+
+RUN apt-get install -y \
+    python3-dev \
+    python3-lxml \
+    libgeos-dev \
+    libmagic1 \
+    unzip \
+    uchardet \
+    cron
+
+RUN wget https://github.com/jqnatividad/qsv/releases/download/0.133.1/qsv-0.133.1-x86_64-unknown-linux-gnu.zip
+RUN unzip qsv-0.133.1-x86_64-unknown-linux-gnu.zip
+RUN rm qsv-0.133.1-x86_64-unknown-linux-gnu.zip
+RUN mv qsv* /usr/local/bin
+
 RUN pip3 install --no-cache-dir setuptools==61.0
-
-RUN apk add python3-dev py3-lxml geos-dev
-
 RUN pip3 install -e 'git+https://github.com/ckan/ckanext-basiccharts.git@master#egg=ckanext-basiccharts'
 RUN pip3 install -e 'git+https://github.com/keitaroinc/ckanext-visualize.git@master#egg=ckanext-visualize'
 RUN pip3 install geojson shapely ckanext-pdfview ckanext-contact
@@ -45,9 +58,7 @@ RUN pip3 install -e 'git+https://github.com/ckan/ckanext-geoview.git@v0.2.0#egg=
 RUN pip3 install -e 'git+https://github.com/ckan/ckanext-spatial.git@master#egg=ckanext-spatial'
 RUN pip3 install -e 'git+https://github.com/ckan/ckanext-hierarchy.git@master#egg=ckanext-hierarchy' && pip3 install -r ${APP_DIR}/src/ckanext-hierarchy/requirements.txt
 RUN pip3 install -e 'git+https://github.com/ckan/ckanext-mapviews.git@master#egg=ckanext-mapviews'
-
-# Copy custom initialization scripts
-COPY docker-entrypoint.d/* /docker-entrypoint.d/
+RUN pip3 install -e "git+https://github.com/dathere/datapusher-plus.git@1.0.4#egg=datapusher-plus" && pip3 install -r ${APP_DIR}/src/datapusher-plus/requirements.txt
 
 # Copy cron file
 COPY cron.txt ${APP_DIR}/
@@ -55,9 +66,14 @@ COPY cron.txt ${APP_DIR}/
 # Import the crontab
 RUN crontab ${APP_DIR}/cron.txt
 
+# Copy custom initialization scripts
+COPY --chown=ckan-sys:ckan-sys docker-entrypoint.d/* /docker-entrypoint.d/
+
 # Apply any patches needed to CKAN core or any of the built extensions (not the
 # runtime mounted ones)
-COPY patches ${APP_DIR}/patches
+COPY --chown=ckan-sys:ckan-sys patches ${APP_DIR}/patches
+
+#USER ckan
 
 RUN for d in $APP_DIR/patches/*; do \
         if [ -d $d ]; then \

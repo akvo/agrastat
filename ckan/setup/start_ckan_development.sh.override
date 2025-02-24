@@ -66,14 +66,16 @@ ckan config-tool $CKAN_INI -s DEFAULT "debug = true"
 
 # Set up the Secret key used by Beaker and Flask
 # This can be overriden using a CKAN___BEAKER__SESSION__SECRET env var
-if grep -E "beaker.session.secret ?= ?$" ckan.ini
+if grep -qE "SECRET_KEY ?= ?$" ckan.ini
 then
-    echo "Setting beaker.session.secret in ini file"
-    ckan config-tool $CKAN_INI "beaker.session.secret=$(python3 -c 'import secrets; print(secrets.token_urlsafe())')"
+    echo "Setting SECRET_KEY in ini file"
+    ckan config-tool $CKAN_INI "SECRET_KEY=$(python3 -c 'import secrets; print(secrets.token_urlsafe())')"
+    ckan config-tool $CKAN_INI "WTF_CSRF_SECRET_KEY=$(python3 -c 'import secrets; print(secrets.token_urlsafe())')"
     JWT_SECRET=$(python3 -c 'import secrets; print("string:" + secrets.token_urlsafe())')
     ckan config-tool $CKAN_INI "api_token.jwt.encode.secret=${JWT_SECRET}"
     ckan config-tool $CKAN_INI "api_token.jwt.decode.secret=${JWT_SECRET}"
 fi
+
 
 # Update the plugins setting in the ini file with the values defined in the env var
 echo "Loading the following plugins: $CKAN__PLUGINS"
@@ -104,7 +106,7 @@ then
     done
 fi
 
-CKAN_RUN="/usr/bin/ckan -c $CKAN_INI run -H 0.0.0.0"
+CKAN_RUN="ckan -c $CKAN_INI run -H 0.0.0.0"
 CKAN_OPTIONS=""
 if [ "$USE_DEBUGPY_FOR_DEV" = true ] ; then
     CKAN_RUN="/usr/bin/python -m debugpy --listen 0.0.0.0:5678 $CKAN_RUN"
@@ -117,8 +119,11 @@ fi
 
 # Start the development server as the ckan user with automatic reload
 while true; do
-    #Start the crond
+    # Start cron
     crond &
+    # Start CKAN Worker
+    ckan jobs worker &
+    #Start the CKAN
     $CKAN_RUN $CKAN_OPTIONS
     echo Exit with status $?. Restarting.
     sleep 2
