@@ -437,7 +437,7 @@ repeat the search with existing filters still in place. Available filters includ
 
 * Tags
 
-*b Format
+* Format
 
 
 If datasets are tagged by geographical area, it is also possible to run AGRASTAT
@@ -681,11 +681,27 @@ Make the changes you require and then select the "Update Profile" button.
     back in using your new username.
 
 
+Dataset statistics
+==================
+Understanding the Dataset Statistics
+-------------------------------------
+The Dataset Statistics provides a visual representation of dataset distribution across different countries, business lines, and value chains. 
+This page helps users quickly analyze dataset availability and focus areas.
+
+* Top 10 Countries - This section lists the top 10 countries based on the number of datasets available. The dataset count for each country, allows users to compare dataset availability across different regions.
+
+* Business Lines Dataset - A radar chart representing the distribution of datasets across different business lines. 
+
+* Value Chains Dataset - A radar chart illustrating dataset distribution across various agricultural value chains. Each category represents a specific crop or product, with dataset counts shown in brackets.
+
+.. image:: /images/dataset_statistics.jpg
+
+
 Getting in touch
 ================
 
 Contact
---------------------------
+--------
 Contact page is designed to help you reach out to the support team quickly and efficiently. 
 Whether you have questions, feedback, or need assistance.
 
@@ -693,17 +709,17 @@ To use the contact page, use the "Resources" link at the top of any page and sel
 
 .. image:: /images/contact_us_1.jpg
 
- AGRASTAT will ask for the following:
+AGRASTAT will ask for the following:
 
-* Contact Email (Required)
+* Contact Email 
 
-* Contact Name (Required)
+* Contact Name
 
-* Subject (Required)
+* Subject 
 
-* Business Line (Optional)
+* Business Line 
 
-* Message (Required)
+* Message
 
 .. image:: /images/contact_us_2.jpg
 
