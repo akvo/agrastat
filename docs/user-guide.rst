@@ -101,7 +101,7 @@ Adding users and logging in
     features, such as "following" datasets. It is also needed to search for and
     download data. Only an administrator is able to create user accounts.
 
-To create a user ID, use the "Organization" link at the top of any page. 
+To create a user account, use the "Organization" link at the top of any page. 
 If the user belongs to multiple organisations, they need to select the organisation the new member is being added to and Click on "Manage".
 
 .. image:: /images/manage_organization.jpg
@@ -498,6 +498,29 @@ If the dataset is of interest, you can opt to be notified of changes to it by
 using the "Follow" button on the dataset page. See the section
 :ref:`managing_your_news_feed` below. You must have a user account and be
 logged in to use this feature.
+
+.. note::
+
+    If you are a member of an organization, you can also follow the organization
+    itself. This will notify you of changes to any dataset owned by the
+    organization.
+
+
+Exploring FAOSTAT datasets
+--------------------------
+
+AGRASTAT supports exploring data fro FAOSTAT. 
+
+
+To explore FAOSTAT datasets, use the "Resources" link at the top of any page and select "FAOSTAT". 
+
+.. image:: /images/resources.jpg
+
+
+Filter the dataset as needed to view or download
+
+.. image:: /images/explore_faostat.jpg
+
 
 Search in detail
 ================
