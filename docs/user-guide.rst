@@ -92,6 +92,35 @@ possibility of a wiki-like datahub.
 Using AGRASTAT
 --------------
 
+Adding users and logging in
+==========================
+
+.. note::
+
+    A user account is needed for publishing features and for personalization
+    features, such as "following" datasets. It is also needed to search for and
+    download data. Only an administrator is able to create user accounts.
+
+To create a user ID, use the "Organization" link at the top of any page. 
+If the user belongs to multiple organisations, they need to select the organisation the new member is being added to and Click on 'Manage'.
+
+.. image:: /images/manage_organization.jpg
+
+Click on 'Members' and then 'Add Member'
+
+.. image:: /images/add_member_1.jpg
+
+Provide an email address and select the role for the new user
+
+.. image:: /images/add_member_2.jpg
+
+Click on Add Member to complete the process. The user will receive an email to the just added address where they can verify their account and set a password
+
+If there are problems with any of the fields, AGRASTAT will tell you the problem
+and enable you to correct it. When the fields are filled in correctly, AGRASTAT
+will create your user account and automatically log you in.
+
+
 
 Features for publishers
 =======================
@@ -399,7 +428,18 @@ of results for your search. You can:
 
 If there are a large number of results, the filters can be very helpful, since
 you can combine filters, selectively adding and removing them, and modify and
-repeat the search with existing filters still in place.
+repeat the search with existing filters still in place. Available filters include:
+
+* Business lines
+
+* Linked value chain
+
+* Countries
+
+* Tags
+
+*b Format
+
 
 If datasets are tagged by geographical area, it is also possible to run AGRASTAT
 with an extension which allows searching and filtering of datasets by selecting
