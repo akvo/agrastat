@@ -66,7 +66,7 @@ government departments, each of which publishes data. Each organization can
 have its own workflow and authorizations, allowing it to manage its own
 publishing process.
 
-An organization's administrators can add individual users to it, with
+An organization"s administrators can add individual users to it, with
 different roles depending on the level of authorization needed. A user in an
 organization can create a dataset owned by that organization. In the default
 setup, this dataset is initially private, and visible only to other users in
@@ -102,11 +102,11 @@ Adding users and logging in
     download data. Only an administrator is able to create user accounts.
 
 To create a user ID, use the "Organization" link at the top of any page. 
-If the user belongs to multiple organisations, they need to select the organisation the new member is being added to and Click on 'Manage'.
+If the user belongs to multiple organisations, they need to select the organisation the new member is being added to and Click on "Manage".
 
 .. image:: /images/manage_organization.jpg
 
-Click on 'Members' and then 'Add Member'
+Click on "Members" and then "Add Member"
 
 .. image:: /images/add_member_1.jpg
 
@@ -114,7 +114,7 @@ Provide an email address and select the role for the new user
 
 .. image:: /images/add_member_2.jpg
 
-Click on Add Member to complete the process.
+Click on "Add Member" to complete the process.
 
 If there are problems with any of the fields, AGRASTAT will tell you the problem
 and enable you to correct it. When the fields are filled in correctly, the user will receive an email to the just added address where they can verify their account and set a password
@@ -220,7 +220,7 @@ appropriate choice at the top of the screen:
 
 * If you are giving AGRASTAT a link to the data, like
   ``http://example.com/mydata.csv``, then select "Link to a file" or "Link to an
-  API". (If you don't know what an API is, you don't need to worry about this
+  API". (If you don"t know what an API is, you don"t need to worry about this
   option - select "Link to a file".)
 
 * If the data to be added to AGRASTAT is in a file on your computer, select "Upload
@@ -252,9 +252,9 @@ select "Next: Additional Info".
 .. versionchanged:: 2.2
    Previous versions of AGRASTAT used to allow adding the dataset to existing
    groups in this step. This was changed. To add a dataset to an existing group
-   now, go to the "Group" tab in the Dataset's page.
+   now, go to the "Group" tab in the Dataset"s page.
 
-**Step 8**. Select the 'Finish' button. AGRASTAT creates the dataset and shows you
+**Step 8**. Select the "Finish" button. AGRASTAT creates the dataset and shows you
 the result. You have finished!
 
 You should be able to find your dataset by typing the title, or some relevant
@@ -270,7 +270,7 @@ You can edit the dataset you have created, or any dataset owned by an
 organization that you are a member of. (If a dataset is not owned by any
 organization, then any registered user can edit it.)
 
-#. Go to the dataset's page. You can find it by entering the title in the search box on any page.
+#. Go to the dataset"s page. You can find it by entering the title in the search box on any page.
 
 #. Select the "Manage" button, which you should see above the dataset title.
 
@@ -287,7 +287,7 @@ organization, then any registered user can edit it.)
 Adding, deleting and editing resources
 --------------------------------------
 
-#. Go to the dataset's "Edit dataset" page (steps 1-2 above).
+#. Go to the dataset"s "Edit dataset" page (steps 1-2 above).
 
 #. In the left sidebar, there are options for editing resources. You can select
    an existing resource (to edit or delete it), or select "Add new resource".
@@ -302,7 +302,7 @@ Adding, deleting and editing resources
 Adding, deleting and editing Kobo resources
 --------------------------------------------
 
-#. Go to the dataset's "Edit dataset" page (steps 1-2 above).
+#. Go to the dataset"s "Edit dataset" page (steps 1-2 above).
 
 #. In the left sidebar, there are options for editing resources. You can select
    an existing resource (to edit or delete it), or select "Add new resource".
@@ -323,7 +323,7 @@ Adding, deleting and editing Kobo resources
 Deleting a dataset
 ------------------
 
-#. Go to the dataset's "Edit dataset" page (see "Editing a dataset", above).
+#. Go to the dataset"s "Edit dataset" page (see "Editing a dataset", above).
 
 #. Select the "Delete" button.
 
@@ -334,7 +334,7 @@ Deleting a dataset
 
     The "Deleted" dataset is not completely deleted. It is hidden, so it does
     not show up in any searches, etc. However, by visiting the URL for the
-    dataset's page, it can still be seen (by users with appropriate authorization),
+    dataset"s page, it can still be seen (by users with appropriate authorization),
     and "undeleted" if necessary. If it is important to completely delete the
     dataset, contact your site administrator.
 
@@ -362,7 +362,7 @@ To create an organization:
 #. AGRASTAT displays the "Create an Organization" page.
 
 #. Enter a name for the organization, and, optionally, a description and image
-   URL for the organization's home page.
+   URL for the organization"s home page.
 
 #. Select the "Create Organization" button. AGRASTAT creates your organization and
    displays its home page. Initially, of course, the organization has no datasets.
@@ -386,7 +386,7 @@ Managing an organization
 ------------------------
 
 When you create an organization, AGRASTAT automatically makes you its "Admin".
-From the organization's page you should see an "Admin" button above the search
+From the organization"s page you should see an "Admin" button above the search
 box. When you select this, AGRASTAT displays the organization admin page. This page
 has two tabs:
 
@@ -400,7 +400,7 @@ has two tabs:
 
 By default AGRASTAT allows members of organizations with three roles:
 
-* *Member* -- can see the organization's private datasets
+* *Member* -- can see the organization"s private datasets
 
 * *Editor* -- can edit and publish datasets
 
@@ -456,7 +456,7 @@ within that organization from its home page in AGRASTAT.
 #. Select the "Organizations" link at the top of any page.
 
 #. Select the organization you are interested in. AGRASTAT will display your
-   organization's home page.
+   organization"s home page.
 
 #. Type your search query in the main search box on the page.
 
@@ -624,7 +624,7 @@ follow individual users (to be notified of changes that they make to datasets).
 .. image:: /images/manage_news_feed.jpg
 
 If you want to stop following a dataset (or organization or user), go to the
-dataset's page (e.g. by selecting a link to it in your News feed) and select
+dataset"s page (e.g. by selecting a link to it in your News feed) and select
 the "Unfollow" button.
 
 Managing your user profile
