@@ -37,39 +37,74 @@ def page_statistic(blueprint):
         )
 
     def _get_top_users_by_dataset_count(org_id):
-        users = toolkit.get_action("member_list")(
-            data_dict={"id": org_id, "object_type": "user"}
-        )
-        user_counts = []
-        for user_id, _, _ in users:
-            user = toolkit.get_action("user_show")(data_dict={"id": user_id})
-            dataset_count = len(
-                toolkit.get_action("package_search")(
-                    data_dict={
-                        "fq": f"organization:{org_id} AND creator_user_id:{user_id}"
-                    }
-                )["results"]
+        # Define the context (required for CKAN actions)
+        context = {
+            "ignore_auth": True
+        }  # Use appropriate auth settings as needed
+
+        try:
+            # Fetch all users in the organization
+            users = toolkit.get_action("member_list")(
+                context=context, data_dict={"id": org_id, "object_type": "user"}
             )
-            user_counts.append((user["name"], dataset_count))
-        return sorted(user_counts, key=lambda x: x[1], reverse=True)[:5]
+
+            # Prepare a list to store user names and their dataset counts
+            user_counts = []
+
+            # Iterate over each user in the organization
+            for user_id, _, _ in users:
+                # Fetch user details
+                user = toolkit.get_action("user_show")(
+                    context=context, data_dict={"id": user_id}
+                )
+
+                # Count datasets created by the user in the organization (including private datasets)
+                dataset_count = toolkit.get_action("package_search")(
+                    context=context,
+                    data_dict={
+                        "fq": f"organization:{org_id} AND creator_user_id:{user_id} AND (private:true OR private:false)",
+                        "rows": 0,  # We only need the count, not the actual datasets
+                    },
+                )["count"]
+
+                # Append the user's name and dataset count to the list
+                user_counts.append(
+                    (user.get("fullname") or user["name"], dataset_count)
+                )
+
+            # Sort users by dataset count in descending order and return the top 3
+            return sorted(user_counts, key=lambda x: x[1], reverse=True)[:3]
+
+        except toolkit.ObjectNotFound:
+            # Handle case where the organization ID is invalid
+            return []
+        except Exception as e:
+            # Log any unexpected errors
+            toolkit.error_shout(f"An error occurred: {str(e)}")
+            return []
 
     def _get_top_datasets_by_followers(org_id):
+        # Define the context (required for CKAN actions)
+        context = {
+            "ignore_auth": True
+        }  # Use appropriate auth settings as needed
+
         # Fetch all datasets in the organization
         datasets = toolkit.get_action("package_search")(
+            context=context,
             data_dict={
                 "fq": f"organization:{org_id}",
-                "rows": 1000,
-            }
+                "rows": 1000,  # Adjust this value based on your needs
+            },
         )["results"]
 
-        # Fetch follower counts for each dataset using package_show
+        # Fetch follower counts for each dataset using dataset_follower_count
         dataset_followers = []
         for ds in datasets:
-            dataset = toolkit.get_action("package_show")(
-                data_dict={"id": ds["id"], "include": "num_followers"}
+            follower_count = toolkit.get_action("dataset_follower_count")(
+                context=context, data_dict={"id": ds["id"]}
             )
-            num_followers = dataset.get("num_followers", 0)
-            dataset_followers.append((ds["name"], num_followers))
+            dataset_followers.append((ds["title"], follower_count))
 
         # Sort datasets by follower count and return the top 5
         return sorted(dataset_followers, key=lambda x: x[1], reverse=True)[:5]
@@ -82,5 +117,18 @@ def page_statistic(blueprint):
         for ds in datasets:
             stats = toolkit.get_action("package_show")({}, {"id": ds["id"]})
             views = stats.get("tracking_summary", {}).get("total", 0)
-            dataset_views.append((ds["name"], views))
+            dataset_views.append((ds["title"], views))
+        print(dataset_views)
+        return sorted(dataset_views, key=lambda x: x[1], reverse=True)[:5]
+
+    def _get_top_datasets_by_views(org_id):
+        datasets = toolkit.get_action("package_search")(
+            data_dict={"fq": f"organization:{org_id}", "rows": 1000}
+        )["results"]
+        dataset_views = []
+        for ds in datasets:
+            stats = toolkit.get_action("package_show")({}, {"id": ds["id"]})
+            views = stats.get("tracking_summary", {}).get("total", 0)
+            dataset_views.append((ds["title"], views))
+        print(dataset_views)
         return sorted(dataset_views, key=lambda x: x[1], reverse=True)[:5]
