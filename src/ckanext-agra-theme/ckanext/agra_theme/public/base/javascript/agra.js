@@ -198,3 +198,24 @@ if (window.location.pathname === "/contact") {
     subject.value = `${value} - ${businessLineValue}`;
   });
 }
+
+// if user is on the resource page and the file uploaded is a tabular data
+// show an alert to the user to proceed to the converter page
+if (
+  window.location.pathname.includes("/resource/") ||
+  window.location.pathname.includes("/resource/")
+) {
+  const fileInput = document.querySelector("#field-resource-upload");
+  const alertDiv = document.querySelector("#info-alert");
+  fileInput.addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    if (
+      file.name.endsWith(".xls") ||
+      file.name.endsWith(".xlsx") ||
+      file.name.endsWith(".dta")
+    ) {
+      alertDiv.style.display = "block";
+      alertDiv.innerHTML = `You are uploading a tabular data that does not support preview. Please proceed to <a target="_blank" href="/convert"><b>converter page</b></a> to convert the file`;
+    }
+  });
+}
