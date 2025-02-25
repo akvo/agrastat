@@ -1,0 +1,91 @@
+{% extends "organization/read_base.html" %}
+
+{% block breadcrumb_content %}
+  <li>{% link_for _('Organizations'), named_route=group_type+'.index' %}</li>
+  <li>{% link_for group_dict.display_name|truncate(35), named_route=group_type+'.read', id=group_dict.name %}</li>
+  <li class="active"><b>Statistic</b></li>
+{% endblock %}
+
+
+
+{% block primary_content_inner %}
+    <h1>Statistics for {{ org.title }}</h1>
+
+    <div class="row">
+        <div class="col-md-12">
+        <div class="statistic-box half">
+        <div class="stat-title">Top Countries</div>
+        <div class="stat-chart" id="chart-countries"></div>
+        </div>
+        </div>
+        <div class="col-md-6">
+        <div class="statistic-box half">
+            <div class="stat-title">Business Lines Dataset</div>
+            <div class="stat-chart" id="chart-business-lines"></div>
+        </div>
+        </div>
+        <div class="col-md-6">
+        <div class="statistic-box half">
+            <div class="stat-title">Value Chains Dataset</div>
+            <div class="stat-chart" id="chart-value-chains"></div>
+        </div>
+        </div>
+    </div>
+    <hr>
+    <!-- Table for Top Users by Dataset Count -->
+    <h2>Top Users by Dataset Count</h2>
+    <table class="table table-striped table-bordered table-condensed">
+        <thead>
+        <tr>
+            <th>User</th>
+            <th>Dataset Count</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user, count in top_users %}
+            <tr>
+            <td>{{ user }}</td>
+            <td>{{ count }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Table for Top Datasets by Followers -->
+    <h2>Top Datasets by Followers</h2>
+    <table class="table table-striped table-bordered table-condensed">
+        <thead>
+        <tr>
+            <th>Dataset</th>
+            <th>Follower Count</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for dataset, followers in top_datasets_by_followers %}
+            <tr>
+            <td>{{ dataset }}</td>
+            <td>{{ followers }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Table for Top Datasets by Views -->
+    <h2>Top Datasets by Views</h2>
+    <table class="table table-striped table-bordered table-condensed">
+        <thead>
+        <tr>
+            <th>Dataset</th>
+            <th>View Count</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for dataset, views in top_datasets_by_views %}
+            <tr>
+            <td>{{ dataset }}</td>
+            <td>{{ views }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

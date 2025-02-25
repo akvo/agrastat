@@ -109,15 +109,16 @@ function createRadarOption(data) {
   return option;
 }
 
-if (window.location.pathname === "/") {
+function renderChart(orgName = null) {
   const header = document.querySelector(".masthead");
   const navLinks = document.querySelectorAll(".masthead .nav > li > a");
   header.style.backgroundColor = "rgba(114,191,68,.7)";
   navLinks.forEach((link) => {
     link.style.color = "white";
   });
+  const extraEndpoint = orgName ? `organization=${orgName}` : "";
   // fetch stat data from the api api/2/statistic/countries
-  fetch("/api/2/statistic/countries?limit=10")
+  fetch("/api/2/statistic/countries?limit=10&" + extraEndpoint)
     .then((response) => response.json())
     .then((data) => {
       /* example of response {name:'uganda', value: 1}  */
@@ -126,7 +127,7 @@ if (window.location.pathname === "/") {
       chart.setOption(createBarOption(data));
     });
 
-  fetch("/api/2/statistic/business_lines")
+  fetch("/api/2/statistic/business_lines" + `?${extraEndpoint}`)
     .then((response) => response.json())
     .then((data) => {
       /* example of response {name:'uganda', value: 1}  */
@@ -137,7 +138,7 @@ if (window.location.pathname === "/") {
       chart.setOption(createRadarOption(data));
     });
 
-  fetch("/api/2/statistic/value_chains")
+  fetch("/api/2/statistic/value_chains" + `?${extraEndpoint}`)
     .then((response) => response.json())
     .then((data) => {
       /* example of response {name:'uganda', value: 1}  */
@@ -145,6 +146,10 @@ if (window.location.pathname === "/") {
       const chart = echarts.init(document.getElementById("chart-value-chains"));
       chart.setOption(createRadarOption(data));
     });
+}
+
+if (window.location.pathname === "/") {
+  renderChart();
 } else {
   window.addEventListener("scroll", () => {
     const navbar = document.querySelector(".navbar-static-top");
@@ -154,6 +159,19 @@ if (window.location.pathname === "/") {
       navbar.classList.remove("sticky");
     }
   });
+}
+
+function getOrganizationNameFromURL() {
+  const path = window.location.pathname;
+  const match = path.match(/\/organization\/stats\/([^\/]+)/);
+  if (match) {
+    renderChart(match[1]);
+  }
+}
+
+if (window.location.pathname.includes("/organization/stats/")) {
+  const orgName = getOrganizationNameFromURL();
+  console.log("Organization Name:", orgName);
 }
 
 if (window.location.pathname === "/contact") {

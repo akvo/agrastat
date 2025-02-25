@@ -1,6 +1,10 @@
 {% ckan_extends %}
 
+
 {% block content_primary_nav %}
   {{super()}}
-  {{ h.build_nav_icon(group_type + '.index', _('Statistic'), id=group_dict.name, icon='info-circle') }}
+  <li class="{% if request.path == '/organization/stats/' ~ group_dict.name %}active{% endif %}">
+    <a href="/organization/stats/{{ group_dict.name }}">
+      <i class="fa fa-bar-chart"></i> Statistic</a>
+  </li>
 {% endblock %}
