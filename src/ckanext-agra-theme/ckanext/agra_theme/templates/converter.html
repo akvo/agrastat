@@ -1,0 +1,41 @@
+{% extends "page.html" %}
+{% import 'macros/form.html' as form %}
+{% block subtitle %}{{ _('Converter') }}{% endblock %}
+{% block breadcrumb_content %}
+<li class="active">{% link_for _('Converter'), 'home.index' %}</li>
+{% endblock %}
+{% block primary %}
+  <div class="module-content">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="page-heading">Upload and Convert File</h1>
+            <form action="/convert" method="POST" enctype="multipart/form-data" class="form-horizontal">
+            {% set errors = {} %} {# Define an empty dictionary for errors (if needed) #}
+
+            <div class="col-md-12">
+            <!-- File Upload Field -->
+            {{ form.input(
+                label=_('File'),
+                id='file',
+                name='file',
+                type='file',
+                value='',
+                error=errors.get('file'),
+                placeholder=_('Choose a file (.xlsx, .xls, .dta)'),
+                classes=['controls'],
+                attrs={'accept': '.xlsx,.xls,.dta', 'required': 'required'}
+            ) }}
+
+            <!-- Submit Button -->
+            <div class="form-actions row">
+                {{ form.required_message() }}
+                <button type="submit" class="btn btn-primary btn-block">{{ _('Convert to CSV') }}</button>
+            </div>
+            </div>
+      </div>
+    </form>
+    </div>
+  </div>
+{% endblock %}
+{% block secondary %}
+{% endblock %}
