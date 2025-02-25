@@ -66,7 +66,7 @@ government departments, each of which publishes data. Each organization can
 have its own workflow and authorizations, allowing it to manage its own
 publishing process.
 
-An organization's administrators can add individual users to it, with
+An organization"s administrators can add individual users to it, with
 different roles depending on the level of authorization needed. A user in an
 organization can create a dataset owned by that organization. In the default
 setup, this dataset is initially private, and visible only to other users in
@@ -86,44 +86,40 @@ possibility of a wiki-like datahub.
     may be slightly different or unavailable. For example, in an official AGRASTAT
     instance in a production setting, the site administrator will probably have
     made it impossible for users to create new organizations via the UI. You can
-    try out all the features described at http://demo.AGRASTAT.org.
+    try out all the features described at http://agrastat.akvotest.org.
 
 --------------
 Using AGRASTAT
 --------------
 
-Registering and logging in
+Adding users and logging in
 ==========================
 
 .. note::
 
-    Registration is needed for most publishing features and for personalization
-    features, such as "following" datasets. It is not needed to search for and
-    download data.
+    A user account is needed for publishing features and for personalization
+    features, such as "following" datasets. It is also needed to search for and
+    download data. Only an administrator is able to create user accounts.
 
-To create a user ID, use the "Register" link at the top of any page. AGRASTAT will
-ask for the following:
+To create a user account, use the "Organization" link at the top of any page. 
+If the user belongs to multiple organisations, they need to select the organisation the new member is being added to and Click on "Manage".
 
-* *Username* -- choose a username using only letters, numbers, - and _ characters.
-  For example, "jbloggs" or "joe_bloggs93".
+.. image:: /images/manage_organization.jpg
 
-* *Full name* -- to be displayed on your user profile
+Click on "Members" and then "Add Member"
 
-* *E-mail address* -- this will not be visible to other users
+.. image:: /images/add_member_1.jpg
 
-* *Password* -- enter the same password in both boxes
+Provide an email address and select the role for the new user
 
-.. image:: /images/register_account.jpg
+.. image:: /images/add_member_2.jpg
+
+Click on "Add Member" to complete the process.
 
 If there are problems with any of the fields, AGRASTAT will tell you the problem
-and enable you to correct it. When the fields are filled in correctly, AGRASTAT
-will create your user account and automatically log you in.
+and enable you to correct it. When the fields are filled in correctly, the user will receive an email to the just added address where they can verify their account and set a password
 
-.. note::
 
-    It is perfectly possible to have more than one user account attached to the
-    same e-mail address. For this reason, choose a username you will remember, as
-    you will need it when logging in.
 
 Features for publishers
 =======================
@@ -157,16 +153,32 @@ actual data will be added in step 4.)
 * *Title* -- this title will be unique across AGRASTAT, so make it brief but specific.
   E.g. "UK population density by region" is better than "Population figures".
 
-* *Description* -- You can add a longer description of the dataset here, including
+* *Related Knowledge Management Products* -- You can add a longer description of the dataset here, including
   information such as where the data is from and any information that people will
   need to know when using the data.
+
+* *Business line* -- The specific industry or domain the dataset supports, defining its primary application and target users
+
+* *Linked value chain* -- The specific commodity or sector the dataset tracks, such as maize, beans, poultry, or fisheries.
+
+* *Data source* -- The origin of the dataset
+
+* *Originating country* --  The country where the dataset was first collected, processed, or maintained.
+
+* *Data owner* -- The name of the person or organization responsible for producing
+  the data.
+
+* *Email* -- an e-mail address for the data owner, to which queries about
+  the data should be sent.
 
 * *Tags* -- here you may add tags that will help people find the data and link it
   with other related data. Examples could be "population", "crime", "East
   Anglia". Hit the <return> key between tags. If you enter a tag wrongly, you can
   use its delete button to remove it before saving the dataset.
 
-* *License* -- it is important to include license information so that people know
+* *Legal* -- Outlines all legal requirements, regulatory compliance, licensing, and contractual terms associated with the dataset. It ensures that data usage adheres to applicable laws and protects the rights of all stakeholders
+
+* *License/sharing agreement* -- it is important to include license information so that people know
   how they can use the data. This field should be a drop-down box. If you need to
   use a license not on the list, contact your site administrator.
 
@@ -176,11 +188,19 @@ actual data will be added in step 4.)
   only one organization. If this is you, AGRASTAT will have chosen your organization
   by default and you need not do anything.)
 
+* *Data visibility* -- a ``Public`` dataset is public and can be seen by any user of the
+  site. A ``Private`` dataset can only be seen by members of the organization owning
+  the dataset and will not show up in searches by other users.
+
+* *PII Status* -- Indicates whether the dataset contains Personally Identifiable Information (PII) such as names, addresses, or ID numbers.
+
+* *Anonymization needed* -- Specifies if the dataset requires anonymization to protect sensitive or personal information before sharing
+
 .. image:: /images/add_dataset_1.jpg
 
 .. note::
 
-    By default, the only required field on this page is the title. However, it
+    The required fields are denoted by an asterik (*). However, it
     is good practice to include, at the minimum, a short description and, if
     possible, the license information. You should ensure that you choose the
     correct organization for the dataset, since at present, this cannot be changed
@@ -200,7 +220,7 @@ appropriate choice at the top of the screen:
 
 * If you are giving AGRASTAT a link to the data, like
   ``http://example.com/mydata.csv``, then select "Link to a file" or "Link to an
-  API". (If you don't know what an API is, you don't need to worry about this
+  API". (If you don"t know what an API is, you don"t need to worry about this
   option - select "Link to a file".)
 
 * If the data to be added to AGRASTAT is in a file on your computer, select "Upload
@@ -221,28 +241,7 @@ information, but it is good practice to add it:
 the "Save & add another" button. When you have finished adding resources,
 select "Next: Additional Info".
 
-**Step 7**. AGRASTAT displays the "Additional data" screen.
 
-* *Visibility* -- a ``Public`` dataset is public and can be seen by any user of the
-  site. A ``Private`` dataset can only be seen by members of the organization owning
-  the dataset and will not show up in searches by other users.
-
-* *Author* -- The name of the person or organization responsible for producing
-  the data.
-
-* *Author e-mail* -- an e-mail address for the author, to which queries about
-  the data should be sent.
-
-* *Maintainer / maintainer e-mail* -- If necessary, details for a second person
-  responsible for the data.
-
-* *Custom fields* -- If you want the dataset to have another field, you can add
-  the field name and value here. E.g. "Year of publication". Note that if there
-  is an extra field that is needed for a large number of datasets, you should
-  talk to your site administrator about changing the default schema and dataset
-  forms.
-
-.. image:: /images/add_dataset_3.jpg
 
 .. note::
 
@@ -253,9 +252,9 @@ select "Next: Additional Info".
 .. versionchanged:: 2.2
    Previous versions of AGRASTAT used to allow adding the dataset to existing
    groups in this step. This was changed. To add a dataset to an existing group
-   now, go to the "Group" tab in the Dataset's page.
+   now, go to the "Group" tab in the Dataset"s page.
 
-**Step 8**. Select the 'Finish' button. AGRASTAT creates the dataset and shows you
+**Step 8**. Select the "Finish" button. AGRASTAT creates the dataset and shows you
 the result. You have finished!
 
 You should be able to find your dataset by typing the title, or some relevant
@@ -271,9 +270,9 @@ You can edit the dataset you have created, or any dataset owned by an
 organization that you are a member of. (If a dataset is not owned by any
 organization, then any registered user can edit it.)
 
-#. Go to the dataset's page. You can find it by entering the title in the search box on any page.
+#. Go to the dataset"s page. You can find it by entering the title in the search box on any page.
 
-#. Select the "Edit" button, which you should see above the dataset title.
+#. Select the "Manage" button, which you should see above the dataset title.
 
 #. AGRASTAT displays the "Edit dataset" screen. You can edit any of the fields
    (Title, Description, Dataset, etc), change the visibility (Private/Public), and
@@ -288,7 +287,7 @@ organization, then any registered user can edit it.)
 Adding, deleting and editing resources
 --------------------------------------
 
-#. Go to the dataset's "Edit dataset" page (steps 1-2 above).
+#. Go to the dataset"s "Edit dataset" page (steps 1-2 above).
 
 #. In the left sidebar, there are options for editing resources. You can select
    an existing resource (to edit or delete it), or select "Add new resource".
@@ -300,11 +299,31 @@ Adding, deleting and editing resources
    (or "Add", for a new resource) to save your changes. Alternatively, to delete
    the resource, select the "Delete resource" button.
 
+Adding, deleting and editing Kobo resources
+--------------------------------------------
+
+#. Go to the dataset"s "Edit dataset" page (steps 1-2 above).
+
+#. In the left sidebar, there are options for editing resources. You can select
+   an existing resource (to edit or delete it), or select "Add new resource".
+
+#. If adding a new Kobo resource, Select the URL to Kobo Toolbox
+
+#. Provide the asset id from ypour kobo toolbox instance
+
+#. Provide the api key for the user from Kobo toolbox
+
+#. Click on validate to check if the asset id and api key are correct
+
+#. When you have finished, select the "Add" button to save your changes.
+
+.. image:: /images/add_kobo_data.jpg
+
 
 Deleting a dataset
 ------------------
 
-#. Go to the dataset's "Edit dataset" page (see "Editing a dataset", above).
+#. Go to the dataset"s "Edit dataset" page (see "Editing a dataset", above).
 
 #. Select the "Delete" button.
 
@@ -315,7 +334,7 @@ Deleting a dataset
 
     The "Deleted" dataset is not completely deleted. It is hidden, so it does
     not show up in any searches, etc. However, by visiting the URL for the
-    dataset's page, it can still be seen (by users with appropriate authorization),
+    dataset"s page, it can still be seen (by users with appropriate authorization),
     and "undeleted" if necessary. If it is important to completely delete the
     dataset, contact your site administrator.
 
@@ -343,7 +362,7 @@ To create an organization:
 #. AGRASTAT displays the "Create an Organization" page.
 
 #. Enter a name for the organization, and, optionally, a description and image
-   URL for the organization's home page.
+   URL for the organization"s home page.
 
 #. Select the "Create Organization" button. AGRASTAT creates your organization and
    displays its home page. Initially, of course, the organization has no datasets.
@@ -367,7 +386,7 @@ Managing an organization
 ------------------------
 
 When you create an organization, AGRASTAT automatically makes you its "Admin".
-From the organization's page you should see an "Admin" button above the search
+From the organization"s page you should see an "Admin" button above the search
 box. When you select this, AGRASTAT displays the organization admin page. This page
 has two tabs:
 
@@ -381,7 +400,7 @@ has two tabs:
 
 By default AGRASTAT allows members of organizations with three roles:
 
-* *Member* -- can see the organization's private datasets
+* *Member* -- can see the organization"s private datasets
 
 * *Editor* -- can edit and publish datasets
 
@@ -408,7 +427,18 @@ of results for your search. You can:
 
 If there are a large number of results, the filters can be very helpful, since
 you can combine filters, selectively adding and removing them, and modify and
-repeat the search with existing filters still in place.
+repeat the search with existing filters still in place. Available filters include:
+
+* Business lines
+
+* Linked value chain
+
+* Countries
+
+* Tags
+
+* Format
+
 
 If datasets are tagged by geographical area, it is also possible to run AGRASTAT
 with an extension which allows searching and filtering of datasets by selecting
@@ -426,7 +456,7 @@ within that organization from its home page in AGRASTAT.
 #. Select the "Organizations" link at the top of any page.
 
 #. Select the organization you are interested in. AGRASTAT will display your
-   organization's home page.
+   organization"s home page.
 
 #. Type your search query in the main search box on the page.
 
@@ -468,6 +498,29 @@ If the dataset is of interest, you can opt to be notified of changes to it by
 using the "Follow" button on the dataset page. See the section
 :ref:`managing_your_news_feed` below. You must have a user account and be
 logged in to use this feature.
+
+.. note::
+
+    If you are a member of an organization, you can also follow the organization
+    itself. This will notify you of changes to any dataset owned by the
+    organization.
+
+
+Exploring FAOSTAT datasets
+--------------------------
+
+AGRASTAT supports exploring data fro FAOSTAT. 
+
+
+To explore FAOSTAT datasets, use the "Resources" link at the top of any page and select "FAOSTAT". 
+
+.. image:: /images/resources.jpg
+
+
+Filter the dataset as needed to view or download
+
+.. image:: /images/explore_faostat.jpg
+
 
 Search in detail
 ================
@@ -594,7 +647,7 @@ follow individual users (to be notified of changes that they make to datasets).
 .. image:: /images/manage_news_feed.jpg
 
 If you want to stop following a dataset (or organization or user), go to the
-dataset's page (e.g. by selecting a link to it in your News feed) and select
+dataset"s page (e.g. by selecting a link to it in your News feed) and select
 the "Unfollow" button.
 
 Managing your user profile
@@ -626,3 +679,48 @@ Make the changes you require and then select the "Update Profile" button.
 
     If you change your username, AGRASTAT will log you out. You will need to log
     back in using your new username.
+
+
+Dataset statistics
+==================
+Understanding the Dataset Statistics
+-------------------------------------
+The Dataset Statistics provides a visual representation of dataset distribution across different countries, business lines, and value chains. 
+This page helps users quickly analyze dataset availability and focus areas.
+
+* Top 10 Countries - This section lists the top 10 countries based on the number of datasets available. The dataset count for each country, allows users to compare dataset availability across different regions.
+
+* Business Lines Dataset - A radar chart representing the distribution of datasets across different business lines. 
+
+* Value Chains Dataset - A radar chart illustrating dataset distribution across various agricultural value chains. Each category represents a specific crop or product, with dataset counts shown in brackets.
+
+.. image:: /images/dataset_statistics.jpg
+
+
+Getting in touch
+================
+
+Contact
+--------
+Contact page is designed to help you reach out to the support team quickly and efficiently. 
+Whether you have questions, feedback, or need assistance.
+
+To use the contact page, use the "Resources" link at the top of any page and select "Contact".
+
+.. image:: /images/contact_us_1.jpg
+
+AGRASTAT will ask for the following:
+
+* Contact Email 
+
+* Contact Name
+
+* Subject 
+
+* Business Line 
+
+* Message
+
+.. image:: /images/contact_us_2.jpg
+
+Once all required fields are filled, click the Submit button to send your inquiry. You should receive a confirmation that your message has been sent.
