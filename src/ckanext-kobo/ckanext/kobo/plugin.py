@@ -12,7 +12,6 @@ api_kobo(kobo_blueprint)
 class KoboPlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.IBlueprint)
-    plugins.implements(plugins.IRoutes, inherit=True)
     plugins.implements(plugins.IClick)
 
     # IClick
