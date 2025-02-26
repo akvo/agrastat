@@ -12,6 +12,7 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: Test
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -24,13 +25,13 @@ jobs:
           repository: akvo/composite-actions
           token: ${{ secrets.GH_PAT }}
           path: composite-actions
-          ref: 0.0.8
+          ref: 0.0.9
 
-      - name: Docker compose rebuild
-        uses: ./composite-actions/.github/actions/ssh-docker-compose
+      - name: Update App
+        uses: ./composite-actions/.github/actions/ssh-command
         with:
           server-ip:  ${{ secrets.SERVER_IP }}
           server-ssh-port:  ${{ secrets.SERVER_SSH_PORT }}
           server-ssh-secret-key:  ${{ secrets.SERVER_SSH_SECRET_KEY }}
           server-ssh-user:  ${{ secrets.SERVER_SSH_USER }}
-          docker-compose-file: ${{ secrets.DOCKER_COMPOSE_FILE }}
+          command: ${{ vars.COMMAND }}
