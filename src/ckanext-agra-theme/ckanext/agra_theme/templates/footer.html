@@ -27,14 +27,13 @@
           </li>
         </ul>
         <ul class="list-unstyled">
-          {% block footer_links_ckan %} {% set api_url =
-          'http://docs.ckan.org/en/{0}/api/'.format(g.ckan_doc_version) %}
-          <li><a href="{{ api_url }}">{{ _('CKAN API') }}</a></li>
+          <li><a href="/documentation/index.html">Documentation</a></li>
           <li>
-            <a href="http://www.ckan.org/">{{ _('CKAN Association') }}</a>
+            <a href="/faostat">FAOSTAT</a>
           </li>
-          <li></li>
-          {% endblock %}
+          <li>
+            <a href="/convert">Data Converter</a>
+          </li>
         </ul>
       </div>
       <div class="col-md-3 footer-links">

@@ -23,7 +23,8 @@
                 error=errors.get('file'),
                 placeholder=_('Choose a file (.xlsx, .xls, .dta)'),
                 classes=['controls'],
-                attrs={'accept': '.xlsx,.xls,.dta', 'required': 'required'}
+                attrs={'accept': '.xlsx,.xls,.dta', 'multiple':'multiple'},
+                is_required=True,
             ) }}
 
             <!-- Submit Button -->
