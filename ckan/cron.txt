@@ -1,1 +1,2 @@
 @hourly ckan tracking update && ckan search-index rebuild -r
+@hourly curl -X POST -H "Authorization: $CKAN__DATAPUSHER__API_TOKEN" $CKAN_SITE_URL/api/action/send_email_notifications
