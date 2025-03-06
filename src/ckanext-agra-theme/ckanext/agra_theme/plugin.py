@@ -111,7 +111,9 @@ class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
     def dataset_facets(self, facets_dict, package_type):
         return self.modify_facets(facets_dict)
 
-    def organization_facets(self, facets_dict, organization_type, package_type):
+    def organization_facets(
+        self, facets_dict, organization_type, package_type
+    ):
         return self.modify_facets(facets_dict, unlisted=["organization"])
 
     def group_facets(self, facets_dict, group_type, package_type):

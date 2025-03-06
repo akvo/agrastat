@@ -1,0 +1,47 @@
+{% set views_created = views or resource_preview %}
+{% if views_created %}
+  <ul class="nav {{ extra_class }}" {{ extra_attributes }}>
+    {% if resource_preview %}
+      <li{% if not view_id %} class="active"{% endif %}>
+        <a href="{{ h.url_for(pkg.type ~ '_resource.read', id=pkg.name, resource_id=resource.id) }}" >
+          <i class="fa icon fa-eye-open"></i>
+          {{ _("Resource Preview") }}
+        </a>
+      </li>
+  {% endif %}
+  {% if h.check_access('package_update', {'id':pkg.id }) and not is_activity_archive %}
+    {% if resource %}
+    <li class="pull-right">
+    <div class="dropdown btn-group">
+        <a class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" href="#">
+        <i class="fa fa-plus-square"></i>
+        {{ _('New View') }}
+        <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+        {% for option in h.get_allowed_view_types(resource, pkg)  %}
+            {% set url = h.url_for(pkg.type ~ '_resource.edit_view', id=pkg.name, resource_id=resource.id, view_type=option[0]) %}
+            <li><a href="{{ url }}"><i class="fa fa-{{ option[2] }}"></i> {{ option[1] }}</a></li>
+        {% endfor %}
+        </ul>
+    </div>
+    <div class="dropdown btn-group">
+	  {% link_for _('Edit View'), named_route=pkg.type ~ '_resource.views', id=pkg.name, resource_id=resource.id, class_='btn btn-default btn-sm', icon='edit' %}
+    </div>
+    </li>
+    {% endif %}
+  {% endif %}
+
+  {% set current_filters = request.args.get('filters') %}
+  {% for view in views %}
+  	{% set is_selected = true if view_id == view.id else false %}
+    {% snippet "package/snippets/resource_views_list_item.html",
+       view=view,
+       pkg=pkg,
+       is_edit=is_edit,
+       is_selected=is_selected,
+       current_filters=current_filters
+    %}
+  {% endfor %}
+</ul>
+{% endif %}
