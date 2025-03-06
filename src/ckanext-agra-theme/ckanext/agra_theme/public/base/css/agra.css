@@ -32,6 +32,9 @@ body {
     padding-bottom: 10px;
     line-height: 20px;
 }
+.nav-tabs-plain {
+    padding: 0px;
+}
 
 .dropdown-menu > li > a {
   display: block;
@@ -44,6 +47,12 @@ body {
 }
 .dropdown-menu > li:not(:last-child) {
   border-bottom: 1px solid #ddd;
+}
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+  color: #08743f;
+  text-decoration: none;
+  background-color: #f5f5f5;
 }
 
 
@@ -373,4 +382,25 @@ table.package-custom-info td.key-name {
 .contact-form.form-horizontal .form-group.control-medium {
     margin-left: 0px;
     margin-right: 0px;
+}
+
+
+/* Dashboard */
+
+.grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.grid-item {
+    border: 1px solid #ccc;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    min-height: 100px;
+}
+.add-visual {
+    font-size: 24px;
+    cursor: pointer;
+    color: #007bff;
 }

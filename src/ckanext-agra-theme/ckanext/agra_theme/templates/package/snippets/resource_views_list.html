@@ -13,12 +13,15 @@
     {% if resource %}
     <li class="pull-right">
     <div class="dropdown btn-group">
-        <a class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" href="#">
+        <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
         <i class="fa fa-plus-square"></i>
         {{ _('New View') }}
         <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
+          <li>
+          <a href="/dashboard-view"><i class="fa fa-dashboard"></i> Dashboard View</a>
+          </li>
         {% for option in h.get_allowed_view_types(resource, pkg)  %}
             {% set url = h.url_for(pkg.type ~ '_resource.edit_view', id=pkg.name, resource_id=resource.id, view_type=option[0]) %}
             <li><a href="{{ url }}"><i class="fa fa-{{ option[2] }}"></i> {{ option[1] }}</a></li>
@@ -26,7 +29,7 @@
         </ul>
     </div>
     <div class="dropdown btn-group">
-	  {% link_for _('Edit View'), named_route=pkg.type ~ '_resource.views', id=pkg.name, resource_id=resource.id, class_='btn btn-default btn-sm', icon='edit' %}
+	  {% link_for _('Edit View'), named_route=pkg.type ~ '_resource.views', id=pkg.name, resource_id=resource.id, class_='btn btn-default', icon='edit' %}
     </div>
     </li>
     {% endif %}

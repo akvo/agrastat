@@ -1,5 +1,4 @@
 {% ckan_extends %}
-
 {% block resource_view %}
   <div id="view-{{ resource_view['id'] }}" class="resource-view" data-id="{{ resource_view['id'] }}" data-title="{{ resource_view['title'] }}" data-description="{{ resource_view['descripion'] }}">
   <p class="desc">{{ h.render_markdown(resource_view['description']) }}</p>
