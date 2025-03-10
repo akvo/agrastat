@@ -19,9 +19,6 @@
         <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-          <li>
-          <a href="/dashboard-view"><i class="fa fa-dashboard"></i> Dashboard View</a>
-          </li>
         {% for option in h.get_allowed_view_types(resource, pkg)  %}
             {% set url = h.url_for(pkg.type ~ '_resource.edit_view', id=pkg.name, resource_id=resource.id, view_type=option[0]) %}
             <li><a href="{{ url }}"><i class="fa fa-{{ option[2] }}"></i> {{ option[1] }}</a></li>

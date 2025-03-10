@@ -1,0 +1,11 @@
+<div class="dashboard-view-container">
+  <h3>Dashboard for {{ resource.name }}</h3>
+  <script>
+    // Example: Fetch and display data
+    fetch("{{ resource.url }}")
+      .then(response => response.json())
+      .then(data => {
+        document.body.innerHTML += `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+      });
+  </script>
+</div>
