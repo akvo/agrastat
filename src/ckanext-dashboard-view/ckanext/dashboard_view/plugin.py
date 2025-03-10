@@ -1,3 +1,4 @@
+import json
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 
@@ -5,7 +6,10 @@ import ckan.plugins.toolkit as toolkit
 class DashboardViewPlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IResourceView, inherit=True)
     plugins.implements(plugins.IConfigurer, inherit=True)
-    plugins.implements(plugins.ITemplateHelpers, inherit=True)
+    plugins.implements(plugins.ITemplateHelpers)
+
+    def get_helpers(self):
+        return {}
 
     def update_config(self, config_):
         toolkit.add_template_directory(config_, "templates")
@@ -13,14 +17,14 @@ class DashboardViewPlugin(plugins.SingletonPlugin):
         toolkit.add_resource("fanstatic", "dashboard_view")
 
     def info(self):
-        schema = {"rows": [ignore_empty]}
+        schema = {"rows": toolkit.get_validator("ignore_missing")}
         return {
             "name": "dashboard_view",
             "title": "Dashboard View",
             "icon": "dashboard",
             "requires_datastore": True,
             "schema": schema,
-            "default_title": p.toolkit._("Dashboard View"),
+            "default_title": "Dashboard View",
         }
 
     def can_view(self, data_dict):
