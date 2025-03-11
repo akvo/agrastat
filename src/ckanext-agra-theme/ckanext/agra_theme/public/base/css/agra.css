@@ -150,6 +150,7 @@ body {
 .masthead .navigation .nav-pills li a:focus,
 .masthead .navigation .nav-pills li.active a {
     background-color: #08743f;
+    color: #fff;
 }
 .masthead .site-search {
     margin: 4px 8px 4px 0;
