@@ -9,7 +9,8 @@ from .routes.api.stats import api_stats
 from .routes.pages.statistic import page_statistic
 from .routes.pages.external import page_external
 from .routes.pages.dashboard import page_dashboard
-from .middleware import AgraThemeMiddleware
+
+# from .middleware import AgraThemeMiddleware
 from .data.countries import country_list, create_countries
 from .data.value_chain import value_chain_list, create_value_chains
 from .data.business_line import business_line_list, create_business_lines
@@ -61,7 +62,7 @@ create_business_lines()
 
 class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
     plugins.implements(plugins.IConfigurer)
-    plugins.implements(plugins.IMiddleware, inherit=True)
+    # plugins.implements(plugins.IMiddleware, inherit=True)
     plugins.implements(plugins.IBlueprint)
     plugins.implements(plugins.ITemplateHelpers)
     plugins.implements(plugins.IDatasetForm)
@@ -143,9 +144,9 @@ class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
     def get_blueprint(self):
         return agra_blueprint
 
-    def make_middleware(self, app, config):
-        # Wrap the CKAN app with our custom middleware
-        return AgraThemeMiddleware(app)
+    # def make_middleware(self, app, config):
+    #     # Wrap the CKAN app with our custom middleware
+    #     return AgraThemeMiddleware(app)
 
     # IConfigurer
     def update_config(self, config_):
