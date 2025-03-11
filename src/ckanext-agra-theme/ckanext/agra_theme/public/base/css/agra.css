@@ -404,3 +404,8 @@ table.package-custom-info td.key-name {
     cursor: pointer;
     color: #007bff;
 }
+ul.dropdown-menu li a i {
+    min-width: 20px;
+    text-align: center;
+    font-size: initial;
+}
