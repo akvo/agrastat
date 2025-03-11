@@ -1,6 +1,7 @@
 import json
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
+from .schema import schema
 
 
 class DashboardViewPlugin(plugins.SingletonPlugin):
@@ -17,7 +18,6 @@ class DashboardViewPlugin(plugins.SingletonPlugin):
         toolkit.add_resource("fanstatic", "dashboard_view")
 
     def info(self):
-        schema = {"rows": toolkit.get_validator("ignore_missing")}
         return {
             "name": "dashboard_view",
             "title": "Dashboard View",
