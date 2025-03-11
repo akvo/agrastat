@@ -11,12 +11,10 @@ poster="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC
     <div class="main hero">
       <div class="container">
         <div class="row">
-          {% if c.userobj %}
           <div class="col-md-12">
             {% block search %} {% snippet 'home/snippets/search.html',
             search_facets=search_facets %} {% endblock %}
           </div>
-          {% endif %}
         </div>
       </div>
     </div>

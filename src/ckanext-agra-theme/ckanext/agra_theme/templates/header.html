@@ -40,17 +40,16 @@
       {% block header_site_navigation %}
       <nav class="section navigation">
         <ul class="nav nav-pills">
-          {% if c.userobj %}
-            {% block header_site_navigation_tabs %} {{
+          {% block header_site_navigation_tabs %} {{
               h.build_nav_main(
                 ('dataset.search', _('Datasets')),
                 ('organization.index', _('Organizations')),
                 ('group.index', _('Groups')),
-                ('home.about', _('About')),
+                ('about', _('About')),
               )
             }}
           {% endblock %}
-
+          {% if c.userobj %}
           <li class="dropdown account-dropdown">
             <a
               href="#"
@@ -128,7 +127,7 @@
               <li
                 class="notifications {% if new_activities > 0 %}notifications-important{% endif %}"
               >
-                <a
+                <
                   href="{{ h.url_for('dashboard.index') }}"
                   title="{{ _('Dashboard (%(num)d new items)'|format(num=new_activities)) }}"
                 >
@@ -149,7 +148,6 @@
             </ul>
           </li>
           {% else %}
-          <li>{% link_for _('About'), named_route='home.about' %}</li>
           <li>{% link_for _('Log in'), named_route='user.login' %}</li>
           {% endif %}
         </ul>
