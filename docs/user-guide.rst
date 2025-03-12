@@ -59,10 +59,9 @@ site setup), login is not needed to search for and find data, but is needed for
 all publishing functions: datasets can be created, edited, etc by users with
 the appropriate permissions.
 
-Normally, each dataset is owned by an "organization". A AGRASTAT instance can have
-any number of organizations. For example, if AGRASTAT is being used as a data
-portal by a national government, the organizations might be different
-government departments, each of which publishes data. Each organization can
+Normally, each dataset is owned by an "organization". An AGRASTAT instance can have
+any number of organizations. For example, AGRASTAT the organizations might be different
+countries or business lines, each of which publishes data. Each organization can
 have its own workflow and authorizations, allowing it to manage its own
 publishing process.
 
@@ -681,6 +680,29 @@ Make the changes you require and then select the "Update Profile" button.
     back in using your new username.
 
 
+Data converter
+==================
+Purpose of the Data converter
+-----------------------------
+This tool allows users to upload and convert Excel (.xlsx) and Stata (.dta) files into CSV format.
+
+Steps to use the Data converter
+-------------------------------
+* Navigate to the Converter Page: Ensure you are on the Converter page on the AgraStat website.
+
+* Upload the File: Click the Choose files button.Select either an Excel (.xlsx) or Stata (.dta) file from your computer that you want to convert. The file name will appear next to the Choose files button once selected.
+
+* Required Field:T he system marks the file upload field as required. Ensure that a file is selected before proceeding.
+
+* Convert the File: After selecting the file, click the green button labeled Convert to CSV. The system will process your file and convert it into CSV format.
+
+* Download the Converted File: Once the conversion is complete, a link to download the converted CSV file will be available.
+
+Feel free to repeat this process for any additional files you wish to convert.
+
+.. image:: /images/data_converter.jpg
+
+
 Dataset statistics
 ==================
 Understanding the Dataset Statistics
@@ -693,6 +715,12 @@ This page helps users quickly analyze dataset availability and focus areas.
 * Business Lines Dataset - A radar chart representing the distribution of datasets across different business lines. 
 
 * Value Chains Dataset - A radar chart illustrating dataset distribution across various agricultural value chains. Each category represents a specific crop or product, with dataset counts shown in brackets.
+
+* Top Users by Dataset Count - This section lists the users who have uploaded the most datasets. Example: "admin" has uploaded 3 datasets, making them the top contributor.
+
+* Top Datasets by Followers - This section highlights the datasets that are being followed the most by users on the platform. Example: "Example Kobo Data" has the highest interest with 3 followers.
+
+* Top Datasets by Views - This section displays how many times each dataset has been viewed by users.
 
 .. image:: /images/dataset_statistics.jpg
 
