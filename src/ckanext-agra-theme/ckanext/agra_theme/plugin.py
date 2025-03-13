@@ -14,6 +14,7 @@ from .routes.pages.dashboard import page_dashboard
 from .data.countries import country_list, create_countries
 from .data.value_chain import value_chain_list, create_value_chains
 from .data.business_line import business_line_list, create_business_lines
+from .data.impact_area import impact_area_list, create_impact_areas
 from .cli import agra as agra_cli
 
 log = logging.getLogger(__name__)
@@ -58,6 +59,7 @@ schema_names = [
 create_countries()
 create_value_chains()
 create_business_lines()
+create_impact_areas()
 
 
 class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
@@ -93,6 +95,7 @@ class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
         # Define the new order
         vocab_keys = {  # Ensure vocab keys come first
             "vocab_business_lines": toolkit._("Business Lines"),
+            "vocab_impact_areas": toolkit._("Impact Areas"),
             "vocab_value_chains": toolkit._("Value Chains"),
             "vocab_countries": toolkit._("Countries"),
             "tags": facets_dict.get("tags"),
@@ -127,6 +130,7 @@ class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
             "countries": country_list,
             "value_chains": value_chain_list,
             "business_lines": business_line_list,
+            "impact_areas": impact_area_list,
             "data_sources": ["Internal", "External"],
             "methodologies": [
                 "Primary Data Collection",
@@ -179,6 +183,10 @@ class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
                     toolkit.get_validator("not_empty"),
                     toolkit.get_converter("convert_to_tags")("business_lines"),
                 ],
+                "impact_areas": [
+                    toolkit.get_validator("not_empty"),
+                    toolkit.get_converter("convert_to_tags")("impact_areas"),
+                ],
             }
         )
         for schema_name in schema_names:
@@ -229,6 +237,10 @@ class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
                     toolkit.get_converter("convert_from_tags")(
                         "business_lines"
                     ),
+                    toolkit.get_validator("ignore_missing"),
+                ],
+                "impact_areas": [
+                    toolkit.get_converter("convert_from_tags")("impact_areas"),
                     toolkit.get_validator("ignore_missing"),
                 ],
             }

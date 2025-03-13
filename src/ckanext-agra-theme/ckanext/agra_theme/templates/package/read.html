@@ -15,6 +15,20 @@
         {% for business_line in pkg.business_lines %}
             {{business_line}}
         {% endfor %}
+        {% else %}
+            -
+        {% endif %}
+    </td>
+    </tr>
+    <tr>
+    <td class="key-name">Impact Area</td>
+    <td>
+        {% if pkg.impact_areas %}
+        {% for impact_area in pkg.impact_areas %}
+            {{impact_area}}
+        {% endfor %}
+        {% else %}
+            -
         {% endif %}
     </td>
     </tr>
