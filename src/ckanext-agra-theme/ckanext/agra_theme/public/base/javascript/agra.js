@@ -127,25 +127,39 @@ function renderChart(orgName = null) {
       chart.setOption(createBarOption(data));
     });
 
-  fetch("/api/2/statistic/business_lines" + `?${extraEndpoint}`)
-    .then((response) => response.json())
-    .then((data) => {
-      /* example of response {name:'uganda', value: 1}  */
-      // create echarts instance in div id = chart-bar-country
-      const chart = echarts.init(
-        document.getElementById("chart-business-lines"),
-      );
-      chart.setOption(createRadarOption(data));
-    });
+  if (document.getElementById("chart-business-lines")) {
+    fetch("/api/2/statistic/business_lines" + `?${extraEndpoint}`)
+      .then((response) => response.json())
+      .then((data) => {
+        const chart = echarts.init(
+          document.getElementById("chart-business-lines"),
+        );
+        chart.setOption(createRadarOption(data));
+      });
+  }
 
-  fetch("/api/2/statistic/value_chains" + `?${extraEndpoint}`)
-    .then((response) => response.json())
-    .then((data) => {
-      /* example of response {name:'uganda', value: 1}  */
-      // create echarts instance in div id = chart-bar-country
-      const chart = echarts.init(document.getElementById("chart-value-chains"));
-      chart.setOption(createRadarOption(data));
-    });
+  // if impact areas div is available
+  if (document.getElementById("chart-impact-areas")) {
+    fetch("/api/2/statistic/impact_areas" + `?${extraEndpoint}`)
+      .then((response) => response.json())
+      .then((data) => {
+        const chart = echarts.init(
+          document.getElementById("chart-impact-areas"),
+        );
+        chart.setOption(createRadarOption(data));
+      });
+  }
+
+  if (document.getElementById("chart-value-chains")) {
+    fetch("/api/2/statistic/value_chains" + `?${extraEndpoint}`)
+      .then((response) => response.json())
+      .then((data) => {
+        const chart = echarts.init(
+          document.getElementById("chart-value-chains"),
+        );
+        chart.setOption(createRadarOption(data));
+      });
+  }
 }
 
 if (window.location.pathname === "/") {
