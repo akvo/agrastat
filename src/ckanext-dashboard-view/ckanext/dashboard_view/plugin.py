@@ -1,7 +1,8 @@
 import json
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
-from .schema import schema
+
+ignore_empty = plugins.toolkit.get_validator("ignore_empty")
 
 
 class DashboardViewPlugin(plugins.SingletonPlugin):
@@ -48,7 +49,7 @@ class DashboardViewPlugin(plugins.SingletonPlugin):
             "title": "Dashboard View",
             "icon": "dashboard",
             "requires_datastore": True,
-            "schema": schema,
+            "schema": {"columns": [ignore_empty]},
             "default_title": "Dashboard View",
         }
 
@@ -65,7 +66,13 @@ class DashboardViewPlugin(plugins.SingletonPlugin):
         }
 
     def view_template(self, context, data_dict):
-        data_dict["columns"] = self.get_resource_parameters(data_dict)
+        if data_dict["resource_view"].get("columns"):
+            try:
+                data_dict["columns"] = json.loads(
+                    data_dict["resource_view"]["columns"]
+                )
+            except json.JSONDecodeError:
+                data_dict["columns"] = []
         return "dashboard_view.html"
 
     def form_template(self, context, data_dict):

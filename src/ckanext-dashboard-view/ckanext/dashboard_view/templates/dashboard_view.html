@@ -1,11 +1,28 @@
-<div class="dashboard-view-container">
-  <h3>Dashboard for {{ resource.name }}</h3>
-  <script>
-    // Example: Fetch and display data
-    fetch("{{ resource.url }}")
-      .then(response => response.json())
-      .then(data => {
-        document.body.innerHTML += `<pre>${JSON.stringify(data, null, 2)}</pre>`;
-      });
-  </script>
+<html>
+<head>
+  <link rel="icon" href="/favicon.png" data-spai-egr="1" sizes="32x32" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/dashboard-view-base.css" />
+  <title>AGRASTAT - Dashboard</title>
+</head>
+<div class="main container">
+  <div class="row dashboard-view-container">
+    {% if columns %}
+      {% for column in columns %}
+        <div class="{{column.grid_size}}">
+          <div class="panel">
+            <h2>{{column.title}}</h2>
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
 </div>
+<script>
+var input = "{{columns}}";
+var decoded = input.replace(/&#39;/g, "'");
+var validJson = decoded.replace(/'/g, '"');
+var columnArray = JSON.parse(validJson);
+</script>
+</html>

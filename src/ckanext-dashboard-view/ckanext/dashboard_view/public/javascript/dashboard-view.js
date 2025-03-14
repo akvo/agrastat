@@ -15,34 +15,69 @@ document.addEventListener("DOMContentLoaded", function () {
       .classList.toggle("hidden", type !== "chart");
   });
 
-  // Save visualization and add it to the grid
   document.getElementById("saveVisual").addEventListener("click", function () {
+    // Step 1: Gather form data for the new visualization
     var gridSize = document.getElementById("gridSize").value;
     var title = document.getElementById("visualTitle").value || "Untitled";
     var visualType = document.getElementById("visualType").value;
-    var content = `<strong>${title}</strong>`;
+
+    // Create the configuration object for the new visualization
+    var newConfig = {
+      grid_size: gridSize,
+      title: title,
+      visualization_type: visualType,
+    };
 
     if (visualType === "chart") {
-      var chartType = document.getElementById("chartType").value;
-      var xAxis =
+      newConfig.chart_type = document.getElementById("chartType").value;
+      newConfig.x_axis =
         document.getElementById("xAxis").value || "X-Axis Placeholder";
-      var yAxis =
+      newConfig.y_axis =
         document.getElementById("yAxis").value || "Y-Axis Placeholder";
-
-      content += `<br><small>Type: ${chartType}</small><br>
-                  <small>X-Axis: ${xAxis}</small><br>
-                  <small>Y-Axis: ${yAxis}</small>`;
     } else if (visualType === "number") {
-      var numberType = document.getElementById("numberType").value || "Average";
-      content += `<br><small>Type: Number (${numberType})</small>`;
-      var numberColumn = document.getElementById("numberColumn").value;
-      content += `<br><small>Value: ${numberColumn}</small>`;
+      newConfig.number_type =
+        document.getElementById("numberType").value || "Average";
+      newConfig.number_column = document.getElementById("numberColumn").value;
     }
 
-    // Create a new grid item
+    // Step 2: Collect all existing configurations
+    var existingConfigs = [];
+    try {
+      // Parse the current value of the hidden input field
+      existingConfigs = JSON.parse(
+        document.getElementById("columns-input").value,
+      );
+    } catch (e) {
+      // If parsing fails (e.g., empty or invalid JSON), start with an empty array
+      existingConfigs = [];
+    }
+
+    // Step 3: Add the new configuration to the list
+    existingConfigs.push(newConfig);
+
+    // Step 4: Serialize the updated list and update the hidden input field
+    document.getElementById("columns-input").value =
+      JSON.stringify(existingConfigs);
+
+    // Step 5: Create a new grid item in the UI
+    var content = `<strong>${title}</strong>`;
+    if (visualType === "chart") {
+      content += `<br><small>Type: ${newConfig.chart_type}</small><br>
+                <small>X-Axis: ${newConfig.x_axis}</small><br>
+                <small>Y-Axis: ${newConfig.y_axis}</small>`;
+    } else if (visualType === "number") {
+      content += `<br><small>Type: Number (${newConfig.number_type})</small><br>
+                <small>Value: ${newConfig.number_column}</small>`;
+    }
+
     var newGridItem = document.createElement("div");
     newGridItem.classList.add(gridSize);
-    newGridItem.innerHTML = `<div class="grid-item panel panel-default text-center visualization-grid-item"><div class="panel-body">${content}</div></div>`;
+    newGridItem.setAttribute("data-config", JSON.stringify(newConfig)); // Store config as a data attribute
+    newGridItem.innerHTML = `
+    <div class="grid-item panel panel-default text-center visualization-grid-item">
+      <div class="panel-body">${content}</div>
+    </div>
+  `;
 
     // Find the "+" button grid item
     var addButtonGridItem = document.querySelector(

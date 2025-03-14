@@ -221,18 +221,17 @@ if (
 ) {
   const fileInput = document.querySelector("#field-resource-upload");
   const alertDiv = document.querySelector("#info-alert");
-  if (!fileInput || !alertDiv) {
-    return;
+  if (fileInput) {
+    fileInput.addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      if (
+        file.name.endsWith(".xls") ||
+        file.name.endsWith(".xlsx") ||
+        file.name.endsWith(".dta")
+      ) {
+        alertDiv.style.display = "block";
+        alertDiv.innerHTML = `You are uploading a tabular data that does not support preview. Please proceed to <a target="_blank" href="/convert"><b>converter page</b></a> to convert the file`;
+      }
+    });
   }
-  fileInput.addEventListener("change", (e) => {
-    const file = e.target.files[0];
-    if (
-      file.name.endsWith(".xls") ||
-      file.name.endsWith(".xlsx") ||
-      file.name.endsWith(".dta")
-    ) {
-      alertDiv.style.display = "block";
-      alertDiv.innerHTML = `You are uploading a tabular data that does not support preview. Please proceed to <a target="_blank" href="/convert"><b>converter page</b></a> to convert the file`;
-    }
-  });
 }
