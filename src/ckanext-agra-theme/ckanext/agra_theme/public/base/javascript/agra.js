@@ -221,6 +221,9 @@ if (
 ) {
   const fileInput = document.querySelector("#field-resource-upload");
   const alertDiv = document.querySelector("#info-alert");
+  if (!fileInput || !alertDiv) {
+    return;
+  }
   fileInput.addEventListener("change", (e) => {
     const file = e.target.files[0];
     if (

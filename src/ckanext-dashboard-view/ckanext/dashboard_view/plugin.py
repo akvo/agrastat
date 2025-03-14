@@ -9,6 +9,31 @@ class DashboardViewPlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IConfigurer, inherit=True)
     plugins.implements(plugins.ITemplateHelpers)
 
+    def get_resource_parameters(self, data_dict):
+        # Get the resource ID
+        resource_id = data_dict["resource"]["id"]
+
+        try:
+            # Fetch column metadata from the DataStore
+            datastore_info = toolkit.get_action("datastore_search")(
+                {},  # Empty context
+                {
+                    "resource_id": resource_id,
+                    "limit": 0,
+                },  # No rows needed, just metadata
+            )
+            # Extract fields (columns) and their types
+            columns = [
+                {"name": field["id"], "type": field["type"]}
+                for field in datastore_info.get("fields", [])
+            ]
+        except Exception as e:
+            # Handle errors (e.g., if DataStore is not enabled or resource not in DataStore)
+            columns = []
+            print(f"Error fetching DataStore metadata: {e}")
+
+        return columns
+
     def get_helpers(self):
         return {}
 
@@ -40,7 +65,9 @@ class DashboardViewPlugin(plugins.SingletonPlugin):
         }
 
     def view_template(self, context, data_dict):
+        data_dict["columns"] = self.get_resource_parameters(data_dict)
         return "dashboard_view.html"
 
     def form_template(self, context, data_dict):
+        data_dict["data_columns"] = self.get_resource_parameters(data_dict)
         return "dashboard_view_form.html"

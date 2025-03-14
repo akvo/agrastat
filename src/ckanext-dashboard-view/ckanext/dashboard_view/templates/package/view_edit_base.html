@@ -1,0 +1,15 @@
+{% ckan_extends %}
+
+{% block secondary %}
+  {# Completely remove the aside element #}
+{% endblock %}
+
+{% block primary %}
+  <section class="module full-width">
+    <div class="module-content full-width">
+      {% block primary_content_inner %}
+        {{ super() }}
+      {% endblock %}
+    </div>
+  </section>
+{% endblock %}
