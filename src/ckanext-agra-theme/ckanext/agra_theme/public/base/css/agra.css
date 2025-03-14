@@ -386,25 +386,6 @@ table.package-custom-info td.key-name {
 }
 
 
-/* Dashboard */
-
-.grid-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-.grid-item {
-    border: 1px solid #ccc;
-    padding: 20px;
-    text-align: center;
-    position: relative;
-    min-height: 100px;
-}
-.add-visual {
-    font-size: 24px;
-    cursor: pointer;
-    color: #007bff;
-}
 ul.dropdown-menu li a i {
     min-width: 20px;
     text-align: center;

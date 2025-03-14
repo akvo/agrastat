@@ -1,0 +1,43 @@
+<!-- dashboard_view_form.html -->
+
+{% block primary_content %}
+<input id="columns-input" class="form-control" name="columns" value="{{resource_view.columns}}">
+
+<hr/>
+<div class="row">
+    <div class="col-md-12"><b>Columns:</b></div>
+    <div class="col-md-12 dashboard-view-grid-base">
+    <!-- Existing visualizations will be dynamically added here -->
+    {% if columns %}
+      {% for column in columns %}
+        <div class="{{ column.grid_size }}" data-config="{{ column | tojson }}">
+          <div class="grid-item panel panel-default text-center visualization-grid-item">
+            <div class="panel-body">
+              <strong>{{ column.title }}</strong><br/>
+              {% if column.visualization_type == "chart" %}
+                <small>Type: {{ column.chart_type }}</small><br/>
+                <small>X-Axis: {{ column.x_axis }}</small><br/>
+                <small>Y-Axis: {{ column.y_axis }}</small><br/>
+              {% elif column.visualization_type == "number" %}
+                <small>Type: Number ({{ column.number_type }})</small><br/>
+                <small>Value: {{ column.number_column }}</small><br/>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+    <div class="col-md-4 add-visualization-container" data-toggle="modal" data-target="#visualModal" style="font-size: 24px; cursor: pointer;">
+        <div class="grid-item panel panel-default text-center">
+            <div class="panel-body">
+                <span class="add-visual text-primary"><i class="fa fa-plus"></i></span>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ h.url_for_static('/javascript/dashboard-view.js') }}"></script>
+{% endblock %}
