@@ -129,6 +129,7 @@ function sanitize_data(data, stringAxis, numericAxis) {
 }
 
 function options_barline(data, config) {
+  const chartType = config.chartType !== "area" ? config.chartType : "line";
   const stringAxis = data.columnTypes.find((field) => field.type === "text").id;
   const numericAxis = data.columnTypes.find(
     (field) => field.id !== stringAxis,
@@ -172,8 +173,9 @@ function options_barline(data, config) {
     options.series = [
       {
         name: config.yAxis,
-        type: config.chartType,
+        type: chartType,
         data: chartData.map((record) => record.value),
+        areaStyle: config.chartType === "area" ? {} : null,
       },
     ];
   } else {
@@ -188,8 +190,9 @@ function options_barline(data, config) {
     options.series = [
       {
         name: config.xAxis,
-        type: config.chartType,
+        type: chartType,
         data: chartData.map((record) => record.value),
+        areaStyle: config.chartType === "area" ? {} : null,
       },
     ];
   }
@@ -237,7 +240,11 @@ function options_scatter(data, config) {
 function render_chart(res_id, config, container) {
   const data = fetch_all_records(res_id, config).then((data) => {
     const myChart = echarts.init(container);
-    if (config.chartType === "bar" || config.chartType === "line") {
+    if (
+      config.chartType === "bar" ||
+      config.chartType === "line" ||
+      config.chartType === "area"
+    ) {
       myChart.setOption(options_barline(data, config));
     } else if (config.chartType === "scatter") {
       myChart.setOption(options_scatter(data, config));

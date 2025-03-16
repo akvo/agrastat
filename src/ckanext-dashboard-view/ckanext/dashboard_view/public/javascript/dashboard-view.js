@@ -25,26 +25,33 @@ function removeGrid(id) {
   }
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-  // Check the current value of the select element on page load
-  var currentType = document.getElementById("visualType").value;
+function resetFormFields() {
+  allFields = ["visualTitle"];
+  allFields.forEach((field) => {
+    document.getElementById(field).value = "";
+  });
+  const currentType = document.getElementById("visualType").value;
   document
     .getElementById("numberOptions")
     .classList.toggle("hidden", currentType !== "number");
   document
+    .getElementById("numberType")
+    .classList.toggle("hidden", currentType !== "number");
+  document
     .getElementById("chartOptions")
     .classList.toggle("hidden", currentType !== "chart");
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Check the current value of the select element on page load
+  resetFormFields();
 
   // Toggle visibility of options based on visualization type
   document.getElementById("visualType").addEventListener("change", function () {
-    var type = this.value;
-    document
-      .getElementById("numberOptions")
-      .classList.toggle("hidden", type !== "number");
-    document
-      .getElementById("chartOptions")
-      .classList.toggle("hidden", type !== "chart");
+    resetFormFields();
   });
+
+  // Add event listener to the "Save Visualization" button
 
   document.getElementById("saveVisual").addEventListener("click", function () {
     // Step 1: Gather form data for the new visualization
@@ -113,13 +120,20 @@ document.addEventListener("DOMContentLoaded", function () {
     panelBody.classList.add("panel-body");
 
     // Step 8: Build the content
-    var content = `<strong>${title}</strong><br>`;
+    var icon = "fa fa-info";
     if (visualType === "chart") {
-      content += `<small>Type: ${newConfig.chartType} Chart</small><br>
+      icon = `fa fa-${newConfig.chartType}-chart`;
+      if (newConfig.chartType === "scatter") {
+        icon = "fa fa-dot-circle-o";
+      }
+    }
+    var content = `<strong><i class="${icon}"></i> ${title}</strong><br>`;
+    if (visualType === "chart") {
+      content += `<small>Type: ${newConfig.chartType}</small><br>
                 <small>X-Axis: ${newConfig.xAxis}</small><br>
                 <small>Y-Axis: ${newConfig.yAxis}</small><br>`;
     } else if (visualType === "number") {
-      content += `<small>Type: Number (${newConfig.numberType})</small><br>
+      content += `<small>Type: (${newConfig.numberType})</small><br>
                 <small>Value: ${newConfig.numberColumn}</small><br>`;
     }
 
@@ -158,8 +172,7 @@ document.addEventListener("DOMContentLoaded", function () {
       );
     }
 
-    // Step 11: Reset form and hide modal
-    document.getElementById("visualForm").reset();
+    resetFormFields();
     $("#visualModal").modal("hide");
   });
 });
