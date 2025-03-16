@@ -1,5 +1,5 @@
 /* Dashboard View */
-.dashboard-view-grid-base {
+.col-md-12.dashboard-view-grid-base {
     padding: 20px;
     background: #ddd;
     margin: 15px;
@@ -58,4 +58,24 @@
     justify-content: center; /* Center content vertically */
     align-items: center; /* Center content horizontally */
     text-align: center; /* Ensure text is centered */
+}
+
+.remove-grid {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    text-decoration: none;
+    color: #d43f3a;
+    background: #ddd;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 5px;
+    min-width: 30px;
+    min-height: 30px;
+    line-height: 30px;
+}
+.remove-grid:hover {
+    color: #fff;
+    background: #d43f3a;
+    text-decoration: none;
 }

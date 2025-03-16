@@ -27,6 +27,10 @@
             <div class="modal-body">
                 <form id="visualForm">
                     <div class="form-group">
+                        <label for="visualTitle">Title</label>
+                        <input type="text" class="form-control" id="visualTitle">
+                    </div>
+                    <div class="form-group">
                         <label for="gridSize">Grid Size</label>
                         <select class="form-control" id="gridSize">
                             <option value="col-md-4">33%</option>
@@ -45,13 +49,12 @@
                         <label>Number Type</label>
                         <select class="form-control" id="numberType">
                             <option>Average</option>
-                            <option>Quantile</option>
                             <option>Max</option>
                             <option>Min</option>
                             <option>Total</option>
                         </select>
                     </div>
-                    <div id="numberValue" class="form-group">
+                    <div id="numberOptions" class="form-group hidden">
                         <label class="control-label">Value</label>
                         <select class="form-control" id="numberColumn">
                             {% for column in data_columns %}
@@ -86,10 +89,6 @@
                                 {% endfor %}
                             </select>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="visualTitle">Title</label>
-                        <input type="text" class="form-control" id="visualTitle">
                     </div>
                 </form>
             </div>
