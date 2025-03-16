@@ -45,24 +45,26 @@
                             <option value="number">Number</option>
                         </select>
                     </div>
-                    <div id="numberType" class="form-group">
-                        <label>Number Type</label>
-                        <select class="form-control" id="numberType">
-                            <option value="avg">Average</option>
-                            <option value="max">Max</option>
-                            <option value="min">Min</option>
-                            <option value="total">Total</option>
-                        </select>
-                    </div>
-                    <div id="numberOptions" class="form-group">
-                        <label class="control-label">Value</label>
-                        <select class="form-control" id="numberColumn">
-                            {% for column in data_columns %}
-                                {% if column.type in ['int4', 'int8', 'float4', 'float8', 'numeric'] %}
-                                    <option value="{{ column.name }}">{{ column.name }} ({{ column.type }})</option>
-                                {% endif %}
-                            {% endfor %}
-                        </select>
+                    <div id="numberOptions">
+                        <div class="form-group">
+                            <label>Number Type</label>
+                            <select class="form-control" id="numberType" name="numberType">
+                                <option value="avg">Average</option>
+                                <option value="max">Max</option>
+                                <option value="min">Min</option>
+                                <option value="total">Total</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Value</label>
+                            <select class="form-control" id="numberColumn">
+                                {% for column in data_columns %}
+                                    {% if column.type in ['int4', 'int8', 'float4', 'float8', 'numeric'] %}
+                                        <option value="{{ column.name }}">{{ column.name }} ({{ column.type }})</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
                     </div>
                     <div id="chartOptions" class="hidden">
                         <div class="form-group">
@@ -75,21 +77,45 @@
                                 <option value="pie">Pie Chart</option>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label class="control-label">X-Axis</label>
-                            <select class="form-control" id="xAxis" name="xAxis">
-                                {% for column in data_columns %}
-                                    <option value="{{ column.name }}">{{ column.name }} ({{ column.type }})</option>
-                                {% endfor %}
-                            </select>
+                        <div id="axisData" class="hidden">
+                            <div class="form-group">
+                                <label class="control-label">X-Axis</label>
+                                <select class="form-control" id="xAxis" name="xAxis">
+                                    {% for column in data_columns %}
+                                        <option value="{{ column.name }}">{{ column.name }} ({{ column.type }})</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Y-Axis</label>
+                                <select class="form-control" id="yAxis" name="yAxis">
+                                    {% for column in data_columns %}
+                                        <option value="{{ column.name }}">{{ column.name }} ({{ column.type }})</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label class="control-label">Y-Axis</label>
-                            <select class="form-control" id="yAxis" name="yAxis">
-                                {% for column in data_columns %}
-                                    <option value="{{ column.name }}">{{ column.name }} ({{ column.type }})</option>
-                                {% endfor %}
-                            </select>
+                        <div id="pieData" class="hidden">
+                            <div class="form-group">
+                                <label class="control-label">Value</label>
+                                <select class="form-control" id="pieValue" name="pieValue">
+                                    {% for column in data_columns %}
+                                        {% if column.type in ['int4', 'int8', 'float4', 'float8', 'numeric'] %}
+                                            <option value="{{ column.name }}">{{ column.name }} ({{ column.type }})</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Group By</label>
+                                <select class="form-control" id="pieGroup" name="pieGroup">
+                                    {% for column in data_columns %}
+                                        {% if column.type not in ['int4', 'int8', 'float4', 'float8', 'numeric'] %}
+                                            <option value="{{ column.name }}">{{ column.name }} ({{ column.type }})</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </form>

@@ -26,20 +26,23 @@ function removeGrid(id) {
 }
 
 function resetFormFields() {
-  allFields = ["visualTitle"];
-  allFields.forEach((field) => {
-    document.getElementById(field).value = "";
-  });
   const currentType = document.getElementById("visualType").value;
   document
     .getElementById("numberOptions")
     .classList.toggle("hidden", currentType !== "number");
   document
-    .getElementById("numberType")
-    .classList.toggle("hidden", currentType !== "number");
-  document
     .getElementById("chartOptions")
     .classList.toggle("hidden", currentType !== "chart");
+  if (currentType === "chart") {
+    const chartType = document.getElementById("chartType").value;
+    if (chartType === "pie") {
+      document.getElementById("axisData").classList.add("hidden");
+      document.getElementById("pieData").classList.remove("hidden");
+    } else {
+      document.getElementById("axisData").classList.remove("hidden");
+      document.getElementById("pieData").classList.add("hidden");
+    }
+  }
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -48,6 +51,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Toggle visibility of options based on visualization type
   document.getElementById("visualType").addEventListener("change", function () {
+    resetFormFields();
+  });
+  document.getElementById("chartType").addEventListener("change", function () {
     resetFormFields();
   });
 
@@ -72,10 +78,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (visualType === "chart") {
       newConfig.chartType = document.getElementById("chartType").value;
-      newConfig.xAxis =
-        document.getElementById("xAxis").value || "X-Axis Placeholder";
-      newConfig.yAxis =
-        document.getElementById("yAxis").value || "Y-Axis Placeholder";
+      if (newConfig.chartType === "pie") {
+        console.log(document.getElementById("pieValue").value);
+        newConfig.pieValue = document.getElementById("pieValue").value;
+        newConfig.pieGroup = document.getElementById("pieGroup").value;
+      } else {
+        newConfig.xAxis = document.getElementById("xAxis").value;
+        newConfig.yAxis = document.getElementById("yAxis").value;
+      }
     } else if (visualType === "number") {
       newConfig.numberType =
         document.getElementById("numberType").value || "Average";
@@ -129,9 +139,16 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     var content = `<strong><i class="${icon}"></i> ${title}</strong><br>`;
     if (visualType === "chart") {
-      content += `<small>Type: ${newConfig.chartType}</small><br>
-                <small>X-Axis: ${newConfig.xAxis}</small><br>
-                <small>Y-Axis: ${newConfig.yAxis}</small><br>`;
+      var ctype = document.getElementById("chartType").value;
+      if (ctype === "pie") {
+        console.log(newConfig);
+        content += `<small>Value: ${newConfig.pieValue}</small><br>
+                <small>Group: ${newConfig.pieGroup}</small><br>`;
+      } else {
+        content += `<small>Type: ${newConfig.chartType}</small><br>
+                  <small>X-Axis: ${newConfig.xAxis}</small><br>
+                  <small>Y-Axis: ${newConfig.yAxis}</small><br>`;
+      }
     } else if (visualType === "number") {
       content += `<small>Type: (${newConfig.numberType})</small><br>
                 <small>Value: ${newConfig.numberColumn}</small><br>`;
@@ -174,5 +191,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     resetFormFields();
     $("#visualModal").modal("hide");
+    allFields = ["visualTitle"];
+    allFields.forEach((field) => {
+      document.getElementById(field).value = "";
+    });
   });
 });
