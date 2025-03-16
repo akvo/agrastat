@@ -12,6 +12,61 @@ const echartsConfig = {
   },
 };
 
+function fetch_aggregated_data(resource_id, config) {
+  const { numberColumn, numberType } = config;
+
+  // Validate required parameters
+  if (!resource_id || !numberColumn || !numberType) {
+    throw new Error(
+      "Missing required parameters: resource_id, numberColumn, or numberType.",
+    );
+  }
+
+  // Map numberType to SQL aggregate functions
+  const sqlFunctions = {
+    total: `SUM("${numberColumn}") AS total`,
+    avg: `AVG("${numberColumn}") AS average`,
+    count: `COUNT("${numberColumn}") AS count`,
+    min: `MIN("${numberColumn}") AS minimum`,
+    max: `MAX("${numberColumn}") AS maximum`,
+  };
+
+  // Ensure the numberType is valid
+  if (!sqlFunctions[numberType]) {
+    throw new Error(
+      `Invalid numberType: ${numberType}. Valid options are 'total', 'avg', 'count', 'min', 'max'.`,
+    );
+  }
+
+  // Construct the SQL query
+  const sqlQuery = `SELECT ${sqlFunctions[numberType]} FROM "${resource_id}"`;
+
+  // Send the request to the CKAN API
+  return fetch(`${datastoreURL}_sql`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ sql: sqlQuery }),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then((result) => {
+      // Handle errors in the CKAN API response
+      if (!result.success) {
+        throw new Error(`CKAN API error: ${result.error.message}`);
+      }
+      return result.result.records[0];
+    })
+    .catch((error) => {
+      console.error("Error fetching aggregated data:", error);
+    });
+}
+
 function fetch_all_records(
   resource_id,
   config,
@@ -195,25 +250,17 @@ function render_chart(res_id, config, container) {
 }
 
 function render_number(res_id, config, container) {
-  const data = fetch_all_records(res_id, config).then((data) => {
+  fetch_aggregated_data(res_id, config).then((data) => {
     if (config.numberType === "total") {
-      const total = _.sumBy(data.result, config.numberColumn);
-      countUp(config.id, total);
+      countUp(config.id, data.total);
     } else if (config.numberType === "avg") {
-      const avg = _.meanBy(data.result, config.numberColumn);
-      countUp(config.id, avg.toFixed(2));
+      countUp(config.id, parseFloat(data.average).toFixed(2));
     } else if (config.numberType === "count") {
-      countUp(config.id, data.result.length).start();
+      countUp(config.id, data.count).start();
     } else if (config.numberType === "max") {
-      const max = _.maxBy(data.result, config.numberColumn)[
-        config.numberColumn
-      ];
-      countUp(config.id, max);
+      countUp(config.id, data.maximum);
     } else if (config.numberType === "min") {
-      const min = _.minBy(data.result, config.numberColumn)[
-        config.numberColumn
-      ];
-      countUp(config.id, min);
+      countUp(config.id, data.minimum);
     }
   });
 }
