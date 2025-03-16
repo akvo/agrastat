@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     if (visualType === "chart") {
-      newConfig.chart_type = document.getElementById("chartType").value;
+      newConfig.chartType = document.getElementById("chartType").value;
       newConfig.xAxis =
         document.getElementById("xAxis").value || "X-Axis Placeholder";
       newConfig.yAxis =
