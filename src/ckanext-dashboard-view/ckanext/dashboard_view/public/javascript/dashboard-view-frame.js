@@ -1,15 +1,21 @@
 const datastoreURL = "/api/3/action/datastore_search";
 const echartsConfig = {
+  grid: {
+    left: "3%",
+    right: "4%",
+    bottom: "3%",
+    containLabel: true,
+  },
   axisLabel: {
     interval: 0,
     formatter: function (value) {
       return value.length > 10 ? value.slice(0, 10) + "..." : value;
     },
   },
-  color: ["#08743f", "#f2c500"],
   axisTick: {
     alignWithLabel: true,
   },
+  color: ["#08743f", "#f2c500"],
 };
 
 function fetch_aggregated_data(resource_id, config) {
@@ -144,30 +150,28 @@ function options_barline(data, config) {
   });
   // create echart
   const options = {
+    grid: echartsConfig.grid,
     tooltip: {
       trigger: "axis",
       axisPointer: {
         type: "shadow",
       },
     },
-    grid: {
-      left: "3%",
-      right: "4%",
-      bottom: "3%",
-      containLabel: true,
-    },
     color: echartsConfig.color,
   };
   if (stringAxis === config.xAxis) {
     options.xAxis = {
+      name: config.xAxis,
       type: "category",
       data: chartData.map((record) => record.key),
       axisLabel: {
         rotate: 45,
         ...echartsConfig.axisLabel,
       },
+      axisTick: echartsConfig.axisTick,
     };
     options.yAxis = {
+      name: config.yAxis,
       type: "value",
     };
     options.series = [
@@ -180,11 +184,14 @@ function options_barline(data, config) {
     ];
   } else {
     options.yAxis = {
+      name: config.yAxis,
       type: "category",
       data: chartData.map((record) => record.key),
       axisLabel: echartsConfig.axisLabel,
+      axisTick: echartsConfig.axisTick,
     };
     options.xAxis = {
+      name: config.xAxis,
       type: "value",
     };
     options.series = [
