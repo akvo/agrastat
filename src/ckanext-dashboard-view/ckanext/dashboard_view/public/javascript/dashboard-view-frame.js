@@ -198,22 +198,22 @@ function render_number(res_id, config, container) {
   const data = fetch_all_records(res_id, config).then((data) => {
     if (config.numberType === "total") {
       const total = _.sumBy(data.result, config.numberColumn);
-      container.innerHTML = total;
+      countUp(config.id, total);
     } else if (config.numberType === "avg") {
       const avg = _.meanBy(data.result, config.numberColumn);
-      container.innerHTML = avg.toFixed(2);
+      countUp(config.id, avg.toFixed(2));
     } else if (config.numberType === "count") {
-      container.innerHTML = data.result.length;
+      countUp(config.id, data.result.length).start();
     } else if (config.numberType === "max") {
       const max = _.maxBy(data.result, config.numberColumn)[
         config.numberColumn
       ];
-      container.innerHTML = max;
+      countUp(config.id, max);
     } else if (config.numberType === "min") {
       const min = _.minBy(data.result, config.numberColumn)[
         config.numberColumn
       ];
-      container.innerHTML = min;
+      countUp(config.id, min);
     }
   });
 }
