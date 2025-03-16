@@ -61,8 +61,10 @@ class DashboardViewPlugin(plugins.SingletonPlugin):
 
     def setup_template_variables(self, context, data_dict):
         return {
+            "resource_id": data_dict["resource"]["id"],
             "resource_json": json.dumps(data_dict["resource"]),
             "resource_view_json": json.dumps(data_dict["resource_view"]),
+            "data_columns": self.get_resource_parameters(data_dict),
         }
 
     def view_template(self, context, data_dict):
@@ -73,9 +75,7 @@ class DashboardViewPlugin(plugins.SingletonPlugin):
                 )
             except json.JSONDecodeError:
                 data_dict["columns"] = []
-        data_dict["resource_id"] = data_dict["resource"]["id"]
         return "dashboard_view.html"
 
     def form_template(self, context, data_dict):
-        data_dict["data_columns"] = self.get_resource_parameters(data_dict)
         return "dashboard_view_form.html"

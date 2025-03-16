@@ -76,11 +76,7 @@ function fetch_all_records(
   const limit = 100;
   const offset = current.length;
   let url = `${datastoreURL}?resource_id=${resource_id}&limit=${limit}&offset=${offset}`;
-  if (config.visualizationType === "number") {
-    url += `&fields=${config.numberColumn}`;
-  } else {
-    url += `&fields=${config.xAxis},${config.yAxis}`;
-  }
+  url += `&fields=${config.xAxis},${config.yAxis}`;
   return fetch(url)
     .then((response) => response.json())
     .then((data) => {

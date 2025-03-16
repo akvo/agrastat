@@ -26,8 +26,13 @@
         </ul>
     </div>
     <div class="dropdown btn-group">
-	  {% link_for _('Edit View'), named_route=pkg.type ~ '_resource.views', id=pkg.name, resource_id=resource.id, class_='btn btn-default', icon='edit' %}
+      <a class="btn btn-default" href="/dataset/{{pkg.name}}/resource/{{resource.id}}/edit_view/{{view_id}}" target="_blank"><i class="fa fa-edit"></i> Edit View</a>
     </div>
+    <!--
+    <div class="dropdown btn-group">
+	  {% link_for _(''), named_route=pkg.type ~ '_resource.views', id=pkg.name, resource_id=resource.id, class_='btn btn-default', icon='bars' %}
+    </div>
+    -->
     </li>
     {% endif %}
   {% endif %}
