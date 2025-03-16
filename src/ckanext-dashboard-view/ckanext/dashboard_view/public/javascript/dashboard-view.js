@@ -58,21 +58,21 @@ document.addEventListener("DOMContentLoaded", function () {
     // Create the configuration object for the new visualization
     var newConfig = {
       id: id, // Use the generated ID
-      grid_size: gridSize,
+      gridSize: gridSize,
       title: title,
-      visualization_type: visualType,
+      visualizationType: visualType,
     };
 
     if (visualType === "chart") {
       newConfig.chart_type = document.getElementById("chartType").value;
-      newConfig.x_axis =
+      newConfig.xAxis =
         document.getElementById("xAxis").value || "X-Axis Placeholder";
-      newConfig.y_axis =
+      newConfig.yAxis =
         document.getElementById("yAxis").value || "Y-Axis Placeholder";
     } else if (visualType === "number") {
-      newConfig.number_type =
+      newConfig.numberType =
         document.getElementById("numberType").value || "Average";
-      newConfig.number_column = document.getElementById("numberColumn").value;
+      newConfig.numberColumn = document.getElementById("numberColumn").value;
     }
 
     // Step 2: Collect all existing configurations
@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Step 5: Create the outer container (col-md-4)
     var outerContainer = document.createElement("div");
-    outerContainer.classList.add("col-md-4");
+    outerContainer.classList.add(gridSize);
     outerContainer.setAttribute("id", `viz_grid_${id}`); // Unique ID for the container
 
     // Step 6: Create the grid item container
@@ -115,12 +115,12 @@ document.addEventListener("DOMContentLoaded", function () {
     // Step 8: Build the content
     var content = `<strong>${title}</strong><br>`;
     if (visualType === "chart") {
-      content += `<small>Type: ${newConfig.chart_type} Chart</small><br>
-                <small>X-Axis: ${newConfig.x_axis}</small><br>
-                <small>Y-Axis: ${newConfig.y_axis}</small><br>`;
+      content += `<small>Type: ${newConfig.chartType} Chart</small><br>
+                <small>X-Axis: ${newConfig.xAxis}</small><br>
+                <small>Y-Axis: ${newConfig.yAxis}</small><br>`;
     } else if (visualType === "number") {
-      content += `<small>Type: Number (${newConfig.number_type})</small><br>
-                <small>Value: ${newConfig.number_column}</small><br>`;
+      content += `<small>Type: Number (${newConfig.numberType})</small><br>
+                <small>Value: ${newConfig.numberColumn}</small><br>`;
     }
 
     // Append the content to the panel body

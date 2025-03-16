@@ -40,7 +40,7 @@
                     </div>
                     <div class="form-group">
                         <label for="visualType">Visualization Type</label>
-                        <select class="form-control" id="visualType">
+                        <select class="form-control" id="visualType" name="visualizationType">
                             <option value="chart">Chart</option>
                             <option value="number">Number</option>
                         </select>
@@ -48,10 +48,10 @@
                     <div id="numberOptions" class="form-group hidden">
                         <label>Number Type</label>
                         <select class="form-control" id="numberType">
-                            <option>Average</option>
-                            <option>Max</option>
-                            <option>Min</option>
-                            <option>Total</option>
+                            <option value="avg">Average</option>
+                            <option value="max">Max</option>
+                            <option value="min">Min</option>
+                            <option value="total">Total</option>
                         </select>
                     </div>
                     <div id="numberOptions" class="form-group hidden">
@@ -67,15 +67,15 @@
                     <div id="chartOptions" class="hidden">
                         <div class="form-group">
                             <label>Chart Type</label>
-                            <select class="form-control" id="chartType">
-                                <option>Bar Chart</option>
-                                <option>Line Chart</option>
-                                <option>Pie Chart</option>
+                            <select class="form-control" id="chartType" name="chartType">
+                                <option value="bar">Bar Chart</option>
+                                <option value="line">Line Chart</option>
+                                <option value="pie">Pie Chart</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label class="control-label">X-Axis</label>
-                            <select class="form-control" id="xAxis">
+                            <select class="form-control" id="xAxis" name="xAxis">
                                 {% for column in data_columns %}
                                     <option value="{{ column.name }}">{{ column.name }} ({{ column.type }})</option>
                                 {% endfor %}
@@ -83,7 +83,7 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label">Y-Axis</label>
-                            <select class="form-control" id="yAxis">
+                            <select class="form-control" id="yAxis" name="yAxis">
                                 {% for column in data_columns %}
                                     <option value="{{ column.name }}">{{ column.name }} ({{ column.type }})</option>
                                 {% endfor %}

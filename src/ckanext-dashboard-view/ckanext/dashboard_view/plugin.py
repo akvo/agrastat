@@ -73,6 +73,7 @@ class DashboardViewPlugin(plugins.SingletonPlugin):
                 )
             except json.JSONDecodeError:
                 data_dict["columns"] = []
+        data_dict["resource_id"] = data_dict["resource"]["id"]
         return "dashboard_view.html"
 
     def form_template(self, context, data_dict):

@@ -4,3 +4,8 @@
     {{ super() }}
     <link rel="stylesheet" href="/css/dashboard-view.css" />
 {% endblock %}
+
+{%- block scripts %}
+  {{super()}}
+  <script src="/vendor/echarts/echarts.min.js" type="text/javascript"></script>
+{% endblock -%}
