@@ -12,7 +12,8 @@
         <div class="{{column.gridSize}}" id="viz_grid_{{ column.id }}">
           <div class="grid-item panel panel-default text-center visualization-grid-item">
             <!-- Close Link -->
-            <a class="remove-grid" href="#" onclick="removeGrid('{{ column.id }}'); return false;">&times;</a>
+            <a class="edit-grid" href="#" onclick="editGrid('{{ column.id }}'); return false;"><i class="fa fa-pencil"></i></a>
+            <a class="remove-grid" href="#" onclick="removeGrid('{{ column.id }}'); return false;"><i class="fa fa-times"></i></a>
             <div class="panel-body">
               {% if column.visualizationType == "chart" %}
                 {% set chartIcon = "dot-circle-o" if column.chartType == "scatter" else column.chartType + "-chart" %}

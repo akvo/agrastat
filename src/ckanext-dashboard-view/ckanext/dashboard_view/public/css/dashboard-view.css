@@ -60,6 +60,25 @@
     text-align: center; /* Ensure text is centered */
 }
 
+.edit-grid {
+    position: absolute;
+    top: 5px;
+    right: 40px;
+    text-decoration: none;
+    color: #007bff;
+    background: #ddd;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 5px;
+    min-width: 30px;
+    min-height: 30px;
+    line-height: 30px;
+}
+.edit-grid:hover {
+    color: #fff;
+    background: #007bff;
+    text-decoration: none;
+}
 .remove-grid {
     position: absolute;
     top: 5px;

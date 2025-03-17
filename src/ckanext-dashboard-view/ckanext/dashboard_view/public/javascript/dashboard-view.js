@@ -1,4 +1,5 @@
 const maxVisualizations = 9;
+let editModeId = null;
 // dashboard-view.js
 function getExistingConfigs() {
   let existingConfigs = [];
@@ -10,19 +11,96 @@ function getExistingConfigs() {
     console.error("Error parsing existing configurations:", e);
     existingConfigs = [];
   }
-  console.log("Existing Configs", existingConfigs);
   return existingConfigs;
 }
 
 function toggleAddButton(currentExistingConfigs = null) {
   const existingConfigs = currentExistingConfigs || getExistingConfigs();
-  console.log("Existing Configs", existingConfigs.length, maxVisualizations);
   const addButton = document.querySelector(".add-visualization-container");
   if (addButton) {
     addButton.classList.toggle(
       "hidden",
       existingConfigs.length >= maxVisualizations,
     );
+  }
+}
+
+function updateGrid(configs) {
+  // Clear the grid
+  const gridBase = document.querySelector(".dashboard-view-grid-base");
+  gridBase.innerHTML = "";
+
+  // Rebuild the grid
+  configs.forEach((config) => {
+    const outerContainer = document.createElement("div");
+    outerContainer.classList.add(config.gridSize);
+    outerContainer.setAttribute("id", `viz_grid_${config.id}`);
+
+    const gridItem = document.createElement("div");
+    gridItem.classList.add(
+      "grid-item",
+      "panel",
+      "panel-default",
+      "text-center",
+      "visualization-grid-item",
+    );
+
+    const panelBody = document.createElement("div");
+    panelBody.classList.add("panel-body");
+
+    let icon = "fa fa-info-circle";
+    if (config.visualizationType === "chart") {
+      icon = `fa fa-${config.chartType}-chart`;
+      if (config.chartType === "scatter") {
+        icon = "fa fa-dot-circle-o";
+      }
+    }
+    let content = `<strong><i class="${icon}"></i> ${config.title}</strong><br>`;
+    if (config.visualizationType === "chart") {
+      if (config.chartType === "pie") {
+        content += `<small>Value: ${config.pieValue}</small><br>
+                <small>Group: ${config.pieGroup}</small><br>`;
+      } else {
+        content += `<small>Type: ${config.chartType}</small><br>
+                  <small>X-Axis: ${config.xAxis}</small><br>
+                  <small>Y-Axis: ${config.yAxis}</small><br>`;
+      }
+    } else if (config.visualizationType === "number") {
+      content += `<small>Data: ${config.numberColumn}</small><br>
+                <small>Value: ${config.numberType}</small><br>`;
+    }
+
+    panelBody.innerHTML = content;
+
+    const closeLink = document.createElement("a");
+    closeLink.classList.add("remove-grid");
+    closeLink.href = "#";
+    closeLink.innerHTML = "<i class='fa fa-times'></i>";
+    closeLink.addEventListener("click", function (event) {
+      event.preventDefault();
+      removeGrid(config.id);
+    });
+
+    const editLink = document.createElement("a");
+    editLink.classList.add("edit-grid");
+    editLink.href = "#";
+    editLink.innerHTML = "<i class='fa fa-pencil'></i>";
+    editLink.addEventListener("click", function (event) {
+      event.preventDefault();
+      editGrid(config.id);
+    });
+
+    gridItem.appendChild(closeLink);
+    gridItem.appendChild(editLink);
+    gridItem.appendChild(panelBody);
+    outerContainer.appendChild(gridItem);
+    gridBase.appendChild(outerContainer);
+  });
+
+  // Add the "+" button back to the grid
+  if (configs.length < maxVisualizations) {
+    const addButton = document.querySelector(".add-visualization-container");
+    gridBase.appendChild(addButton);
   }
 }
 
@@ -43,6 +121,45 @@ function removeGrid(id) {
     gridItemToRemove.remove();
   }
   toggleAddButton(existingConfigs);
+}
+
+function editGrid(id) {
+  // Step 1: Find the configuration with the matching ID
+  const existingConfigs = getExistingConfigs();
+  const configToEdit = existingConfigs.find((config) => config.id === id);
+
+  if (!configToEdit) {
+    console.error("Visualization not found for editing:", id);
+    return;
+  }
+
+  // Set the edit mode ID
+  editModeId = id;
+
+  // Step 2: Populate the form fields with the configuration data
+  document.getElementById("gridSize").value = configToEdit.gridSize;
+  document.getElementById("visualTitle").value = configToEdit.title;
+  document.getElementById("visualType").value = configToEdit.visualizationType;
+
+  // Step 3: Toggle the form fields based on the visualization type
+  resetFormFields();
+
+  if (configToEdit.visualizationType === "chart") {
+    document.getElementById("chartType").value = configToEdit.chartType;
+    if (configToEdit.chartType === "pie") {
+      document.getElementById("pieValue").value = configToEdit.pieValue;
+      document.getElementById("pieGroup").value = configToEdit.pieGroup;
+    } else {
+      document.getElementById("xAxis").value = configToEdit.xAxis;
+      document.getElementById("yAxis").value = configToEdit.yAxis;
+    }
+  } else if (configToEdit.visualizationType === "number") {
+    document.getElementById("numberType").value = configToEdit.numberType;
+    document.getElementById("numberColumn").value = configToEdit.numberColumn;
+  }
+
+  // Step 4: Show the modal
+  $("#visualModal").modal("show");
 }
 
 function resetFormFields() {
@@ -80,17 +197,14 @@ document.addEventListener("DOMContentLoaded", function () {
   // Add event listener to the "Save Visualization" button
 
   document.getElementById("saveVisual").addEventListener("click", function () {
-    // Step 1: Gather form data for the new visualization
+    // Gather form data for the visualization
     const gridSize = document.getElementById("gridSize").value;
     const title = document.getElementById("visualTitle").value || "Untitled";
     const visualType = document.getElementById("visualType").value;
 
-    // Generate a unique ID for the new visualization
-    const id = Math.random().toString(36).substr(2, 9);
-
-    // Create the configuration object for the new visualization
+    // Create the configuration object
     let newConfig = {
-      id: id, // Use the generated ID
+      id: editModeId || Math.random().toString(36).substr(2, 9), // Use existing ID or generate a new one
       gridSize: gridSize,
       title: title,
       visualizationType: visualType,
@@ -111,100 +225,36 @@ document.addEventListener("DOMContentLoaded", function () {
       newConfig.numberColumn = document.getElementById("numberColumn").value;
     }
 
-    // Step 2: Collect all existing configurations
+    // Collect all existing configurations
     let existingConfigs = getExistingConfigs();
 
-    // Step 3: Add the new configuration to the list
-    existingConfigs.push(newConfig);
+    if (editModeId) {
+      // Update the existing visualization
+      const index = existingConfigs.findIndex(
+        (config) => config.id === editModeId,
+      );
+      if (index !== -1) {
+        existingConfigs[index] = newConfig; // Replace the old configuration
+      } else {
+        console.error("Visualization not found for editing:", editModeId);
+      }
 
-    // Step 4: Serialize the updated list and update the hidden input field
+      // Reset edit mode
+      editModeId = null;
+    } else {
+      // Add the new visualization
+      existingConfigs.push(newConfig);
+    }
+
+    // Serialize the updated list and update the hidden input field
     document.getElementById("columns-input").value =
       JSON.stringify(existingConfigs);
 
-    // Step 5: Create the outer container (col-md-4)
-    const outerContainer = document.createElement("div");
-    outerContainer.classList.add(gridSize);
-    outerContainer.setAttribute("id", `viz_grid_${id}`); // Unique ID for the container
+    // Update the grid in the DOM
+    updateGrid(existingConfigs);
 
-    // Step 6: Create the grid item container
-    const gridItem = document.createElement("div");
-    gridItem.classList.add(
-      "grid-item",
-      "panel",
-      "panel-default",
-      "text-center",
-      "visualization-grid-item",
-    );
-
-    // Step 7: Create the panel body
-    const panelBody = document.createElement("div");
-    panelBody.classList.add("panel-body");
-
-    // Step 8: Build the content
-    let icon = "fa fa-info-circle";
-    if (visualType === "chart") {
-      icon = `fa fa-${newConfig.chartType}-chart`;
-      if (newConfig.chartType === "scatter") {
-        icon = "fa fa-dot-circle-o";
-      }
-    }
-    let content = `<strong><i class="${icon}"></i> ${title}</strong><br>`;
-    if (visualType === "chart") {
-      const ctype = document.getElementById("chartType").value;
-      if (ctype === "pie") {
-        content += `<small>Value: ${newConfig.pieValue}</small><br>
-                <small>Group: ${newConfig.pieGroup}</small><br>`;
-      } else {
-        content += `<small>Type: ${newConfig.chartType}</small><br>
-                  <small>X-Axis: ${newConfig.xAxis}</small><br>
-                  <small>Y-Axis: ${newConfig.yAxis}</small><br>`;
-      }
-    } else if (visualType === "number") {
-      content += `<small>Data: ${newConfig.numberColumn}</small><br>
-                <small>Value: ${newConfig.numberType}</small><br>`;
-    }
-
-    // Append the content to the panel body
-    panelBody.innerHTML = content;
-
-    // Step 9: Add the "X" link for removal
-    const closeLink = document.createElement("a");
-    closeLink.classList.add("remove-grid"); // Add the "remove-grid" class
-    closeLink.href = "#"; // Prevent default link behavior
-    closeLink.innerHTML = "&times;"; // Unicode for "X"
-
-    // Attach the removeGrid function to the "X" link
-    closeLink.addEventListener("click", function (event) {
-      event.preventDefault(); // Prevent default link behavior
-      removeGrid(id); // Pass the unique ID to the removeGrid function
-    });
-
-    // Append the close link to the grid item
-    gridItem.appendChild(closeLink);
-
-    // Append the panel body to the grid item
-    gridItem.appendChild(panelBody);
-
-    // Append the grid item to the outer container
-    outerContainer.appendChild(gridItem);
-
-    // Step 10: Insert the new grid item before the "+" button
-    const addButtonGridItem = document.querySelector(
-      ".dashboard-view-grid-base .add-visualization-container",
-    );
-    if (addButtonGridItem && addButtonGridItem.parentNode) {
-      addButtonGridItem.parentNode.insertBefore(
-        outerContainer,
-        addButtonGridItem,
-      );
-      toggleAddButton(existingConfigs);
-    }
-
+    // Reset the form and hide the modal
     resetFormFields();
     $("#visualModal").modal("hide");
-    const allFields = ["visualTitle"];
-    allFields.forEach((field) => {
-      document.getElementById(field).value = "";
-    });
   });
 });
