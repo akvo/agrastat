@@ -1,0 +1,100 @@
+/* Dashboard View */
+.col-md-12.dashboard-view-grid-base {
+    padding: 20px;
+    background: #ddd;
+    margin: 15px;
+    width: calc(100% - 30px);
+}
+
+.grid-item {
+    border: 1px solid #ccc;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    min-height: 160px;
+}
+.add-visual {
+    font-size: 24px;
+    cursor: pointer;
+    color: #007bff;
+}
+
+.add-visualization-container {
+    display: flex; /* Enable Flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100%; /* Ensure the column takes up the full height of its parent */
+}
+
+.add-visualization-container .grid-item.panel.panel-default {
+    width: 100%; /* Ensure the panel spans the full width of the column */
+    height: 100%; /* Ensure the panel takes up the full height */
+    display: flex; /* Enable Flexbox for the panel */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+.add-visualization-container .panel-body {
+    display: flex; /* Enable Flexbox for the panel body */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100%; /* Ensure the panel body takes up the full height */
+}
+
+.add-visualization-container .add-visual {
+    font-size: 24px; /* Adjust the size of the plus icon */
+}
+
+.visualization-grid-item {
+    display: flex; /* Enable Flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    min-height: 160px; /* Respect the existing min-height */
+}
+
+.visualization-grid-item .panel-body {
+    display: flex; /* Enable Flexbox for the panel body */
+    flex-direction: column; /* Stack content vertically */
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    text-align: center; /* Ensure text is centered */
+}
+
+.edit-grid {
+    position: absolute;
+    top: 5px;
+    right: 40px;
+    text-decoration: none;
+    color: #007bff;
+    background: #ddd;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 5px;
+    min-width: 30px;
+    min-height: 30px;
+    line-height: 30px;
+}
+.edit-grid:hover {
+    color: #fff;
+    background: #007bff;
+    text-decoration: none;
+}
+.remove-grid {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    text-decoration: none;
+    color: #d43f3a;
+    background: #ddd;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 5px;
+    min-width: 30px;
+    min-height: 30px;
+    line-height: 30px;
+}
+.remove-grid:hover {
+    color: #fff;
+    background: #d43f3a;
+    text-decoration: none;
+}

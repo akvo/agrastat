@@ -1,0 +1,131 @@
+{% ckan_extends %}
+
+{% block secondary %}
+  {# Completely remove the aside element #}
+{% endblock %}
+
+{% block primary %}
+  <section class="module full-width">
+    <div class="module-content full-width">
+      {% block primary_content_inner %}
+        {{ super() }}
+      {% endblock %}
+    </div>
+  </section>
+{% endblock %}
+
+{% block footer %}
+{{super()}}
+{% if data_columns %}
+<div class="modal fade" id="visualModal" tabindex="-1" role="dialog" aria-labelledby="visualModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="visualModalLabel">Add New Visualization</h4>
+            </div>
+            <div class="modal-body">
+                <form id="visualForm">
+                    <div class="form-group">
+                        <label for="visualTitle">Title</label>
+                        <input type="text" class="form-control" id="visualTitle">
+                    </div>
+                    <div class="form-group">
+                        <label for="gridSize">Grid Width</label>
+                        <select class="form-control" id="gridSize">
+                            <option value="col-md-12">100%</option>
+                            <option value="col-md-6">50%</option>
+                            <option value="col-md-4">33%</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="visualType">Visualization Type</label>
+                        <select class="form-control" id="visualType" name="visualizationType">
+                            <option value="chart">Chart</option>
+                            <option value="number">Number</option>
+                        </select>
+                    </div>
+                    <div id="numberOptions">
+                        <div class="form-group">
+                            <label>Number Type</label>
+                            <select class="form-control" id="numberType" name="numberType">
+                                <option value="avg">Average</option>
+                                <option value="max">Max</option>
+                                <option value="min">Min</option>
+                                <option value="total">Total</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Value</label>
+                            <select class="form-control" id="numberColumn">
+                                {% for column in data_columns %}
+                                    {% if column.type in ['int4', 'int8', 'float4', 'float8', 'numeric'] %}
+                                        <option value="{{ column.name }}">{{ column.name }} ({{ column.type }})</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div id="chartOptions" class="hidden">
+                        <div class="form-group">
+                            <label>Chart Type</label>
+                            <select class="form-control" id="chartType" name="chartType">
+                                <option value="bar">Bar Chart</option>
+                                <option value="line">Line Chart</option>
+                                <option value="scatter">Scatter Chart</option>
+                                <option value="area">Area Chart</option>
+                                <option value="pie">Pie Chart</option>
+                            </select>
+                        </div>
+                        <div id="axisData" class="hidden">
+                            <div class="form-group">
+                                <label class="control-label">X-Axis</label>
+                                <select class="form-control" id="xAxis" name="xAxis">
+                                    {% for column in data_columns %}
+                                        <option value="{{ column.name }}">{{ column.name }} ({{ column.type }})</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Y-Axis</label>
+                                <select class="form-control" id="yAxis" name="yAxis">
+                                    {% for column in data_columns %}
+                                        <option value="{{ column.name }}">{{ column.name }} ({{ column.type }})</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div id="pieData" class="hidden">
+                            <div class="form-group">
+                                <label class="control-label">Value</label>
+                                <select class="form-control" id="pieValue" name="pieValue">
+                                    {% for column in data_columns %}
+                                        {% if column.type in ['int4', 'int8', 'float4', 'float8', 'numeric'] %}
+                                            <option value="{{ column.name }}">{{ column.name }} ({{ column.type }})</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Group By</label>
+                                <select class="form-control" id="pieGroup" name="pieGroup">
+                                    {% for column in data_columns %}
+                                        {% if column.type not in ['int4', 'int8', 'float4', 'float8', 'numeric'] %}
+                                            <option value="{{ column.name }}">{{ column.name }} ({{ column.type }})</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="saveVisual">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

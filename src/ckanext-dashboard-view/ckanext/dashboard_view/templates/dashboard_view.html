@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="icon" href="/favicon.png" data-spai-egr="1" sizes="32x32" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/dashboard-view-base.css" />
+  <title>AGRASTAT - Dashboard</title>
+  <script type="text/javascript">
+    window.resource_id = "{{resource_id | safe}}";
+  </script>
+  <script src="{{ h.url_for_static('/vendor/lodash/lodash.min.js') }}" type="text/javascript"></script>
+  <script src="{{ h.url_for_static('/vendor/echarts/echarts.min.js') }}" type="text/javascript"></script>
+  <script src="{{ h.url_for_static('/vendor/countup/countUp.js') }}" type="text/javascript"></script>
+</head>
+<div class="main container">
+  <div class="row dashboard-view-container">
+    {% if columns %}
+      {% for column in columns %}
+        <div class="{{ column.gridSize }} viz-item" id="viz_grid_{{ column.id }}" data-viz-type="{{column.visualizationType}}" data-config='{{ column | tojson }}'>
+          <h2 class="viz-title">{{ column.title }}</h2>
+          <div class="panel text-center">
+            {% if column.visualizationType == "chart" %}
+            <div id="{{column.id}}" class="viz-chart"></div>
+            {% else %}
+            <div id="{{column.id}}" class="viz-number"></div>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p>No visualizations configured yet.</p>
+    {% endif %}
+  </div>
+</div>
+<script src="{{ h.url_for_static('/javascript/dashboard-view-frame.js') }}" type="text/javascript"></script>
+</html>

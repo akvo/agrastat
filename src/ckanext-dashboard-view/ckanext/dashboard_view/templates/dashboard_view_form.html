@@ -1,0 +1,52 @@
+<!-- dashboard_view_form.html -->
+
+{% block primary_content %}
+<input id="columns-input" class="form-control hidden" name="columns" value="{{resource_view.columns}}">
+
+<hr/>
+<div class="row">
+    <div class="col-md-12 dashboard-view-grid-base">
+    <!-- Existing visualizations will be dynamically added here -->
+    {% if columns %}
+      {% for column in columns %}
+        <div class="{{column.gridSize}}" id="viz_grid_{{ column.id }}">
+          <div class="grid-item panel panel-default text-center visualization-grid-item">
+            <!-- Close Link -->
+            <a class="edit-grid" href="#" onclick="editGrid('{{ column.id }}'); return false;"><i class="fa fa-pencil"></i></a>
+            <a class="remove-grid" href="#" onclick="removeGrid('{{ column.id }}'); return false;"><i class="fa fa-times"></i></a>
+            <div class="panel-body">
+              {% if column.visualizationType == "chart" %}
+                {% set chartIcon = "dot-circle-o" if column.chartType == "scatter" else column.chartType + "-chart" %}
+                <strong><i class="fa fa-{{chartIcon}}"></i> {{ column.title }}</strong><br/>
+                <small>Type: {{ column.chartType }}</small><br/>
+                {% if column.chartType != "pie" %}
+                <small>X-Axis: {{ column.xAxis }}</small><br/>
+                <small>Y-Axis: {{ column.yAxis }}</small><br/>
+                {% else %}
+                <small>Value: {{ column.pieValue }}</small><br/>
+                <small>GroupBy: {{ column.pieGroup }}</small><br/>
+                {% endif %}
+              {% elif column.visualizationType == "number" %}
+                <strong><i class="fa fa-info-circle"></i> {{ column.title }}</strong><br/>
+                <small>Data: {{ column.numberColumn }}</small><br/>
+                <small>Value: {{ column.numberType }}</small><br/>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+    <div class="col-md-4 add-visualization-container" data-toggle="modal" data-target="#visualModal" style="font-size: 24px; cursor: pointer;">
+        <div class="grid-item panel panel-default text-center">
+            <div class="panel-body">
+                <span class="add-visual text-primary"><i class="fa fa-plus"></i></span>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ h.url_for_static('/javascript/dashboard-view.js') }}" type="text/javascript"></script>
+{% endblock %}
