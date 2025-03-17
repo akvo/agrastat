@@ -1,4 +1,4 @@
-const maxVisualizations = 9;
+const maxVisualizations = 6;
 let editModeId = null;
 // dashboard-view.js
 function getExistingConfigs() {
@@ -14,23 +14,24 @@ function getExistingConfigs() {
   return existingConfigs;
 }
 
-function toggleAddButton(currentExistingConfigs = null) {
-  const existingConfigs = currentExistingConfigs || getExistingConfigs();
-  const addButton = document.querySelector(".add-visualization-container");
-  if (addButton) {
-    addButton.classList.toggle(
-      "hidden",
-      existingConfigs.length >= maxVisualizations,
-    );
-  }
-}
-
 function updateGrid(configs) {
-  // Clear the grid
+  // Get the grid base container
   const gridBase = document.querySelector(".dashboard-view-grid-base");
-  gridBase.innerHTML = "";
 
-  // Rebuild the grid
+  // Temporarily detach the "+" button (add button)
+  const addButton = gridBase.querySelector(".add-visualization-container");
+  if (addButton) {
+    gridBase.removeChild(addButton); // Remove the "+" button from the DOM
+  }
+
+  // Clear the grid (remove all visualization containers)
+  gridBase
+    .querySelectorAll(":scope > div:not(.add-visualization-container)")
+    .forEach((item) => {
+      item.remove(); // Remove each visualization container
+    });
+
+  // Rebuild the grid with updated configurations
   configs.forEach((config) => {
     const outerContainer = document.createElement("div");
     outerContainer.classList.add(config.gridSize);
@@ -97,10 +98,14 @@ function updateGrid(configs) {
     gridBase.appendChild(outerContainer);
   });
 
-  // Add the "+" button back to the grid
-  if (configs.length < maxVisualizations) {
-    const addButton = document.querySelector(".add-visualization-container");
+  // Reattach the "+" button to the grid
+  if (addButton) {
     gridBase.appendChild(addButton);
+  }
+  if (configs.length === maxVisualizations) {
+    addButton.classList.add("hidden");
+  } else {
+    addButton.classList.remove("hidden");
   }
 }
 
@@ -116,11 +121,7 @@ function removeGrid(id) {
     JSON.stringify(existingConfigs);
 
   // Step 2: Remove the grid item from the DOM
-  const gridItemToRemove = document.querySelector(`#viz_grid_${id}`);
-  if (gridItemToRemove) {
-    gridItemToRemove.remove();
-  }
-  toggleAddButton(existingConfigs);
+  updateGrid(existingConfigs);
 }
 
 function editGrid(id) {
@@ -185,7 +186,7 @@ function resetFormFields() {
 document.addEventListener("DOMContentLoaded", function () {
   // Check the current value of the select element on page load
   resetFormFields();
-  toggleAddButton();
+  updateGrid(getExistingConfigs());
   // Toggle visibility of options based on visualization type
   document.getElementById("visualType").addEventListener("change", function () {
     resetFormFields();
