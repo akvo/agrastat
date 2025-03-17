@@ -766,6 +766,10 @@ Feel free to repeat this process for any additional files you wish to convert.
 
 .. image:: /images/data_converter.jpg
 
+.. note::
+
+    Only a logged in users have access to the data converter tool
+
 
 Dataset statistics
 ==================
