@@ -466,6 +466,8 @@ within that organization from its home page in AGRASTAT.
 AGRASTAT will return search results as normal, but restricted to datasets from the
 organization.
 
+.. image:: /images/dataset_organisation.jpg
+
 If the organization is of interest, you can opt to be notified of changes to it
 (such as new datasets and modifications to datasets) by using the "Follow"
 button on the organization page. See the section :ref:`managing_your_news_feed`
