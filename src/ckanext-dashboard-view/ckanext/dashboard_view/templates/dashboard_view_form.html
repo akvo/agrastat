@@ -5,7 +5,6 @@
 
 <hr/>
 <div class="row">
-    <div class="col-md-12"><b>Columns:</b></div>
     <div class="col-md-12 dashboard-view-grid-base">
     <!-- Existing visualizations will be dynamically added here -->
     {% if columns %}
@@ -27,9 +26,9 @@
                 <small>GroupBy: {{ column.pieGroup }}</small><br/>
                 {% endif %}
               {% elif column.visualizationType == "number" %}
-                <strong><i class="fa fa-info"></i> {{ column.title }}</strong><br/>
-                <small>Type: {{ column.numberType }}</small><br/>
-                <small>Value: {{ column.numberColumn }}</small><br/>
+                <strong><i class="fa fa-info-circle"></i> {{ column.title }}</strong><br/>
+                <small>Data: {{ column.numberColumn }}</small><br/>
+                <small>Value: {{ column.numberType }}</small><br/>
               {% endif %}
             </div>
           </div>

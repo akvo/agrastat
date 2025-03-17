@@ -19,7 +19,7 @@ const echartsConfig = {
 };
 
 function fetch_aggregated_data(resource_id, config) {
-  const { numberColumn, numberType } = config;
+  const { numberColumn, numberType, groupBy } = config;
 
   // Validate required parameters
   if (!resource_id || !numberColumn || !numberType) {
@@ -32,7 +32,7 @@ function fetch_aggregated_data(resource_id, config) {
   const sqlFunctions = {
     total: `SUM("${numberColumn}") AS total`,
     avg: `AVG("${numberColumn}") AS average`,
-    count: `COUNT("${numberColumn}") AS count`,
+    count: `COUNT(DISTINCT "${numberColumn}") AS count`,
     min: `MIN("${numberColumn}") AS minimum`,
     max: `MAX("${numberColumn}") AS maximum`,
   };
@@ -44,8 +44,15 @@ function fetch_aggregated_data(resource_id, config) {
     );
   }
 
-  // Construct the SQL query
-  const sqlQuery = `SELECT ${sqlFunctions[numberType]} FROM "${resource_id}"`;
+  // Construct the base SQL query
+  let sqlQuery = `SELECT ${sqlFunctions[numberType]}`;
+
+  // Add GROUP BY clause if groupBy is provided
+  if (groupBy) {
+    sqlQuery += `, "${groupBy}" FROM "${resource_id}" GROUP BY "${groupBy}"`;
+  } else {
+    sqlQuery += ` FROM "${resource_id}"`;
+  }
 
   // Send the request to the CKAN API
   return fetch(`${datastoreURL}_sql`, {
@@ -66,7 +73,7 @@ function fetch_aggregated_data(resource_id, config) {
       if (!result.success) {
         throw new Error(`CKAN API error: ${result.error.message}`);
       }
-      return result.result.records[0];
+      return result.result.records;
     })
     .catch((error) => {
       console.error("Error fetching aggregated data:", error);
@@ -261,17 +268,55 @@ function render_chart(res_id, config, container) {
 
 function render_number(res_id, config, container) {
   fetch_aggregated_data(res_id, config).then((data) => {
+    const res = data[0];
     if (config.numberType === "total") {
-      countUp(config.id, data.total);
+      countUp(config.id, res.total);
     } else if (config.numberType === "avg") {
-      countUp(config.id, parseFloat(data.average).toFixed(2));
+      countUp(config.id, parseFloat(res.average).toFixed(2));
     } else if (config.numberType === "count") {
-      countUp(config.id, data.count).start();
+      countUp(config.id, res.count).start();
     } else if (config.numberType === "max") {
-      countUp(config.id, data.maximum);
+      countUp(config.id, res.maximum);
     } else if (config.numberType === "min") {
-      countUp(config.id, data.minimum);
+      countUp(config.id, res.minimum);
     }
+  });
+}
+
+function render_pie(res_id, config, container) {
+  const queryConfig = {
+    numberColumn: config.pieValue,
+    numberType: "total",
+    groupBy: config.pieGroup,
+  };
+  fetch_aggregated_data(res_id, queryConfig).then((data) => {
+    const chartData = data.map((record) => {
+      return {
+        name: record[config.pieGroup],
+        value: record.total,
+      };
+    });
+    const myChart = echarts.init(container);
+    myChart.setOption({
+      tooltip: {
+        trigger: "item",
+        formatter: "{a} <br/>{b} : {c} ({d}%)",
+      },
+      series: [
+        {
+          name: config.pieGroup,
+          type: "pie",
+          data: chartData,
+          emphasis: {
+            itemStyle: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: "rgba(0, 0, 0, 0.5)",
+            },
+          },
+        },
+      ],
+    });
   });
 }
 
@@ -283,7 +328,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const config = JSON.parse(el.getAttribute("data-config"));
     const container = document.getElementById(config.id);
     if (config.visualizationType === "chart") {
-      render_chart(resource_id, config, container);
+      if (config.chartType === "pie") {
+        render_pie(resource_id, config, container);
+      } else {
+        render_chart(resource_id, config, container);
+      }
     } else {
       render_number(resource_id, config, container);
     }
