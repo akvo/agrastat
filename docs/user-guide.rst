@@ -774,6 +774,8 @@ Dataset statistics
 Understanding the Dataset Statistics
 -------------------------------------
 The Dataset Statistics provides a visual representation of dataset distribution across different countries, business lines, and value chains. 
+Navigate to the organizations page and select the "Statistics" tab to access the dataset statistics.
+
 This page helps users quickly analyze dataset availability and focus areas.
 
 * Top 10 Countries - This section lists the top 10 countries based on the number of datasets available. The dataset count for each country, allows users to compare dataset availability across different regions.
