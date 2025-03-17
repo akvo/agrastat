@@ -20,6 +20,26 @@ poster="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC
     </div>
     <div class="main content">
       <div class="container">
+        {% set random_view = h.get_random_dashboard_view() %}
+        {% if random_view %}
+        <div class="row">
+          <div class="col-md-12 dataset-highlights">
+          <h1>Dataset Highlights</h1>
+            <iframe src="{{ random_view.iframe_url }}" width="100%" height="600px" frameborder="0"></iframe>
+            This dashboard is part of the resource:
+            <strong>
+              <a href="{{ h.url_for('resource.read', id=random_view.package_name, resource_id=random_view.resource_id) }}" target="_blank">
+                {{ random_view.resource_name }}
+              </a>
+            </strong> which belongs to the dataset:
+            <strong>
+              <a href="{{ h.url_for('dataset.read', id=random_view.package_name) }}" target="_blank">
+                {{ random_view.package_name }}
+              </a>
+            </strong>
+          </div>
+        </div>
+        {% endif %}
         <div class="row">
           <div class="col-md-12 home-content">
             <h1>Dataset Statistics</h1>
