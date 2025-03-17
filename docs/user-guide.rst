@@ -54,8 +54,8 @@ A dataset contains two things:
 Users, organizations and authorization
 ======================================
 
-AGRASTAT users can register user accounts and log in. Normally (depending on the
-site setup), login is not needed to search for and find data, but is needed for
+AGRASTAT users can have user accounts and log in. Normally (depending on the
+site setup), login is not needed to search for and find public data, but is needed for
 all publishing functions: datasets can be created, edited, etc by users with
 the appropriate permissions.
 
@@ -430,6 +430,8 @@ repeat the search with existing filters still in place. Available filters includ
 
 * Business lines
 
+* Impact areas
+
 * Linked value chain
 
 * Countries
@@ -503,6 +505,59 @@ logged in to use this feature.
     If you are a member of an organization, you can also follow the organization
     itself. This will notify you of changes to any dataset owned by the
     organization.
+
+
+Creating Dashboards
+-------------------
+AGRASTAT allows the user to create embeddable dashboards from the resources avaibled under their datasets.
+To create your dasboard:
+
+#. Find and select the dataset to create the dashboard from
+
+#. From the resources available, select the resource you want to create the dashboard from and Click on "Preview"
+
+#. Click on "New View"
+
+#. Click on "Dashboard View"
+
+#. Provide a title for the dashboard
+
+#. The click on "+" button to add a visual to the dashboard
+
+#. AGRASTAT will ask you to ptovide
+
+    * Title
+    * Grid width
+    * Type of visual
+    * Chart type
+    * X-axis
+    * Y-axis
+
+#. Once you have provided the information, click on "Save"
+
+#. You can add more visuals to the dashboard by clicking on the "+" button
+
+#. Once you have added all the visuals you need, click on "Add"
+
+.. image:: /images/add_dashboard.jpg
+
+
+
+Embedding Dashboards
+--------------------
+AGRASTAT allows the user to embed created dashboards into websites that support HTML.
+To embed your dashboard in other websites, follow the steps below:
+
+#. Navigate to the dashboard you want to embed by previewing the dataset of interest and selecting the dashboard
+
+#. Click on the "Edit view" button
+
+#. Click on the "Embed" button
+
+#. Copy the code provided. You can set the height and width of the dashboard to fit your website.
+
+
+.. image:: /images/embed_dashboard.jpg
 
 
 Exploring FAOSTAT datasets
@@ -624,6 +679,7 @@ Advanced Search Examples:
     in that documentation. Also note that not the whole functionality is offered
     through the simplified search interface in AGRASTAT or it can differ due to
     extensions or local development in your AGRASTAT instance.
+
 
 Personalization
 ===============
