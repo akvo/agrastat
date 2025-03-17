@@ -127,12 +127,12 @@ function renderChart(orgName = null) {
       chart.setOption(createBarOption(data));
     });
 
-  if (document.getElementById("chart-business-lines")) {
-    fetch("/api/2/statistic/business_lines" + `?${extraEndpoint}`)
+  if (document.getElementById("chart-impact-areas")) {
+    fetch("/api/2/statistic/impact_areas" + `?${extraEndpoint}`)
       .then((response) => response.json())
       .then((data) => {
         const chart = echarts.init(
-          document.getElementById("chart-business-lines"),
+          document.getElementById("chart-impact-areas"),
         );
         chart.setOption(createRadarOption(data));
       });
