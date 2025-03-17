@@ -768,7 +768,7 @@ Feel free to repeat this process for any additional files you wish to convert.
 
 .. note::
 
-    Only a logged in users have access to the data converter tool
+    Only logged in users have access to the data converter tool
 
 
 Dataset statistics
