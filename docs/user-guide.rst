@@ -543,6 +543,7 @@ To create your dasboard:
 
 .. image:: /images/add_dashboard.jpg
 
+.. image:: /images/embed_dashboard.jpg
 
 
 Embedding Dashboards
@@ -558,13 +559,13 @@ To embed your dashboard in other websites, follow the steps below:
 
 #. Copy the code provided. You can set the height and width of the dashboard to fit your website.
 
+
+.. image:: /images/embed_dashboard.jpg
+
 .. note::
 
     The code provided is an iframe code that can be embedded in any website that supports HTML.
     Only a logged in user can embed a dashboard
-
-
-.. image:: /images/embed_dashboard.jpg
 
 
 Exploring FAOSTAT datasets
