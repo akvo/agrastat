@@ -740,11 +740,6 @@ Make the changes you require and then select the "Update Profile" button.
 
 .. note::
 
-    If you change your username, AGRASTAT will log you out. You will need to log
-    back in using your new username.
-
-.. note::
-
     To receive email notifications for datasets that you follow make sure to check "Subscribe to notification emails".
 
 Data converter
