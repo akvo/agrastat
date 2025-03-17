@@ -158,6 +158,8 @@ actual data will be added in step 4.)
 
 * *Business line* -- The specific industry or domain the dataset supports, defining its primary application and target users
 
+* *Impact area* -- The specific sector or area of focus the dataset supports, such as policy, nutrition, seed systems, or sustainable farming.
+
 * *Linked value chain* -- The specific commodity or sector the dataset tracks, such as maize, beans, poultry, or fisheries.
 
 * *Data source* -- The origin of the dataset
