@@ -745,7 +745,7 @@ Make the changes you require and then select the "Update Profile" button.
 
 .. note::
 
-    To receive email notifications for datatasets that you follow make sure to check "Subscribe to notification emails".
+    To receive email notifications for datasets that you follow make sure to check "Subscribe to notification emails".
 
 Data converter
 ==================
