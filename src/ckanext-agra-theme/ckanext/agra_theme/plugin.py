@@ -16,6 +16,7 @@ from .data.value_chain import value_chain_list, create_value_chains
 from .data.business_line import business_line_list, create_business_lines
 from .data.impact_area import impact_area_list, create_impact_areas
 from .cli import agra as agra_cli
+from .helpers import get_random_dashboard_view
 
 log = logging.getLogger(__name__)
 
@@ -143,6 +144,7 @@ class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
                 "Daily",
             ],
             "facet_disabled": ["license_id"],
+            "get_random_dashboard_view": get_random_dashboard_view,
         }
 
     def get_blueprint(self):

@@ -290,10 +290,15 @@ span.private-views {
     text-align: center;
     color: #08743f;
 }
+#home .dataset-highlights h1,
 #home .home-content h1 {
     font-size: 36px;
     font-weight: 700;
     margin-bottom: 20px;
+}
+
+#home .dataset-highlights {
+    text-align: center;
 }
 
 .padding-top-20 {
