@@ -526,7 +526,7 @@ To create your dasboard:
 
 #. The click on "+" button to add a visual to the dashboard
 
-#. AGRASTAT will ask you to ptovide
+#. AGRASTAT will ask you to provide the below information for the visual:
 
     * Title
     * Grid width
@@ -557,6 +557,11 @@ To embed your dashboard in other websites, follow the steps below:
 #. Click on the "Embed" button
 
 #. Copy the code provided. You can set the height and width of the dashboard to fit your website.
+
+.. note::
+
+    The code provided is an iframe code that can be embedded in any website that supports HTML.
+    Only a logged in user can embed a dashboard
 
 
 .. image:: /images/embed_dashboard.jpg
