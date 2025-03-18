@@ -282,8 +282,51 @@ span.private-views {
     margin-bottom: 42px;
 }
 .homepage .module-search {
+    padding: 0px 40px;
     background: none;
+}
+
+.homepage .category-icons {
+    margin: 0px 40px;
+    display: block;
     padding: 40px;
+}
+.homepage .category-icons .category {
+    min-width: 230px;
+    min-height: 230px;
+    display: inline-block;
+    background: #ebebeb;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #e5e5e5;
+    transition: box-shadow 0.3s ease, background 0.3s ease;
+    cursor: pointer;
+}
+.homepage .category-icons .category:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    background: #08743f;
+}
+.homepage .category-icons .category .title {
+    display: block;
+    padding: 20px;
+    font-weight: bold;
+    color: #08743f;
+    transition: color 0.3s ease;
+}
+
+.homepage .category-icons .category:hover .title {
+    color: white;
+}
+.homepage .category-icons .category .icons {
+    display: block;
+    text-align: center;
+    font-size: 48px;
+    color: #08743f;
+    transition: filter 0.3s ease;
+}
+.homepage .category-icons .category:hover .icons {
+    filter: invert(100%);
 }
 
 #home > div[role="main"] .main.content h1 {

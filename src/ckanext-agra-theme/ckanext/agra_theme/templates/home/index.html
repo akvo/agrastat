@@ -20,6 +20,13 @@ poster="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC
     </div>
     <div class="main content">
       <div class="container">
+        <div class="row">
+          <div class="col-md-12 home-content">
+          <h1>Impact Areas</h1>
+          {% snippet 'home/snippets/categories.html' %}
+          </div>
+        </div>
+
         {% set random_view = h.get_random_dashboard_view() %}
         {% if random_view %}
         <div class="row">
