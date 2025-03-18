@@ -54,15 +54,14 @@ A dataset contains two things:
 Users, organizations and authorization
 ======================================
 
-AGRASTAT users can register user accounts and log in. Normally (depending on the
-site setup), login is not needed to search for and find data, but is needed for
+AGRASTAT users can have user accounts and log in. Normally (depending on the
+site setup), login is not needed to search for and find public data, but is needed for
 all publishing functions: datasets can be created, edited, etc by users with
 the appropriate permissions.
 
-Normally, each dataset is owned by an "organization". A AGRASTAT instance can have
-any number of organizations. For example, if AGRASTAT is being used as a data
-portal by a national government, the organizations might be different
-government departments, each of which publishes data. Each organization can
+Normally, each dataset is owned by an "organization". An AGRASTAT instance can have
+any number of organizations. For example, AGRASTAT the organizations might be different
+countries or business lines, each of which publishes data. Each organization can
 have its own workflow and authorizations, allowing it to manage its own
 publishing process.
 
@@ -158,6 +157,8 @@ actual data will be added in step 4.)
   need to know when using the data.
 
 * *Business line* -- The specific industry or domain the dataset supports, defining its primary application and target users
+
+* *Impact area* -- The specific sector or area of focus the dataset supports, such as policy, nutrition, seed systems, or sustainable farming.
 
 * *Linked value chain* -- The specific commodity or sector the dataset tracks, such as maize, beans, poultry, or fisheries.
 
@@ -431,6 +432,8 @@ repeat the search with existing filters still in place. Available filters includ
 
 * Business lines
 
+* Impact areas
+
 * Linked value chain
 
 * Countries
@@ -462,6 +465,8 @@ within that organization from its home page in AGRASTAT.
 
 AGRASTAT will return search results as normal, but restricted to datasets from the
 organization.
+
+.. image:: /images/dataset_organisation.jpg
 
 If the organization is of interest, you can opt to be notified of changes to it
 (such as new datasets and modifications to datasets) by using the "Follow"
@@ -504,6 +509,65 @@ logged in to use this feature.
     If you are a member of an organization, you can also follow the organization
     itself. This will notify you of changes to any dataset owned by the
     organization.
+
+
+Creating Dashboards
+-------------------
+AGRASTAT allows the user to create embeddable dashboards from the resources avaibled under their datasets.
+To create your dasboard:
+
+#. Find and select the dataset to create the dashboard from
+
+#. From the resources available, select the resource you want to create the dashboard from and Click on "Preview"
+
+#. Click on "New View"
+
+#. Click on "Dashboard View"
+
+#. Provide a title for the dashboard
+
+#. The click on "+" button to add a visual to the dashboard
+
+#. AGRASTAT will ask you to provide the below information for the visual:
+
+    * Title
+    * Grid width
+    * Type of visual
+    * Chart type
+    * X-axis
+    * Y-axis
+
+#. Once you have provided the information, click on "Save"
+
+#. You can add more visuals to the dashboard by clicking on the "+" button
+
+#. Once you have added all the visuals you need, click on "Add"
+
+.. image:: /images/add_dashboard.jpg
+
+.. image:: /images/embed_dashboard.jpg
+
+
+Embedding Dashboards
+--------------------
+AGRASTAT allows the user to embed created dashboards into websites that support HTML.
+To embed your dashboard in other websites, follow the steps below:
+
+#. Navigate to the dashboard you want to embed by previewing the dataset of interest and selecting the dashboard
+
+#. Click on the "Edit view" button
+
+#. Click on the "Embed" button
+
+#. Copy the code provided. You can set the height and width of the dashboard to fit your website.
+
+
+.. image:: /images/embed_dashboard.jpg
+
+.. note::
+
+    The code provided is an iframe code that can be embedded in any website that supports HTML.
+    Only a logged in user can embed a dashboard
 
 
 Exploring FAOSTAT datasets
@@ -626,6 +690,7 @@ Advanced Search Examples:
     through the simplified search interface in AGRASTAT or it can differ due to
     extensions or local development in your AGRASTAT instance.
 
+
 Personalization
 ===============
 
@@ -677,8 +742,33 @@ Make the changes you require and then select the "Update Profile" button.
 
 .. note::
 
-    If you change your username, AGRASTAT will log you out. You will need to log
-    back in using your new username.
+    To receive email notifications for datasets that you follow make sure to check "Subscribe to notification emails".
+
+Data converter
+==================
+Purpose of the Data converter
+-----------------------------
+This tool allows users to upload and convert Excel (.xlsx) and Stata (.dta) files into CSV format.
+
+Steps to use the Data converter
+-------------------------------
+* Navigate to the Converter Page: Ensure you are on the Converter page on the AgraStat website.
+
+* Upload the File: Click the Choose files button.Select either an Excel (.xlsx) or Stata (.dta) file from your computer that you want to convert. The file name will appear next to the Choose files button once selected.
+
+* Required Field:T he system marks the file upload field as required. Ensure that a file is selected before proceeding.
+
+* Convert the File: After selecting the file, click the green button labeled Convert to CSV. The system will process your file and convert it into CSV format.
+
+* Download the Converted File: Once the conversion is complete, a link to download the converted CSV file will be available.
+
+Feel free to repeat this process for any additional files you wish to convert.
+
+.. image:: /images/data_converter.jpg
+
+.. note::
+
+    Only logged in users have access to the data converter tool
 
 
 Dataset statistics
@@ -686,6 +776,8 @@ Dataset statistics
 Understanding the Dataset Statistics
 -------------------------------------
 The Dataset Statistics provides a visual representation of dataset distribution across different countries, business lines, and value chains. 
+Navigate to the organizations page and select the "Statistics" tab to access the dataset statistics.
+
 This page helps users quickly analyze dataset availability and focus areas.
 
 * Top 10 Countries - This section lists the top 10 countries based on the number of datasets available. The dataset count for each country, allows users to compare dataset availability across different regions.
@@ -693,6 +785,12 @@ This page helps users quickly analyze dataset availability and focus areas.
 * Business Lines Dataset - A radar chart representing the distribution of datasets across different business lines. 
 
 * Value Chains Dataset - A radar chart illustrating dataset distribution across various agricultural value chains. Each category represents a specific crop or product, with dataset counts shown in brackets.
+
+* Top Users by Dataset Count - This section lists the users who have uploaded the most datasets. Example: "admin" has uploaded 3 datasets, making them the top contributor.
+
+* Top Datasets by Followers - This section highlights the datasets that are being followed the most by users on the platform. Example: "Example Kobo Data" has the highest interest with 3 followers.
+
+* Top Datasets by Views - This section displays how many times each dataset has been viewed by users.
 
 .. image:: /images/dataset_statistics.jpg
 

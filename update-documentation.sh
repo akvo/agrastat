@@ -1,4 +1,5 @@
 #!/usr/bin/sh
+
 set -eu
 
 docker run -i --rm -v "$(pwd)/docs:/docs" \
