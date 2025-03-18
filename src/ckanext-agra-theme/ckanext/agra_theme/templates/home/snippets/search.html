@@ -34,4 +34,11 @@ placeholder = _('E.g. environment') %}
     >
     {% endfor %}
   </div>
+  {% set num_datasets = h.datasets_count() %}
+  {% set num_resources = h.resources_count() %}
+  {% set num_countries = h.countries|length %}
+
+  <h2 class="tagline">
+    Discover <small>{{ num_datasets }} datasets</small> with <small>{{ num_resources }} resources</small> covering <small>{{ num_countries }} Countries</small>
+  </h2>
 </div>

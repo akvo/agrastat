@@ -260,12 +260,23 @@ span.private-views {
     min-height: calc(100vh - 72px);
 }
 #home > div[role="main"] > .main.hero h1,
-#home > div[role="main"] > .main.hero h1 small {
+#home > div[role="main"] > .main.hero h1 small,
+#home > div[role="main"] > .main.hero h2.tagline,
+#home > div[role="main"] > .main.hero h2.tagline small {
     text-align: center;
     font-size: 64px;
     font-weight: 700;
     margin-bottom: 0;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+#home > div[role="main"] > .main.hero h2.tagline,
+#home > div[role="main"] > .main.hero h2.tagline small {
+    font-size: 34px;
+}
+
+#home > div[role="main"] > .main.hero h2.tagline small {
+    color: #e5e71e;
 }
 
 #home > div[role="main"] .main.content {

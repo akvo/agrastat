@@ -65,3 +65,13 @@ def get_random_dashboard_view():
         "view_id": view_id,
         "iframe_url": iframe_url,
     }
+
+
+def datasets_count():
+    # Logic to count datasets
+    return Session.query(Package).count()
+
+
+def resources_count():
+    # Logic to count resources
+    return Session.query(Resource).count()
