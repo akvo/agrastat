@@ -1,4 +1,31 @@
 {% ckan_extends %}
 
 {% block resource_read_url %}
+  {% set download_count = h.get_resource_download_count(res.id) %}
+  <div class="tracking-info">
+    <span class="recent-views"><i class="fa fa-line-chart"></i> {{download_count}} Downloads</span>
+  </div>
+{% endblock %}
+
+{% block resource_actions_inner %}
+{% if h.check_access('package_update', {'id':pkg.id }) and not is_activity_archive %}
+    <li>{% link_for _('Manage'), named_route=pkg.type ~ '_resource.edit', id=pkg.name, resource_id=res.id, class_='btn btn-default', icon='wrench' %}</li>
+{% endif %}
+{% if res.url and h.is_url(res.url) %}
+    <li>
+    <div class="btn-group">
+    <a class="btn btn-primary resource-url-analytics resource-type-{{ res.resource_type }}" href="{{ res.url.replace("download", "get") }}">
+        {% if res.resource_type in ('listing', 'service') %}
+        <i class="fa fa-eye"></i> {{ _('View') }}
+        {% elif  res.resource_type == 'api' %}
+        <i class="fa fa-key"></i> {{ _('API Endpoint') }}
+        {% elif not res.has_views and not res.url_type == 'upload' %}
+        <i class="fa fa-external-link"></i> {{ _('Go to resource') }}
+        {% else %}
+        <i class="fa fa-arrow-circle-o-down"></i> {{ _('Download') }}
+        {% endif %}
+    </a>
+    </div>
+    </li>
+{% endif %}
 {% endblock %}
