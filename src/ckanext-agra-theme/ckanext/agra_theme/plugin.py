@@ -3,12 +3,18 @@ from collections import OrderedDict
 from flask import Blueprint, render_template, request, abort, jsonify
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
+from ckan.model import meta
 from .routes.api.agrovoc import api_agrovoc
 from .routes.api.countries import api_countries
 from .routes.api.stats import api_stats
 from .routes.pages.statistic import page_statistic
 from .routes.pages.external import page_external
 from .routes.pages.dashboard import page_dashboard
+from .routes.pages.download import page_download
+from .models import (
+    resource_download_count_table,
+    get_resource_download_count,
+)
 
 # from .middleware import AgraThemeMiddleware
 from .data.countries import country_list, create_countries
@@ -28,6 +34,7 @@ api_stats(agra_blueprint)
 page_statistic(agra_blueprint)
 page_external(agra_blueprint)
 page_dashboard(agra_blueprint)
+page_download(agra_blueprint)
 
 schema_names = [
     {"name": "data_source", "required": True},
@@ -72,6 +79,13 @@ class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
     plugins.implements(plugins.IPackageController, inherit=True)
     plugins.implements(plugins.IFacets, inherit=True)
     plugins.implements(plugins.IClick)
+    plugins.implements(plugins.IConfigurable)
+
+    # IConfigurable
+    def configure(self, config):
+        # Check if the table exists; if not, create it
+        if not resource_download_count_table.exists(bind=meta.engine):
+            resource_download_count_table.create(bind=meta.engine)
 
     # IClick (CLI)
     def get_commands(self):
@@ -147,6 +161,7 @@ class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
             "get_random_dashboard_view": get_random_dashboard_view,
             "datasets_count": datasets_count,
             "resources_count": resources_count,
+            "get_resource_download_count": get_resource_download_count,
         }
 
     def get_blueprint(self):
@@ -216,6 +231,11 @@ class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
         """Return the schema for package updates."""
         schema = super(AgraThemePlugin, self).update_package_schema()
         schema = self._modify_package_schema(schema)
+        schema.update(
+            {
+                "download_count": [toolkit.get_validator("ignore_missing")],
+            }
+        )
         return schema
 
     def show_package_schema(self):
@@ -258,4 +278,9 @@ class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
                     ]
                 }
             )
+        schema.update(
+            {
+                "download_count": [toolkit.get_validator("ignore_missing")],
+            }
+        )
         return schema
