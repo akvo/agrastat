@@ -450,3 +450,11 @@ ul.dropdown-menu li a i {
     text-align: center;
     font-size: initial;
 }
+
+.tracking-info {
+    display: inline-block;
+    margin-bottom: 10px;
+}
+.tracking-info .recent-views{
+    font-size: 12px;
+}

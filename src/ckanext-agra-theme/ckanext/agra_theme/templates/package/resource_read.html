@@ -1,4 +1,7 @@
 {% ckan_extends %}
 
 {% block resource_read_url %}
+  <div class="tracking-info">
+    <span class="recent-views"><i class="fa fa-line-chart"></i> {{h.get_resource_download_count(resource.id)}} Downloads</span>
+  </div>
 {% endblock %}

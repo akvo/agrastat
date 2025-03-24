@@ -3,6 +3,7 @@ from collections import OrderedDict
 from flask import Blueprint, render_template, request, abort, jsonify
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
+from ckan.model import meta
 from .routes.api.agrovoc import api_agrovoc
 from .routes.api.countries import api_countries
 from .routes.api.stats import api_stats
@@ -16,7 +17,13 @@ from .data.value_chain import value_chain_list, create_value_chains
 from .data.business_line import business_line_list, create_business_lines
 from .data.impact_area import impact_area_list, create_impact_areas
 from .cli import agra as agra_cli
-from .helpers import get_random_dashboard_view, datasets_count, resources_count
+from .helpers import (
+    get_random_dashboard_view,
+    datasets_count,
+    resources_count,
+    get_resource_download_count,
+    get_package_download_count,
+)
 
 log = logging.getLogger(__name__)
 
@@ -73,6 +80,31 @@ class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
     plugins.implements(plugins.IFacets, inherit=True)
     plugins.implements(plugins.IClick)
 
+    def get_helpers(self):
+        return {
+            "countries": country_list,
+            "value_chains": value_chain_list,
+            "business_lines": business_line_list,
+            "impact_areas": impact_area_list,
+            "data_sources": ["Internal", "External"],
+            "methodologies": [
+                "Primary Data Collection",
+                "Secondary Data",
+            ],
+            "updating_schedules": [
+                "Regular",
+                "One off",
+                "Monthly",
+                "Daily",
+            ],
+            "facet_disabled": ["license_id"],
+            "get_random_dashboard_view": get_random_dashboard_view,
+            "datasets_count": datasets_count,
+            "resources_count": resources_count,
+            "get_resource_download_count": get_resource_download_count,
+            "get_package_download_count": get_package_download_count,
+        }
+
     # IClick (CLI)
     def get_commands(self):
         return [agra_cli]
@@ -125,29 +157,6 @@ class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
 
     def group_facets(self, facets_dict, group_type, package_type):
         return self.modify_facets(facets_dict, unlisted=["groups"])
-
-    def get_helpers(self):
-        return {
-            "countries": country_list,
-            "value_chains": value_chain_list,
-            "business_lines": business_line_list,
-            "impact_areas": impact_area_list,
-            "data_sources": ["Internal", "External"],
-            "methodologies": [
-                "Primary Data Collection",
-                "Secondary Data",
-            ],
-            "updating_schedules": [
-                "Regular",
-                "One off",
-                "Monthly",
-                "Daily",
-            ],
-            "facet_disabled": ["license_id"],
-            "get_random_dashboard_view": get_random_dashboard_view,
-            "datasets_count": datasets_count,
-            "resources_count": resources_count,
-        }
 
     def get_blueprint(self):
         return agra_blueprint
@@ -216,6 +225,11 @@ class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
         """Return the schema for package updates."""
         schema = super(AgraThemePlugin, self).update_package_schema()
         schema = self._modify_package_schema(schema)
+        schema.update(
+            {
+                "download_count": [toolkit.get_validator("ignore_missing")],
+            }
+        )
         return schema
 
     def show_package_schema(self):
@@ -258,4 +272,9 @@ class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
                     ]
                 }
             )
+        schema.update(
+            {
+                "download_count": [toolkit.get_validator("ignore_missing")],
+            }
+        )
         return schema
