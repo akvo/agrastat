@@ -1,6 +1,10 @@
 {% ckan_extends %}
 
 {% block package_notes %}
+    {% set package_download_count = h.get_package_download_count(pkg) %}
+    <div class="tracking-info">
+    <span class="recent-views"><i class="fa fa-line-chart"></i> {{pkg.tracking_summary.total if pkg.tracking_summary else 'no tracking'}} Views | {{ package_download_count }} Downloads</span>
+    </div>
     {% if pkg.notes %}
     <div class="notes embedded-content">
         {{ h.render_markdown(h.get_translated(pkg, 'notes')) }}

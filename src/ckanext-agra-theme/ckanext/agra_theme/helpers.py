@@ -2,6 +2,7 @@ import random
 from ckan.plugins import toolkit
 from ckan.model import Session
 from ckan.model import ResourceView, Resource, Package
+from ckan.logic import get_action
 
 
 def get_random_dashboard_view():
@@ -75,3 +76,22 @@ def datasets_count():
 def resources_count():
     # Logic to count resources
     return Session.query(Resource).count()
+
+
+def get_resource_download_count(resource_id):
+    # Logic to count resource downloads
+    context = {"ignore_auth": True}
+    data_dict = {"id": resource_id, "include_tracking": True}
+    result = get_action("resource_show")(context, data_dict)
+    return result["tracking_summary"]["total"]
+
+
+def get_package_download_count(package):
+    # Logic to count package downloads
+    context = {"ignore_auth": True}
+    download_count = 0
+    for resource in package["resources"]:
+        data_dict = {"id": resource["id"], "include_tracking": True}
+        result = get_action("resource_show")(context, data_dict)
+        download_count += result["tracking_summary"]["recent"]
+    return download_count

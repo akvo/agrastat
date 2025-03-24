@@ -18,6 +18,7 @@ Example:
 {% set title = package.title or package.name %}
 {% set notes = h.markdown_extract(package.notes, extract_length=truncate) %}
 {% set package_with_tracking = h.get_action('package_show', ({'id': package.id, 'include_tracking': True})) %}
+{% set package_download_count = h.get_package_download_count(package) %}
 
 {% block package_item %}
   <li class="{{ item_class or "dataset-item" }}">
@@ -41,7 +42,7 @@ Example:
           </h2>
         {% endblock %}
           <div class="tracking-info">
-            <span class="recent-views"><i class="fa fa-line-chart"></i> {{package_with_tracking.tracking_summary.total if package_with_tracking.tracking_summary else 'no tracking'}} Recent Views</span>
+            <span class="recent-views"><i class="fa fa-line-chart"></i> {{package_with_tracking.tracking_summary.total if package_with_tracking.tracking_summary else 'no tracking'}} Views | {{ package_download_count }} Downloads</span>
           </div>
           {% block heading_private %}
             {% if package.private %}

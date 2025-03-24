@@ -10,11 +10,6 @@ from .routes.api.stats import api_stats
 from .routes.pages.statistic import page_statistic
 from .routes.pages.external import page_external
 from .routes.pages.dashboard import page_dashboard
-from .routes.pages.download import page_download
-from .models import (
-    resource_download_count_table,
-    get_resource_download_count,
-)
 
 # from .middleware import AgraThemeMiddleware
 from .data.countries import country_list, create_countries
@@ -22,7 +17,13 @@ from .data.value_chain import value_chain_list, create_value_chains
 from .data.business_line import business_line_list, create_business_lines
 from .data.impact_area import impact_area_list, create_impact_areas
 from .cli import agra as agra_cli
-from .helpers import get_random_dashboard_view, datasets_count, resources_count
+from .helpers import (
+    get_random_dashboard_view,
+    datasets_count,
+    resources_count,
+    get_resource_download_count,
+    get_package_download_count,
+)
 
 log = logging.getLogger(__name__)
 
@@ -34,7 +35,6 @@ api_stats(agra_blueprint)
 page_statistic(agra_blueprint)
 page_external(agra_blueprint)
 page_dashboard(agra_blueprint)
-page_download(agra_blueprint)
 
 schema_names = [
     {"name": "data_source", "required": True},
@@ -79,13 +79,31 @@ class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
     plugins.implements(plugins.IPackageController, inherit=True)
     plugins.implements(plugins.IFacets, inherit=True)
     plugins.implements(plugins.IClick)
-    plugins.implements(plugins.IConfigurable)
 
-    # IConfigurable
-    def configure(self, config):
-        # Check if the table exists; if not, create it
-        if not resource_download_count_table.exists(bind=meta.engine):
-            resource_download_count_table.create(bind=meta.engine)
+    def get_helpers(self):
+        return {
+            "countries": country_list,
+            "value_chains": value_chain_list,
+            "business_lines": business_line_list,
+            "impact_areas": impact_area_list,
+            "data_sources": ["Internal", "External"],
+            "methodologies": [
+                "Primary Data Collection",
+                "Secondary Data",
+            ],
+            "updating_schedules": [
+                "Regular",
+                "One off",
+                "Monthly",
+                "Daily",
+            ],
+            "facet_disabled": ["license_id"],
+            "get_random_dashboard_view": get_random_dashboard_view,
+            "datasets_count": datasets_count,
+            "resources_count": resources_count,
+            "get_resource_download_count": get_resource_download_count,
+            "get_package_download_count": get_package_download_count,
+        }
 
     # IClick (CLI)
     def get_commands(self):
@@ -139,30 +157,6 @@ class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
 
     def group_facets(self, facets_dict, group_type, package_type):
         return self.modify_facets(facets_dict, unlisted=["groups"])
-
-    def get_helpers(self):
-        return {
-            "countries": country_list,
-            "value_chains": value_chain_list,
-            "business_lines": business_line_list,
-            "impact_areas": impact_area_list,
-            "data_sources": ["Internal", "External"],
-            "methodologies": [
-                "Primary Data Collection",
-                "Secondary Data",
-            ],
-            "updating_schedules": [
-                "Regular",
-                "One off",
-                "Monthly",
-                "Daily",
-            ],
-            "facet_disabled": ["license_id"],
-            "get_random_dashboard_view": get_random_dashboard_view,
-            "datasets_count": datasets_count,
-            "resources_count": resources_count,
-            "get_resource_download_count": get_resource_download_count,
-        }
 
     def get_blueprint(self):
         return agra_blueprint
