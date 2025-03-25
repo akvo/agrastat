@@ -39,7 +39,7 @@
 
   <div class="kobo-input" id="kobo-inputs" style="display:{%if is_kobo%}block{%else%}none{%endif%};">
     <span class="border-text">Kobo Settings</span>
-  {{ form.select('kf_url', id='field-kf-url', label=_('KF URL'), options=[{'value':'', 'text': 'Please Select'},{'value': 'https://kf.kobotoolbox.org', 'text':'kf.kobotoolbox.org'},{'value':'https://eu.kobotoolbox.org','text':'eu.kobotoolbox.org'}], selected=data.kf_url, error=errors.kf_url, classes=['control-full']) }}
+  {{ form.select('kf_url', id='field-kf-url', label=_('Kobo URL'), options=[{'value':'', 'text': 'Please Select'},{'value': 'https://kf.kobotoolbox.org', 'text':'kf.kobotoolbox.org'},{'value':'https://eu.kobotoolbox.org','text':'eu.kobotoolbox.org'}], selected=data.kf_url, error=errors.kf_url, classes=['control-full']) }}
   {{ form.input('asset_uid', id='field-asset-uid', label=_('Asset UID'), placeholder=_('eg. yoiufas79834J'), value=data.asset_uid, error=errors.asset_uid, classes=['control-full']) }}
   {{ form.input('hash', id='field-hash', label=_('Hash'), value=data.hash, error=errors.hash, classes=['hidden']) }}
   {{ form.input('kobo_token', id='field-kobo-token', label=_('API Token'), placeholder=_('eg. yoiufas79834J'), type='password',value=data.kobo_token, error=errors.kobo_token, classes=['control-full']) }}
