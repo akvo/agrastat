@@ -15,22 +15,6 @@
             <a class="edit-grid" href="#" onclick="editGrid('{{ column.id }}'); return false;"><i class="fa fa-pencil"></i></a>
             <a class="remove-grid" href="#" onclick="removeGrid('{{ column.id }}'); return false;"><i class="fa fa-times"></i></a>
             <div class="panel-body">
-              {% if column.visualizationType == "chart" %}
-                {% set chartIcon = "dot-circle-o" if column.chartType == "scatter" else column.chartType + "-chart" %}
-                <strong><i class="fa fa-{{chartIcon}}"></i> {{ column.title }}</strong><br/>
-                <small>Type: {{ column.chartType }}</small><br/>
-                {% if column.chartType != "pie" %}
-                <small>X-Axis: {{ column.xAxis }}</small><br/>
-                <small>Y-Axis: {{ column.yAxis }}</small><br/>
-                {% else %}
-                <small>Value: {{ column.pieValue }}</small><br/>
-                <small>GroupBy: {{ column.pieGroup }}</small><br/>
-                {% endif %}
-              {% elif column.visualizationType == "number" %}
-                <strong><i class="fa fa-info-circle"></i> {{ column.title }}</strong><br/>
-                <small>Data: {{ column.numberColumn }}</small><br/>
-                <small>Value: {{ column.numberType }}</small><br/>
-              {% endif %}
             </div>
           </div>
         </div>

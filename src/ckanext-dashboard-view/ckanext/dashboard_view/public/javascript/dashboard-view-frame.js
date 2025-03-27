@@ -19,20 +19,26 @@ const echartsConfig = {
 };
 
 function fetch_aggregated_data(resource_id, config) {
-  const { numberColumn, numberType, groupBy } = config;
+  const { numberColumn, distictColumn, numberType, groupBy } = config;
 
   // Validate required parameters
-  if (!resource_id || !numberColumn || !numberType) {
-    throw new Error(
-      "Missing required parameters: resource_id, numberColumn, or numberType.",
-    );
+  if (!resource_id || !numberType) {
+    if (numberType === "count" && !distictColumn) {
+      throw new Error(
+        "Missing required parameters: resource_id, numberColumn, distictColumn, or numberType.",
+      );
+    } else if (numberType !== "count" && !numberColumn) {
+      throw new Error(
+        "Missing required parameters: resource_id, numberColumn, distictColumn, or numberType.",
+      );
+    }
   }
 
   // Map numberType to SQL aggregate functions
   const sqlFunctions = {
     total: `SUM("${numberColumn}") AS total`,
     avg: `AVG("${numberColumn}") AS average`,
-    count: `COUNT(DISTINCT "${numberColumn}") AS count`,
+    count: `COUNT(DISTINCT "${distictColumn}") AS count`,
     min: `MIN("${numberColumn}") AS minimum`,
     max: `MAX("${numberColumn}") AS maximum`,
   };
@@ -274,7 +280,7 @@ function render_number(res_id, config, container) {
     } else if (config.numberType === "avg") {
       countUp(config.id, parseFloat(res.average).toFixed(2));
     } else if (config.numberType === "count") {
-      countUp(config.id, res.count).start();
+      countUp(config.id, res.count);
     } else if (config.numberType === "max") {
       countUp(config.id, res.maximum);
     } else if (config.numberType === "min") {

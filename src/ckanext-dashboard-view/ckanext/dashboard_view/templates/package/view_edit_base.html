@@ -50,16 +50,27 @@
                             <label>Number Type</label>
                             <select class="form-control" id="numberType" name="numberType">
                                 <option value="avg">Average</option>
+                                <option value="count">Count [Distict]</option>
                                 <option value="max">Max</option>
                                 <option value="min">Min</option>
                                 <option value="total">Total</option>
                             </select>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group hidden" id="numberColumnField">
                             <label class="control-label">Value</label>
-                            <select class="form-control" id="numberColumn">
+                            <select class="form-control" name="numberColumn" id="numberColumn">
                                 {% for column in data_columns %}
                                     {% if column.type in ['int4', 'int8', 'float4', 'float8', 'numeric'] %}
+                                        <option value="{{ column.name }}">{{ column.name }} ({{ column.type }})</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group hidden" id="distictColumnField">
+                            <label class="control-label">Column Count</label>
+                            <select class="form-control" name="distictColumn" id="distictColumn">
+                                {% for column in data_columns %}
+                                    {% if column.type not in ['int4', 'int8', 'float4', 'float8', 'numeric'] %}
                                         <option value="{{ column.name }}">{{ column.name }} ({{ column.type }})</option>
                                     {% endif %}
                                 {% endfor %}
