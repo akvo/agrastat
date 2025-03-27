@@ -8955,9 +8955,6 @@ td.diff_header {
     -o-transition: color 0.2s ease-in;
     transition: color 0.2s ease-in;
 }
-.search-form .search-input button:hover i {
-    color: #000;
-}
 .search-form .search-input.search-giant {
     margin-bottom: 0px;
 }
@@ -10053,9 +10050,8 @@ h4 small {
 }
 .homepage .module-search .module-content {
     border-radius: 3px 3px 0 0;
-    background-color: #08743f;
+    background-color: transparent;
     border-bottom: none;
-    padding: 40px 20px 5px;
 }
 .homepage .module-search .module-content .heading {
     margin-top: 0;

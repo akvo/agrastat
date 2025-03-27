@@ -112,7 +112,7 @@ function createRadarOption(data) {
 function renderChart(orgName = null) {
   const header = document.querySelector(".masthead");
   const navLinks = document.querySelectorAll(".masthead .nav > li > a");
-  header.style.backgroundColor = "rgba(114,191,68,.7)";
+  header.style.backgroundColor = "#08743f";
   navLinks.forEach((link) => {
     link.style.color = "white";
   });
