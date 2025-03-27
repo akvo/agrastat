@@ -1,3 +1,16 @@
+const typeVisualization = {
+  bar: "Bar Chart",
+  line: "Line Chart",
+  area: "Area Chart",
+  scatter: "Scatter Plot",
+  pie: "Pie Chart",
+  avg: "Average",
+  sum: "Sum",
+  count: "Count Distinct",
+  min: "Minimum",
+  max: "Maximum",
+};
+
 const maxVisualizations = 6;
 let editModeId = null;
 // dashboard-view.js
@@ -57,18 +70,25 @@ function updateGrid(configs) {
       }
     }
     let content = `<strong><i class="${icon}"></i> ${config.title}</strong><br>`;
+    let visualizationType = "";
     if (config.visualizationType === "chart") {
+      visualizationType = typeVisualization[config.chartType];
+      content += `<small>Type: ${visualizationType}</small><br>`;
       if (config.chartType === "pie") {
         content += `<small>Value: ${config.pieValue}</small><br>
                 <small>Group: ${config.pieGroup}</small><br>`;
       } else {
-        content += `<small>Type: ${config.chartType}</small><br>
-                  <small>X-Axis: ${config.xAxis}</small><br>
+        content += `<small>X-Axis: ${config.xAxis}</small><br>
                   <small>Y-Axis: ${config.yAxis}</small><br>`;
       }
     } else if (config.visualizationType === "number") {
-      content += `<small>Data: ${config.numberColumn}</small><br>
-                <small>Value: ${config.numberType}</small><br>`;
+      visualizationType = typeVisualization[config.numberType];
+      if (config.numberType === "count") {
+        content += `<small>Data: ${config.distictColumn}</small><br>`;
+      } else {
+        content += `<small>Data: ${config.numberColumn}</small><br>`;
+      }
+      content += `<small>Value: ${visualizationType}</small><br>`;
     }
 
     panelBody.innerHTML = content;
@@ -156,7 +176,18 @@ function editGrid(id) {
     }
   } else if (configToEdit.visualizationType === "number") {
     document.getElementById("numberType").value = configToEdit.numberType;
-    document.getElementById("numberColumn").value = configToEdit.numberColumn;
+    if (configToEdit.numberType === "count") {
+      document.getElementById("distictColumnField").classList.remove("hidden");
+      document.getElementById("distictColumn").value =
+        configToEdit.distictColumn;
+      document.getElementById("numberColumnField").classList.add("hidden");
+      document.getElementById("numberColumn").value = "";
+    } else {
+      document.getElementById("distictColumnField").classList.add("hidden");
+      document.getElementById("distictColumn").value = "";
+      document.getElementById("numberColumn").value = configToEdit.numberColumn;
+      document.getElementById("numberColumnField").classList.remove("hidden");
+    }
   }
 
   // Step 4: Show the modal
@@ -181,6 +212,16 @@ function resetFormFields() {
       document.getElementById("pieData").classList.add("hidden");
     }
   }
+  if (currentType === "number") {
+    const numberType = document.getElementById("numberType").value;
+    if (numberType === "count") {
+      document.getElementById("distictColumnField").classList.remove("hidden");
+      document.getElementById("numberColumnField").classList.add("hidden");
+    } else {
+      document.getElementById("distictColumnField").classList.add("hidden");
+      document.getElementById("numberColumnField").classList.remove("hidden");
+    }
+  }
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -192,6 +233,9 @@ document.addEventListener("DOMContentLoaded", function () {
     resetFormFields();
   });
   document.getElementById("chartType").addEventListener("change", function () {
+    resetFormFields();
+  });
+  document.getElementById("numberType").addEventListener("change", function () {
     resetFormFields();
   });
 
@@ -223,7 +267,12 @@ document.addEventListener("DOMContentLoaded", function () {
     } else if (visualType === "number") {
       newConfig.numberType =
         document.getElementById("numberType").value || "avg";
-      newConfig.numberColumn = document.getElementById("numberColumn").value;
+      if (newConfig.numberType === "count") {
+        newConfig.distictColumn =
+          document.getElementById("distictColumn").value;
+      } else {
+        newConfig.numberColumn = document.getElementById("numberColumn").value;
+      }
     }
 
     // Collect all existing configurations
