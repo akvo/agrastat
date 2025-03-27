@@ -253,6 +253,7 @@ span.private-views {
     align-items: center;
 }
 /* Home Page */
+/* Home Page */
 #home > div[role="main"] > .main.hero {
     display: flex;
     justify-content: center;
@@ -261,9 +262,20 @@ span.private-views {
     background-image: url("/base/images/agra-bg-2.png");
     background-size: 100%;
     background-repeat: no-repeat;
-    background-position-x: 100%;
-    background-position-y: 320px;
+    background-position: right 360px; /* right horizontally, 320px down vertically */
 }
+
+@media screen and (min-width: 1200px) {
+  #home > div[role="main"] > .main.hero {
+    background-position: right 260px;
+  }
+}
+@media screen and (min-width: 1800px) {
+  #home > div[role="main"] > .main.hero {
+    background-position: right 120px;
+  }
+}
+
 .search-form .search-input.search-giant button {
     margin-top: -18px;
     right: 11px;
@@ -293,16 +305,18 @@ span.private-views {
     text-align: center;
     font-size: 64px;
     font-weight: 700;
-    margin-bottom: 0;
+    margin-bottom: 18px;
     color: #000;
 }
 #home > div[role="main"] > .main.hero h1 {
     color: #08743f;
+    line-height: 56px;
 }
 
 #home > div[role="main"] > .main.hero h2.tagline,
 #home > div[role="main"] > .main.hero h2.tagline small {
     font-size: 32px;
+    line-height: 28px;
     font-weight: normal;
     margin-top: 0px;
 }
