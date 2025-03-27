@@ -10,21 +10,20 @@
         <h3>Who We Are</h3>
         <ul class="list-unstyled">
           <li>
-            <a href="/about">About Us</a>
+            <a href="{{ h.url_for(controller='home', action='about') }}"
+              >{{ _('About AGRASTAT').format(g.site_title) }}</a
+            >
           </li>
           <li>
-            <a href="/policies">Policies</a>
+            <a href="https://agra.org/" target="_blank">
+              Official Website
+            </a>
           </li>
         </ul>
       </div>
       <div class="col-md-3 footer-links">
         <h3>Links</h3>
         <ul class="list-unstyled">
-          <li>
-            <a href="{{ h.url_for(controller='home', action='about') }}"
-              >{{ _('About {0}').format(g.site_title) }}</a
-            >
-          </li>
         </ul>
         <ul class="list-unstyled">
           <li><a href="/documentation/index.html">Documentation</a></li>

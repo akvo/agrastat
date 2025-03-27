@@ -13,26 +13,40 @@
     <table class="package-custom-info">
     <tbody>
     <tr>
-    <td class="key-name">Business Line</td>
+    <td class="key-name">Business Lines</td>
     <td>
-        {% if pkg.business_lines %}
-        {% for business_line in pkg.business_lines %}
-            {{business_line}}
+        {% set business_line_names = [] %}
+        {% for selected_business_line in pkg.business_lines %}
+            {% for business_line in h.business_lines %}
+                {% if business_line == selected_business_line %}
+                    {% do business_line_names.append(business_line) %}
+                {% endif %}
+            {% endfor %}
         {% endfor %}
-        {% else %}
-            -
+        {% if business_line_names %}
+            {% for name in business_line_names %}
+                {%- if loop.last and loop.index > 1 %} and {% elif not loop.first %}, {% endif -%}
+                {{ name }}
+            {% endfor %}
         {% endif %}
     </td>
     </tr>
     <tr>
-    <td class="key-name">Impact Area</td>
+    <td class="key-name">Impact Areas</td>
     <td>
-        {% if pkg.impact_areas %}
-        {% for impact_area in pkg.impact_areas %}
-            {{impact_area}}
+        {% set impact_area_names = [] %}
+        {% for selected_impact_area in pkg.impact_areas %}
+            {% for impact_area in h.impact_areas %}
+                {% if impact_area == selected_impact_area %}
+                    {% do impact_area_names.append(impact_area) %}
+                {% endif %}
+            {% endfor %}
         {% endfor %}
-        {% else %}
-            -
+        {% if impact_area_names %}
+            {% for name in impact_area_names %}
+                {%- if loop.last and loop.index > 1 %} and {% elif not loop.first %}, {% endif -%}
+                {{ name }}
+            {% endfor %}
         {% endif %}
     </td>
     </tr>

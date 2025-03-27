@@ -1,9 +1,6 @@
 {% extends "page.html" %}{% block subtitle %}{{ _("Welcome") }}{% endblock %} {%
 block maintag %}{% endblock %} {% block toolbar %}{% endblock %} {% block
 content %}
-<video autoplay loop muted playsinline data-spai=1 class='home-video-bg' src="/media/agra-video.mp4"
-poster="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxOTIwIDEwODAiIHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIGRhdGEtdT0iaHR0cHMlM0ElMkYlMkZhZ3JhLm9yZyUyRndwLWNvbnRlbnQlMkZ0aGVtZXMlMkZhZ3JhJTJGYXNzZXRzJTJGaW1nJTJGZGVmYXVsdC1iZy5qcGciIGRhdGEtdz0iMTkyMCIgZGF0YS1oPSIxMDgwIiBkYXRhLWJpcD0iIj48L3N2Zz4="
-       ></video>
 <div id="home" class="homepage">
   <div id="content" class="container">{{ self.flash() }}</div>
   {% block primary_content %}
@@ -14,19 +11,13 @@ poster="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC
           <div class="col-md-12">
             {% block search %} {% snippet 'home/snippets/search.html',
             search_facets=search_facets %} {% endblock %}
+            {% snippet 'home/snippets/categories.html' %}
           </div>
         </div>
       </div>
     </div>
     <div class="main content">
       <div class="container">
-        <div class="row">
-          <div class="col-md-12 home-content">
-          <h1>Impact Areas</h1>
-          {% snippet 'home/snippets/categories.html' %}
-          </div>
-        </div>
-
         {% set random_view = h.get_random_dashboard_view() %}
         {% if random_view %}
         <div class="row">

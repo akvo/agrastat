@@ -3,17 +3,16 @@
 {% block package_basic_fields_description %}
 {{ form.markdown('notes', id='field-notes', label=_('Related Knowledge Management Products'), placeholder=_('eg. Some useful notes about the data'), value=data.notes, error=errors.notes) }}
 <div class="form-group control-medium">
-  <label class="control-label is-required" for="business-lines">{{ _("Business Line") }}</label>
+  <label class="control-label is-required" for="business_lines">{{ _("Business Lines") }}</label>
   <div class="controls">
-    <select id="bussines-lines" name="business_lines" class="form-control">
-      <option value="">Please Select</option>
+    <select id="business_lines" name="business_lines" data-module="autocomplete" multiple="multiple" placeholder="Please Select">
       {% for business_line in h.business_lines %}
         <option value="{{ business_line }}"
-            {% for selected_business_line in data.business_lines %}
-              {% if selected_business_line == business_line %}
-                selected="selected"
-              {% endif %}
-            {% endfor %}>
+          {% for selected_business_line in data.business_lines %}
+            {% if selected_business_line == business_line %}
+              selected
+            {% endif %}
+          {% endfor %}>
           {{ business_line }}
         </option>
       {% endfor %}
@@ -21,17 +20,16 @@
   </div>
 </div>
 <div class="form-group control-medium">
-  <label class="control-label is-required" for="impact-areas">{{ _("Impact Area") }}</label>
+  <label class="control-label is-required" for="impact_areas">{{ _("Impact Areas") }}</label>
   <div class="controls">
-    <select id="impact-areas" name="impact_areas" class="form-control">
-      <option value="">Please Select</option>
+    <select id="impact_areas" name="impact_areas" data-module="autocomplete" multiple="multiple" placeholder="Please Select">
       {% for impact_area in h.impact_areas %}
         <option value="{{ impact_area }}"
-            {% for selected_impact_area in data.impact_areas %}
-              {% if selected_impact_area == impact_area %}
-                selected="selected"
-              {% endif %}
-            {% endfor %}>
+          {% for selected_impact_area in data.impact_areas %}
+            {% if selected_impact_area == impact_area %}
+              selected
+            {% endif %}
+          {% endfor %}>
           {{ impact_area }}
         </option>
       {% endfor %}
