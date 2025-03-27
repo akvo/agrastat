@@ -265,6 +265,10 @@ span.private-views {
     background-position: right 360px; /* right horizontally, 320px down vertically */
 }
 
+#home > div[role="main"] > .main.hero > .container {
+    margin-top: -160px;
+}
+
 @media screen and (min-width: 1200px) {
   #home > div[role="main"] > .main.hero {
     background-position: right 260px;
@@ -303,22 +307,29 @@ span.private-views {
 #home > div[role="main"] > .main.hero h2.tagline,
 #home > div[role="main"] > .main.hero h2.tagline small {
     text-align: center;
-    font-size: 64px;
+    font-size: 48px;
     font-weight: 700;
     margin-bottom: 18px;
     color: #000;
 }
 #home > div[role="main"] > .main.hero h1 {
     color: #08743f;
-    line-height: 56px;
+    line-height: 32px;
 }
 
 #home > div[role="main"] > .main.hero h2.tagline,
 #home > div[role="main"] > .main.hero h2.tagline small {
-    font-size: 32px;
-    line-height: 28px;
+    font-size: 26px;
+    line-height: 20px;
     font-weight: normal;
     margin-top: 0px;
+}
+
+@media screen and (min-width: 1024px) {
+    #home > div[role="main"] > .main.hero h1 {
+        font-size: 52px;
+        line-height: 38px;
+    }
 }
 
 #home > div[role="main"] > .main.hero h2.tagline small {
