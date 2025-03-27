@@ -265,8 +265,10 @@ span.private-views {
     background-position: right 360px; /* right horizontally, 320px down vertically */
 }
 
-#home > div[role="main"] > .main.hero > .container {
-    margin-top: -160px;
+@media screen and (min-width: 768px) {
+    #home > div[role="main"] > .main.hero > .container {
+        margin-top: -325px;
+    }
 }
 
 @media screen and (min-width: 1200px) {
@@ -323,6 +325,7 @@ span.private-views {
     line-height: 20px;
     font-weight: normal;
     margin-top: 0px;
+    margin-bottom: 36px;
 }
 
 @media screen and (min-width: 1024px) {
@@ -360,7 +363,7 @@ span.private-views {
 
 .homepage .category-icons {
     display: block;
-    padding: 20px;
+    padding: 20px 20px 0px 20px;
 }
 
 .homepage .category-icons .category {
@@ -368,8 +371,7 @@ span.private-views {
     min-height: 150px;
     display: inline-block;
     padding: 10px;
-    margin-bottom: 20px;
-    border-radius: 5px;
+    margin-bottom: 0px;
     transition: background 0.3s ease;
     cursor: pointer;
 }
@@ -377,9 +379,10 @@ span.private-views {
 .homepage .category-icons .category .title {
     font-size: 20px;
     display: block;
-    padding: 20px 10px;
+    padding: 10px;
     font-weight: bold;
     color: #08743f;
+    line-height: 22px;
     transition: transform 0.3s ease;
 }
 

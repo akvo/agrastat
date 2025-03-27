@@ -9,9 +9,9 @@ content %}
       <div class="container">
         <div class="row">
           <div class="col-md-12">
+            {% snippet 'home/snippets/categories.html' %}
             {% block search %} {% snippet 'home/snippets/search.html',
             search_facets=search_facets %} {% endblock %}
-            {% snippet 'home/snippets/categories.html' %}
           </div>
         </div>
       </div>
