@@ -71,12 +71,12 @@ def get_random_dashboard_view():
 
 def datasets_count():
     # Logic to count datasets
-    return Session.query(Package).count()
+    return Session.query(Package).filter(Package.state == "active").count()
 
 
 def resources_count():
     # Logic to count resources
-    return Session.query(Resource).count()
+    return Session.query(Resource).filter(Resource.state == "active").count()
 
 
 def get_resource_download_count(resource_id):
