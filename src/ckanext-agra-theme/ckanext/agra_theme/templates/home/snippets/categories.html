@@ -7,7 +7,7 @@
     Discover <small>{{ num_datasets }} datasets</small> with <small>{{ num_resources }} resources</small> covering <small>{{ num_countries }} Countries</small>
   </h2>
   {% for category in h.impact_areas %}
-    <div class="col-md-2 text-center">
+    <div class="col-md-2 col-sm-4 col-xs-4 text-center">
       <a href="{{ h.url_for('dataset.search', vocab_impact_areas=category) }}" class="category-link" target="_blank">
       <div class="category">
         {% set category_icon = category.lower().replace(" ", "_") %}

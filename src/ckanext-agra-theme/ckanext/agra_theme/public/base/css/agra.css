@@ -267,7 +267,7 @@ span.private-views {
 
 @media screen and (min-width: 768px) {
     #home > div[role="main"] > .main.hero > .container {
-        margin-top: -325px;
+        margin-top: -225px;
     }
 }
 
@@ -280,6 +280,10 @@ span.private-views {
   #home > div[role="main"] > .main.hero {
     background-position: right 120px;
   }
+}
+.homepage .module-search .search-giant input {
+    border: 1px solid #d7d2d7;
+    box-shadow: inset 0px 0px 3px rgba(0, 0, 0, 0.1);
 }
 
 .search-form .search-input.search-giant button {
