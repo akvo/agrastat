@@ -29,6 +29,7 @@ def get_random_dashboard_view():
         .join(Package, Resource.package_id == Package.id)
         .filter(ResourceView.view_type == "dashboard_view")
         .filter(Resource.state == "active")
+        .filter(Package.state == "active")
     )
 
     # Exclude private datasets if the user is not logged in
