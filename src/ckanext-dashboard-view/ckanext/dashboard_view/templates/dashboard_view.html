@@ -17,7 +17,7 @@
   <div class="row dashboard-view-container">
     {% if columns %}
       {% for column in columns %}
-        <div class="{{ column.gridSize }} viz-item" id="viz_grid_{{ column.id }}" data-viz-type="{{column.visualizationType}}" data-config='{{ column | tojson }}'>
+        <div class="{{ column.gridSize }} col-xs-12 viz-item" id="viz_grid_{{ column.id }}" data-viz-type="{{column.visualizationType}}" data-config='{{ column | tojson }}'>
           <h2 class="viz-title">{{ column.title }}</h2>
           <div class="panel text-center">
             {% if column.visualizationType == "chart" %}

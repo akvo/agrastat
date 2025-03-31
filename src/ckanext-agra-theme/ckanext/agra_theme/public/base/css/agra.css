@@ -320,13 +320,13 @@ span.private-views {
 }
 #home > div[role="main"] > .main.hero h1 {
     color: #08743f;
-    line-height: 32px;
+    line-height: 45px;
 }
 
 #home > div[role="main"] > .main.hero h2.tagline,
 #home > div[role="main"] > .main.hero h2.tagline small {
     font-size: 26px;
-    line-height: 20px;
+    line-height: 26px;
     font-weight: normal;
     margin-top: 0px;
     margin-bottom: 36px;
