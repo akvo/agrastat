@@ -259,28 +259,11 @@ span.private-views {
     justify-content: center;
     align-items: center;
     min-height: calc(100vh - 72px);
-    background-image: url("/base/images/agra-bg-2.png");
     background-size: 100%;
     background-repeat: no-repeat;
     background-position: right 360px; /* right horizontally, 320px down vertically */
 }
 
-@media screen and (min-width: 768px) {
-    #home > div[role="main"] > .main.hero > .container {
-        margin-top: -225px;
-    }
-}
-
-@media screen and (min-width: 1200px) {
-  #home > div[role="main"] > .main.hero {
-    background-position: right 260px;
-  }
-}
-@media screen and (min-width: 1800px) {
-  #home > div[role="main"] > .main.hero {
-    background-position: right 120px;
-  }
-}
 .homepage .module-search .search-giant input {
     border: 1px solid #d7d2d7;
     box-shadow: inset 0px 0px 3px rgba(0, 0, 0, 0.1);
@@ -308,6 +291,21 @@ span.private-views {
     color: #fff;
 }
 
+#home > div[role="main"] > .main.hero .container{
+    width: 100%;
+}
+.container .container-content {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+@media (min-width: 992px) {
+  .container .container-content {
+    width: 970px;
+  }
+}
+
 #home > div[role="main"] > .main.hero h1,
 #home > div[role="main"] > .main.hero h1 small,
 #home > div[role="main"] > .main.hero h2.tagline,
@@ -316,10 +314,16 @@ span.private-views {
     font-size: 48px;
     font-weight: 700;
     margin-bottom: 18px;
-    color: #000;
+    color: #e5e71e;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
+
+#home > div[role="main"] > .main.hero h2.tagline,
 #home > div[role="main"] > .main.hero h1 {
-    color: #08743f;
+    color: #ffffff;
+}
+
+#home > div[role="main"] > .main.hero h1 {
     line-height: 45px;
 }
 
@@ -340,7 +344,7 @@ span.private-views {
 }
 
 #home > div[role="main"] > .main.hero h2.tagline small {
-    color: #08743f;
+    color: #e5e71e;
     font-weight: bold;
 }
 
@@ -367,7 +371,9 @@ span.private-views {
 
 .homepage .category-icons {
     display: block;
-    padding: 20px 20px 0px 20px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 40px;
 }
 
 .homepage .category-icons .category {
@@ -385,9 +391,10 @@ span.private-views {
     display: block;
     padding: 10px;
     font-weight: bold;
-    color: #08743f;
+    color: #fff;
     line-height: 22px;
     transition: transform 0.3s ease;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .homepage .category-icons .category:hover .title {
