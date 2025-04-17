@@ -1,11 +1,7 @@
 {% extends "page.html" %}{% block subtitle %}{{ _("Welcome") }}{% endblock %} {%
 block maintag %}{% endblock %} {% block toolbar %}{% endblock %} {% block
 content %}
-<video autoplay loop muted playsinline data-spai=1 class='home-video-bg' src="/media/agra-video.mp4"
-
-poster="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxOTIwIDEwODAiIHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIGRhdGEtdT0iaHR0cHMlM0ElMkYlMkZhZ3JhLm9yZyUyRndwLWNvbnRlbnQlMkZ0aGVtZXMlMkZhZ3JhJTJGYXNzZXRzJTJGaW1nJTJGZGVmYXVsdC1iZy5qcGciIGRhdGEtdz0iMTkyMCIgZGF0YS1oPSIxMDgwIiBkYXRhLWJpcD0iIj48L3N2Zz4="
-
-       ></video>
+<video autoplay loop muted playsinline data-spai=1 class='home-video-bg' src="/media/agra-video.mp4" poster="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxOTIwIDEwODAiIHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIGRhdGEtdT0iaHR0cHMlM0ElMkYlMkZhZ3JhLm9yZyUyRndwLWNvbnRlbnQlMkZ0aGVtZXMlMkZhZ3JhJTJGYXNzZXRzJTJGaW1nJTJGZGVmYXVsdC1iZy5qcGciIGRhdGEtdz0iMTkyMCIgZGF0YS1oPSIxMDgwIiBkYXRhLWJpcD0iIj48L3N2Zz4="></video>
 <div id="home" class="homepage">
   <div id="content" class="container">{{ self.flash() }}</div>
   {% block primary_content %}
@@ -29,7 +25,7 @@ poster="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC
         <div class="row">
           <div class="col-md-12 dataset-highlights">
           <h1>Dataset Highlights</h1>
-            <iframe src="{{ random_view.iframe_url }}" width="100%" height="600px" frameborder="0"></iframe>
+            <iframe src="{{ random_view.iframe_url }}" width="100%" height="600px" frameborder="0" id="view-iframe"></iframe>
             This dashboard is part of the resource:
             <strong>
               <a href="{{ h.url_for('resource.read', id=random_view.package_name, resource_id=random_view.resource_id) }}" target="_blank">
@@ -70,7 +66,7 @@ poster="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC
         <div class="row">
           <div class="col-md-12 home-content">
             <h1>Learn How</h1>
-            <p class="align-center">Get up and running with <strong>AGRASTAT</strong> quickly! This short video tutorial provides a step-by-step guide to using the platform, covering everything from basic navigation to leveraging our custom extensions.  Learn how to maximize Agrastat's features and streamline your workflow in just a few minutes.</p>
+            <p class="align-center">Get up and running with <strong>AGRASTAT</strong> quickly! This short video tutorial provides a step-by-step guide to using the platform, covering everything from basic navigation to leveraging our custom extensions.  Learn how to maximize Agrastats features and streamline your workflow in just a few minutes.</p>
           </div>
         </div>
         <div class="row d-flex justify-content-center">
@@ -85,3 +81,8 @@ poster="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC
   </div>
   {% endblock %}
 </div>
+
+{% block scripts %}
+  {{ super() }}
+  <script src="{{ h.url_for_static('/base/javascript/dashboard-view.js') }}"></script>
+{% endblock %}
