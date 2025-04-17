@@ -24,22 +24,17 @@ content %}
         {% if random_view %}
         <div class="row">
           <div class="col-md-12 dataset-highlights">
-          <h1>Dataset Highlights</h1>
-            <iframe src="{{ random_view.iframe_url }}" width="100%" height="600px" frameborder="0" id="view-iframe"></iframe>
-            This dashboard is part of the resource:
-            <strong>
-              <a href="{{ h.url_for('resource.read', id=random_view.package_name, resource_id=random_view.resource_id) }}" target="_blank">
-                {{ random_view.resource_name }}
-              </a>
-            </strong> which belongs to the dataset:
-            <strong>
-              <a href="{{ h.url_for('dataset.read', id=random_view.package_name) }}" target="_blank">
-                {{ random_view.package_name }}
-              </a>
-            </strong>
+          <h1>Highlights</h1>
+            <div class="view-dashboard-wrapper">
+              <iframe src="{{ random_view.iframe_url }}" width="100%" height="600px" frameborder="0" id="view-dashboard"></iframe>
+              <div class="resource-title">
+                {{ random_view.view_title }}
+              </div>
+            </div>
           </div>
         </div>
         {% endif %}
+        <hr/>
         <div class="row">
           <div class="col-md-12 home-content">
             <h1>Dataset Statistics</h1>
@@ -61,15 +56,17 @@ content %}
         </div>
         <hr/>
         {% block search %}
-          {% snippet 'home/snippets/search.html', search_facets=search_facets %}
+          <div class="row">
+            <div class="col-md-12">
+              {% snippet 'home/snippets/search.html', search_facets=search_facets %}
+            </div>
+          </div>
         {% endblock %}
-        <div class="row">
+        <div class="row row-green">
           <div class="col-md-12 home-content">
             <h1>Learn How</h1>
             <p class="align-center">Get up and running with <strong>AGRASTAT</strong> quickly! This short video tutorial provides a step-by-step guide to using the platform, covering everything from basic navigation to leveraging our custom extensions.  Learn how to maximize Agrastats features and streamline your workflow in just a few minutes.</p>
           </div>
-        </div>
-        <div class="row d-flex justify-content-center">
           <div class="col-md-12 home-content video-content">
             <video src="/media/agra-tutorial.mp4" controls="controls" class="video-frame">
             </video>
@@ -81,8 +78,3 @@ content %}
   </div>
   {% endblock %}
 </div>
-
-{% block scripts %}
-  {{ super() }}
-  <script src="{{ h.url_for_static('/base/javascript/dashboard-view.js') }}"></script>
-{% endblock %}

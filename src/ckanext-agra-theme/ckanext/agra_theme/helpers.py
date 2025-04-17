@@ -18,6 +18,7 @@ def get_random_dashboard_view():
     # Perform a join between resource_view, resource, and package tables
     query = (
         Session.query(
+            ResourceView.title.label("view_title"),
             ResourceView.id.label("view_id"),
             ResourceView.resource_id,
             Resource.id.label("resource_id"),
@@ -59,6 +60,7 @@ def get_random_dashboard_view():
         view_id=view_id,
         qualified=True,
     )
+    view_name = selected_view
 
     # Return the view details
     return {
@@ -67,6 +69,7 @@ def get_random_dashboard_view():
         "resource_id": resource_id,
         "view_id": view_id,
         "iframe_url": iframe_url,
+        "view_title": selected_view.view_title,
     }
 
 

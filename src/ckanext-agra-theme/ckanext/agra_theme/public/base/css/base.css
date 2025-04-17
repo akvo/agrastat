@@ -10042,7 +10042,7 @@ h4 small {
     position: relative;
 }
 .homepage .module-search {
-    padding: 5px;
+    padding: 0px;
     color: #fff;
 }
 .homepage .module-search .search-giant input {
