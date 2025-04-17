@@ -11,9 +11,21 @@ header.html file. #}
   {% include "header.html" %}
 {% endblock -%}
 {# The content block allows you to replace the content of the page if needed #}
+
+{% if c.action == 'about' %}
+  <div class="about-header">
+    <div class="about-header-image">
+      <h1 class="page-heading">{{ _('About') }}</h1>
+    </div>
+  </div>
+{% endif %}
+
 {%- block content %}
   {% block maintag %}
-    <div class="main">
+    <div class="main{% if c.action == 'about' %} about-main{% endif %}">
+      {% if c.action == 'about' %}
+        {% snippet 'snippets/waves.html' %}
+      {% endif %}
   {% endblock %}
   <div id="content" class="container">
     {% block main_content %} {% block flash %}
@@ -35,9 +47,9 @@ header.html file. #}
     </div>
     {% endblock %}
 
-    <div
-      class="row wrapper{% block wrapper_class %}{% endblock %}{% if self.secondary()|trim == '' or c.action=='resource_read' %} no-nav{% endif %}"
-    >
+      <div
+        class="row wrapper{% block wrapper_class %}{% endblock %}{% if self.secondary()|trim == '' or c.action=='resource_read' %} no-nav{% endif %}{% if c.action == 'about' %} about-wrapper{% endif %}"
+      >
       {# The pre_primary block can be used to add content to before the
       rendering of the main content columns of the page. #} {% block pre_primary
       %} {% endblock %} {% block secondary %}
