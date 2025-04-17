@@ -1,5 +1,6 @@
 body {
     background: #fff;
+    font-size: 1.6rem;
 }
 .home-video-bg {
     position: fixed;
@@ -603,6 +604,76 @@ ul.dropdown-menu li a i {
 .about-text {
   font-weight: normal;
   font-size: 17px;
+}
+.about-main-text {
+  font-size: 22px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.align-items-center {
+  display: flex;
+  align-items: center;
+}
+
+.text-middle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.img-about {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 100%;
+  padding: 10px;
+  border: 3px solid #e5e71e;
+}
+.align-right {
+  text-align: right;
+}
+
+.mt-50 {
+  margin-top: 50px;
+}
+.mb-50 {
+  margin-bottom: 50px;
+}
+
+.about-content h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #08743f;
+}
+.about-content hr {
+    border: 1px solid #ddd;
+    margin: 20px 0;
+}
+.about-content p b {
+    font-weight: 700;
+    color: #08743f;
+}
+
+.about-odd-item {
+  margin-top:150px;
+  margin-bottom: 0px;
+}
+
+.about-odd-item:before {
+  content: '';
+  display: block;
+  min-height: 320px;
+  background-color: #ddd;
+  margin-top: 20px;
+  width: 200%;
+  position: absolute;
+  margin: auto;
+  margin-left: auto;
+  margin-left: -50%;
 }
 
 /* Wave container */

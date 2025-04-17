@@ -1085,7 +1085,7 @@ html {
 body {
     /*font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;*/
     font-family: Poppins, sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.42857143;
     color: #333333;
     background-color: #fff;
@@ -1282,7 +1282,7 @@ h4,
 }
 h5,
 .h5 {
-    font-size: 14px;
+    font-size: 16px;
 }
 h6,
 .h6 {
@@ -2651,7 +2651,7 @@ input[type="checkbox"]:focus {
 output {
     display: block;
     padding-top: 7px;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.42857143;
     color: #555555;
 }
@@ -2660,7 +2660,7 @@ output {
     width: 100%;
     height: 34px;
     padding: 6px 12px;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.42857143;
     color: #555555;
     background-color: #fff;
@@ -3132,7 +3132,7 @@ select[multiple].input-lg {
     background-image: none;
     border: 1px solid transparent;
     padding: 6px 12px;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.42857143;
     border-radius: 4px;
     -webkit-user-select: none;
@@ -3618,7 +3618,7 @@ tbody.collapse.in {
     min-width: 160px;
     padding: 0px;
     margin: 3px 0 0;
-    font-size: 14px;
+    font-size: 16px;
     text-align: left;
     list-style: none;
     background-color: #fff;
@@ -3991,7 +3991,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .input-group-addon {
     padding: 6px 12px;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
     line-height: 1;
     color: #555555;
@@ -4556,8 +4556,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     margin-bottom: 10px;
 }
 .navbar-btn.btn-xs {
-    margin-top: 14px;
-    margin-bottom: 14px;
+    margin-top: 16px;
+    margin-bottom: 16px;
 }
 .navbar-text {
     margin-top: 15px;
@@ -4906,7 +4906,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 .pager li > a,
 .pager li > span {
     display: inline-block;
-    padding: 5px 14px;
+    padding: 5px 16px;
     background-color: #fff;
     border: 1px solid #f6f6f6;
     border-radius: 15px;
@@ -6443,7 +6443,7 @@ button.close {
     word-spacing: normal;
     word-wrap: normal;
     white-space: normal;
-    font-size: 14px;
+    font-size: 16px;
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid #ccc;
@@ -6541,15 +6541,15 @@ button.close {
     border-left-color: #fff;
 }
 .popover-title {
-    padding: 8px 14px;
+    padding: 8px 16px;
     margin: 0;
-    font-size: 14px;
+    font-size: 16px;
     background-color: #f7f7f7;
     border-bottom: 1px solid #ebebeb;
     border-radius: 5px 5px 0 0;
 }
 .popover-content {
-    padding: 9px 14px;
+    padding: 9px 16px;
 }
 .carousel {
     position: relative;
@@ -7218,7 +7218,7 @@ a.tag:hover {
 .module-heading {
     margin: 0;
     padding: 10px 25px;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.3;
     background-color: #f6f6f6;
     border-top: 1px solid #f6f6f6;
@@ -7367,7 +7367,7 @@ a.tag:hover {
     max-width: initial;
 }
 .group .content h3 {
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.3;
 }
 .group-listing {
@@ -7654,7 +7654,7 @@ a.tag:hover {
 .nav-item > a,
 .nav-aside li a {
     color: #333;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.42857143;
     margin: -7px -25px;
     padding: 7px 25px;
@@ -7851,7 +7851,7 @@ label {
 }
 label {
     cursor: pointer;
-    font-size: 14px;
+    font-size: 16px;
 }
 label:after {
     content: ":";
@@ -7962,7 +7962,7 @@ select[multiple].control-large input {
     }
 }
 .form-actions .action-info.small {
-    font-size: 11px;
+    font-size: 13px;
     line-height: 1.2;
 }
 @media (max-width: 991px) {
@@ -8287,7 +8287,7 @@ fieldset[disabled] .control-custom.disabled .checkbox.btn.focus {
     z-index: 0;
 }
 .stages li:before {
-    border-radius: 14px;
+    border-radius: 16px;
     content: counter(stage);
     display: inline-block;
     width: 27px;
@@ -8383,7 +8383,7 @@ fieldset[disabled] .control-custom.disabled .checkbox.btn.focus {
     margin-bottom: 0;
 }
 .slug-preview {
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.5;
     margin-top: 5px;
     margin-left: 10px;
@@ -8426,7 +8426,7 @@ fieldset[disabled] .control-custom.disabled .checkbox.btn.focus {
     .select2-choices
     .select2-search-field:first-child
     input {
-    font-size: 14px;
+    font-size: 16px;
 }
 .select2-container-multi .select2-choices .select2-search-field input {
     height: 29px;
@@ -8643,7 +8643,7 @@ fieldset[disabled] .control-custom.disabled .checkbox.btn.focus {
 }
 .resource-item .heading {
     color: #000;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
 }
 .resource-item .format-label {
@@ -9086,7 +9086,7 @@ td.diff_header {
     background: none;
     font-size: 18px;
     background-color: transparent;
-    font-size: 14px;
+    font-size: 16px;
     padding: 10px 20px;
 }
 .toolbar .breadcrumb:before,
@@ -9224,7 +9224,7 @@ h3 {
     font-size: 18px;
 }
 h4 {
-    font-size: 14px;
+    font-size: 16px;
 }
 h1,
 h2,
@@ -9236,7 +9236,7 @@ h1 small,
 h2 small,
 h3 small,
 h4 small {
-    font-size: 14px;
+    font-size: 16px;
 }
 .prose h1,
 .prose heading-1 h2,
@@ -9507,7 +9507,7 @@ h4 small {
     height: 65px;
     background-position: -1720px -220px;
     transform: scale(0.53);
-    margin: -14px 0 0 -14px;
+    margin: -16px 0 0 -16px;
 }
 .format-label[data-format="html"],
 .format-label[data-format*="html"] {
@@ -9515,7 +9515,7 @@ h4 small {
     height: 65px;
     background-position: -120px -220px;
     transform: scale(0.53);
-    margin: -14px 0 0 -14px;
+    margin: -16px 0 0 -16px;
 }
 .format-label[data-format="json"],
 .format-label[data-format*="json"] {
@@ -9523,7 +9523,7 @@ h4 small {
     height: 65px;
     background-position: -220px -220px;
     transform: scale(0.53);
-    margin: -14px 0 0 -14px;
+    margin: -16px 0 0 -16px;
 }
 .format-label[data-format="xml"],
 .format-label[data-format*="xml"] {
@@ -9531,7 +9531,7 @@ h4 small {
     height: 65px;
     background-position: -320px -220px;
     transform: scale(0.53);
-    margin: -14px 0 0 -14px;
+    margin: -16px 0 0 -16px;
 }
 .format-label[data-format="txt"],
 .format-label[data-format*="txt"] {
@@ -9539,7 +9539,7 @@ h4 small {
     height: 65px;
     background-position: -420px -220px;
     transform: scale(0.53);
-    margin: -14px 0 0 -14px;
+    margin: -16px 0 0 -16px;
 }
 .format-label[data-format="doc"],
 .format-label[data-format*="doc"],
@@ -9549,7 +9549,7 @@ h4 small {
     height: 65px;
     background-position: -520px -220px;
     transform: scale(0.53);
-    margin: -14px 0 0 -14px;
+    margin: -16px 0 0 -16px;
 }
 .format-label[data-format="odt"],
 .format-label[data-format*="odt"] {
@@ -9557,7 +9557,7 @@ h4 small {
     height: 65px;
     background-position: -620px -220px;
     transform: scale(0.53);
-    margin: -14px 0 0 -14px;
+    margin: -16px 0 0 -16px;
 }
 .format-label[data-format="csv"],
 .format-label[data-format*="csv"] {
@@ -9565,7 +9565,7 @@ h4 small {
     height: 65px;
     background-position: -720px -220px;
     transform: scale(0.53);
-    margin: -14px 0 0 -14px;
+    margin: -16px 0 0 -16px;
 }
 .format-label[data-format="xls"],
 .format-label[data-format*="xls"] {
@@ -9573,7 +9573,7 @@ h4 small {
     height: 65px;
     background-position: -820px -220px;
     transform: scale(0.53);
-    margin: -14px 0 0 -14px;
+    margin: -16px 0 0 -16px;
 }
 .format-label[data-format="zip"],
 .format-label[data-format*="zip"] {
@@ -9581,7 +9581,7 @@ h4 small {
     height: 65px;
     background-position: -920px -220px;
     transform: scale(0.53);
-    margin: -14px 0 0 -14px;
+    margin: -16px 0 0 -16px;
 }
 .format-label[data-format="api"],
 .format-label[data-format*="api"] {
@@ -9589,7 +9589,7 @@ h4 small {
     height: 65px;
     background-position: -1020px -220px;
     transform: scale(0.53);
-    margin: -14px 0 0 -14px;
+    margin: -16px 0 0 -16px;
 }
 .format-label[data-format="pdf"],
 .format-label[data-format*="pdf"] {
@@ -9597,7 +9597,7 @@ h4 small {
     height: 65px;
     background-position: -1120px -220px;
     transform: scale(0.53);
-    margin: -14px 0 0 -14px;
+    margin: -16px 0 0 -16px;
 }
 .format-label[data-format="rdf"],
 .format-label[data-format*="rdf"] {
@@ -9605,7 +9605,7 @@ h4 small {
     height: 65px;
     background-position: -1220px -220px;
     transform: scale(0.53);
-    margin: -14px 0 0 -14px;
+    margin: -16px 0 0 -16px;
 }
 .format-label[data-format="wms"],
 .format-label[data-format*="wms"] {
@@ -9613,7 +9613,7 @@ h4 small {
     height: 65px;
     background-position: -1320px -220px;
     transform: scale(0.53);
-    margin: -14px 0 0 -14px;
+    margin: -16px 0 0 -16px;
 }
 .format-label[data-format="png"],
 .format-label[data-format*="png"] {
@@ -9621,7 +9621,7 @@ h4 small {
     height: 65px;
     background-position: -1420px -220px;
     transform: scale(0.53);
-    margin: -14px 0 0 -14px;
+    margin: -16px 0 0 -16px;
 }
 .format-label[data-format="jpg"],
 .format-label[data-format*="jpg"],
@@ -9631,7 +9631,7 @@ h4 small {
     height: 65px;
     background-position: -1520px -220px;
     transform: scale(0.53);
-    margin: -14px 0 0 -14px;
+    margin: -16px 0 0 -16px;
 }
 .format-label[data-format="gif"],
 .format-label[data-format*="gif"] {
@@ -9639,7 +9639,7 @@ h4 small {
     height: 65px;
     background-position: -1620px -220px;
     transform: scale(0.53);
-    margin: -14px 0 0 -14px;
+    margin: -16px 0 0 -16px;
 }
 .format-label[data-format="wfs"],
 .format-label[data-format*="wfs"] {
@@ -9647,7 +9647,7 @@ h4 small {
     height: 65px;
     background-position: -1820px -220px;
     transform: scale(0.53);
-    margin: -14px 0 0 -14px;
+    margin: -16px 0 0 -16px;
 }
 .format-label[data-format="gml"],
 .format-label[data-format*="gml"] {
@@ -9655,7 +9655,7 @@ h4 small {
     height: 65px;
     background-position: -1920px -220px;
     transform: scale(0.53);
-    margin: -14px 0 0 -14px;
+    margin: -16px 0 0 -16px;
 }
 .format-label[data-format="wmts"],
 .format-label[data-format*="wmts"] {
@@ -9663,7 +9663,7 @@ h4 small {
     height: 65px;
     background-position: -2020px -220px;
     transform: scale(0.53);
-    margin: -14px 0 0 -14px;
+    margin: -16px 0 0 -16px;
 }
 .format-label[data-format="kml"],
 .format-label[data-format*="kml"] {
@@ -9671,7 +9671,7 @@ h4 small {
     height: 65px;
     background-position: -2120px -220px;
     transform: scale(0.53);
-    margin: -14px 0 0 -14px;
+    margin: -16px 0 0 -16px;
 }
 .format-label[data-format="geo"],
 .format-label[data-format*="geo"] {
@@ -9688,9 +9688,9 @@ h4 small {
 [class*=" icon-"] {
     display: inline-block;
     text-align: right;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1;
-    width: 14px;
+    width: 16px;
 }
 .btn [class^="icon-"],
 .nav [class^="icon-"],
@@ -9717,8 +9717,8 @@ h4 small {
 }
 .info-block-small [class^="icon-"],
 .info-block-small [class*=" icon-"] {
-    font-size: 14px;
-    width: 14px;
+    font-size: 16px;
+    width: 16px;
     margin-top: 1px;
 }
 .nav-tabs .fa:last-child,
@@ -9851,7 +9851,7 @@ h4 small {
     .js body.filters-modal .secondary .filters .hide-filters {
         display: inline-block;
         position: absolute;
-        top: 14px;
+        top: 16px;
         right: 17px;
         opacity: 0.6;
     }
@@ -10089,7 +10089,7 @@ h4 small {
 }
 .homepage .module-search .tags h3 {
     color: #fff;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.42857143;
     padding: 2px 8px 0px 0px;
 }
@@ -10634,7 +10634,7 @@ h4 small {
 .activity {
     padding: 0;
     list-style-type: none;
-    background: transparent url("../../../base/images/dotted.png") 14px 0
+    background: transparent url("../../../base/images/dotted.png") 16px 0
         repeat-y;
 }
 .activity .item {
@@ -10684,7 +10684,7 @@ h4 small {
     left: 40px;
 }
 .activity .item p {
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.5;
     margin: 5px 0 0 80px;
 }
@@ -10729,7 +10729,7 @@ h4 small {
     text-decoration: none;
 }
 .popover .popover-content {
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.42857143;
     color: #444;
     word-break: break-all;

@@ -1,5 +1,8 @@
 {% extends "page.html" %}
 
+{% set num_datasets = h.datasets_count() %}
+{% set num_countries = h.countries|length %}
+
 {% block subtitle %}{% endblock %}
 
 {% block breadcrumb_content %}
@@ -7,16 +10,33 @@
 
 {% block primary %}
   <article class="module" role="main">
-    <div class="module-content">
-      {% block about %}
-        {% if g.site_about %}
-          {{ h.render_markdown(g.site_about) }}
-        {% else %}
-          <div class="about-text">
-            {% snippet 'home/snippets/about_text.html' %}
-          </div>
-        {% endif %}
-      {% endblock %}
+    <div class="module-content about-content">
+      <div class="row align-items-center mb-50">
+        <div class="col-md-3">
+          <img src="/base/images/about/about-agra-01.jpg" class="img img-responsive img-about">
+        </div>
+        <div class="col-md-9 text-middle">
+          <p class="about-text about-main-text" style="margin: auto;">
+            <b>AGRASTAT</b> serves as a central <b>data hub</b> for African agriculture, developed and maintained by <a href="https://agra.org" target="_blank"><b>AGRA</b></a>. Its core purpose is to empower stakeholders within the agriculture sector by providing <b>dependable and easily accessible data and analytics services</b>, ultimately enhancing the precision of policy and investment choices.
+          </p>
+        </div>
+      </div>
+      <hr/>
+      <div class="row mb-50">
+        <div class="col-md-6">
+          <h2>Turning Data into Decisions</h2>
+          <p class="about-text">
+<b>AGRASTAT</b> aims to transform raw data into valuable information and knowledge, facilitating <b>evidence-based decision-making</b> for sustainably growing Africa's food systems. Currently, the platform offers access to <b>{{ num_datasets }} Datasets</b> across <b>{{ num_countries }} African Countries</b>, covering impact areas such as Production, Nutrition, Markets and Trade, Seed systems, Sustainable farming, and Policy.
+          </p>
+        </div>
+        <div class="col-md-6">
+          <h2>Smart Tools for Smart Farming</h2>
+          <p class="about-text">
+          <b>AGRASTAT</b> is designed with several key features to streamline data access and utilisation. It includes a <b>data hub with data storage, embedded analytics, and user-friendly dashboards</b> for exploring and visualising information. <b>AGRASTAT</b> is an evolving resource, with ongoing development focused on expanding its data offerings and analytical capabilities to support agricultural transformation across Africa.
+          </p>
+        </div>
+      </div>
+      <hr/>
     </div>
   </article>
 {% endblock %}
