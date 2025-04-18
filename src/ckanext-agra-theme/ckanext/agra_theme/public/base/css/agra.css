@@ -790,3 +790,60 @@ ul.dropdown-menu li a i {
     font-weight: bold;
     border-top: solid 1px #ddd;
 }
+
+/* Carousel container */
+.carousel-container {
+  position: relative;
+  width: 100%;
+  max-width: 1200px; /* Adjust as needed */
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+/* Carousel wrapper */
+.carousel {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+/* Individual carousel items */
+.carousel-item {
+  min-width: 100%; /* Each item takes up the full width of the container */
+  box-sizing: border-box;
+}
+
+/* Carousel Navigation buttons */
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  border-radius: 50%; /* Make the button circular */
+  width: 40px; /* Set a fixed size for the circle */
+  height: 40px; /* Set a fixed size for the circle */
+  cursor: pointer;
+  font-size: 18px; /* Adjust Font Awesome icon size */
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center the icon */
+  z-index: 10;
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+.carousel-button.prev {
+  left: 10px;
+}
+
+.carousel-button.next {
+  right: 10px;
+}
+
+.carousel-button:hover {
+  background-color: rgb(99, 150, 56);
+}
+
+.carousel-button i {
+  font-size: 18px;
+}

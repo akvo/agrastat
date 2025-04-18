@@ -37,40 +37,39 @@ def get_random_dashboard_view():
     if not user_is_logged_in:
         query = query.filter(Package.private == False)
 
+    query = query.limit(3)
+
     # Execute the query
     dashboard_views = query.all()
 
     if not dashboard_views:
         return None  # No dashboard views found
 
-    # Randomly select one view
-    selected_view = random.choice(dashboard_views)
-
-    # Extract package name, resource ID, and view ID
-    package_name = selected_view.package_name
-    resource_id = selected_view.resource_id
-    resource_name = selected_view.resource_name
-    view_id = selected_view.view_id
-
-    # Construct the full iframe URL
-    iframe_url = toolkit.url_for(
-        "resource.view",
-        id=package_name,
-        resource_id=resource_id,
-        view_id=view_id,
-        qualified=True,
-    )
-    view_name = selected_view
-
-    # Return the view details
-    return {
-        "resource_name": resource_name,
-        "package_name": package_name,
-        "resource_id": resource_id,
-        "view_id": view_id,
-        "iframe_url": iframe_url,
-        "view_title": selected_view.view_title,
-    }
+    selected_views = []
+    for view in dashboard_views:
+        package_name = view.package_name
+        resource_id = view.resource_id
+        resource_name = view.resource_name
+        view_id = view.view_id
+        view_title = view.view_title
+        iframe_url = toolkit.url_for(
+            "resource.view",
+            id=package_name,
+            resource_id=resource_id,
+            view_id=view_id,
+            qualified=True,
+        )
+        selected_views.append(
+            {
+                "resource_name": resource_name,
+                "package_name": package_name,
+                "resource_id": resource_id,
+                "view_id": view_id,
+                "iframe_url": iframe_url,
+                "view_title": view_title,
+            }
+        )
+    return selected_views
 
 
 def datasets_count():

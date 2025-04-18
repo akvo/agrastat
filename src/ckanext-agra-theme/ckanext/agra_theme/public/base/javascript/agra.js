@@ -235,3 +235,25 @@ if (
     });
   }
 }
+
+let currentIndex = 0;
+
+function moveCarousel(direction) {
+  const carousel = document.querySelector(".carousel");
+  const items = document.querySelectorAll(".carousel-item");
+  const totalItems = items.length;
+
+  // Update the current index based on direction
+  currentIndex += direction;
+
+  // Ensure the index stays within bounds
+  if (currentIndex < 0) {
+    currentIndex = totalItems - 1;
+  } else if (currentIndex >= totalItems) {
+    currentIndex = 0;
+  }
+
+  // Calculate the new transform position
+  const offset = -currentIndex * 100; // Each item is 100% wide
+  carousel.style.transform = `translateX(${offset}%)`;
+}
