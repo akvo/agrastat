@@ -45,6 +45,7 @@ body {
   line-height: 1.42857143;
   color: #333333;
   white-space: nowrap;
+  width: 158px;
 }
 .dropdown-menu > li:not(:last-child) {
   border-bottom: 1px solid #ddd;
@@ -594,7 +595,8 @@ ul.dropdown-menu li a i {
   flex-direction: column;
 }
 
-.about-header {
+.about-header,
+.contact-header {
   text-align: center;
   padding: 0;
   background-color: #f8f9fa;
@@ -603,7 +605,8 @@ ul.dropdown-menu li a i {
   overflow: hidden;
 }
 
-.about-header-image {
+.about-header-image,
+.contact-header-image {
   position: relative;
   width: 100%;
   height: 400px;
@@ -616,7 +619,13 @@ ul.dropdown-menu li a i {
   justify-content: center;
   align-items: center;
 }
-.about-header-image::before {
+
+.contact-header-image {
+  background-image: url('/base/images/contact.jpg');
+}
+
+.about-header-image::before,
+.contact-header-image::before {
   content: '';
   position: absolute;
   top: 0;
@@ -628,7 +637,9 @@ ul.dropdown-menu li a i {
 }
 
 .about-header h1.page-heading,
-.about-header h1.page-heading small{
+.contact-header h1.page-heading,
+.about-header h1.page-heading small,
+.contact-header h1.page-heading small {
   font-size: 52px;
   line-height: 38px;
   font-weight: 700;

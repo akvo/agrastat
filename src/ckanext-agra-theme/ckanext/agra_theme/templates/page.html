@@ -20,10 +20,18 @@ header.html file. #}
   </div>
 {% endif %}
 
+{% if c.action == 'form' %}
+  <div class="contact-header">
+    <div class="contact-header-image">
+      <h1 class="page-heading">{{ _('Contact us') }}</h1>
+    </div>
+  </div>
+{% endif %}
+
 {%- block content %}
   {% block maintag %}
-    <div class="main{% if c.action == 'about' %} about-main{% endif %}">
-      {% if c.action == 'about' %}
+    <div class="main{% if c.action in ['about', 'form'] %} about-main{% endif %}">
+      {% if c.action in ['about', 'form'] %}
         {% snippet 'snippets/waves.html' %}
       {% endif %}
   {% endblock %}
@@ -48,7 +56,7 @@ header.html file. #}
     {% endblock %}
 
       <div
-        class="row wrapper{% block wrapper_class %}{% endblock %}{% if self.secondary()|trim == '' or c.action=='resource_read' %} no-nav{% endif %}{% if c.action == 'about' %} about-wrapper{% endif %}"
+        class="row wrapper{% block wrapper_class %}{% endblock %}{% if self.secondary()|trim == '' or c.action=='resource_read' %} no-nav{% endif %}{% if c.action in ['about','form'] %} about-wrapper{% endif %}"
       >
       {# The pre_primary block can be used to add content to before the
       rendering of the main content columns of the page. #} {% block pre_primary
