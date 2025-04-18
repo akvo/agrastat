@@ -1,3 +1,8 @@
+function hideLoading(container) {
+  const loader = container.querySelector(".viz-loading");
+  // if (loader) loader.style.display = "none";
+}
+
 const datastoreURL = "/api/3/action/datastore_search";
 const echartsConfig = {
   grid: {
@@ -265,8 +270,10 @@ function render_chart(res_id, config, container) {
       config.chartType === "line" ||
       config.chartType === "area"
     ) {
+      hideLoading(container);
       myChart.setOption(options_barline(data, config));
     } else if (config.chartType === "scatter") {
+      hideLoading(container);
       myChart.setOption(options_scatter(data, config));
     }
   });
@@ -286,6 +293,7 @@ function render_number(res_id, config, container) {
     } else if (config.numberType === "min") {
       countUp(config.id, res.minimum);
     }
+    hideLoading(container);
   });
 }
 
@@ -303,6 +311,7 @@ function render_pie(res_id, config, container) {
       };
     });
     const myChart = echarts.init(container);
+    hideLoading(container);
     myChart.setOption({
       tooltip: {
         trigger: "item",
