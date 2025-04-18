@@ -32,7 +32,9 @@ content %}
                   <div class="view-dashboard-wrapper">
                     <iframe src="{{ random_view.iframe_url }}" width="100%" height="600px" frameborder="0" id="view-dashboard"></iframe>
                     <div class="resource-title">
-                      {{ random_view.view_title }}
+                      <a href="{{random_view.link}}" target="_blank">
+                        {{ random_view.view_title }}
+                      </a>
                     </div>
                   </div>
                 </div>

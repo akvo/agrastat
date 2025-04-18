@@ -59,6 +59,7 @@ def get_random_dashboard_view():
             view_id=view_id,
             qualified=True,
         )
+        link = f"/dataset/{package_name}/resource/{resource_id}?view_id={view_id}"
         selected_views.append(
             {
                 "resource_name": resource_name,
@@ -67,6 +68,7 @@ def get_random_dashboard_view():
                 "view_id": view_id,
                 "iframe_url": iframe_url,
                 "view_title": view_title,
+                "link": link,
             }
         )
     return selected_views
