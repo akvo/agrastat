@@ -21,9 +21,13 @@
           <h2 class="viz-title">{{ column.title }}</h2>
           <div class="panel text-center">
             {% if column.visualizationType == "chart" %}
-            <div id="{{column.id}}" class="viz-chart"></div>
+            <div id="{{column.id}}" class="viz-chart">
+              <div class="viz-loading-spinner"></div>
+            </div>
             {% else %}
-            <div id="{{column.id}}" class="viz-number"></div>
+            <div id="{{column.id}}" class="viz-number">
+              <div class="viz-loading-spinner"></div>
+            </div>
             {% endif %}
           </div>
         </div>
