@@ -265,6 +265,12 @@ span.private-views {
     background-repeat: no-repeat;
     background-position: right 360px; /* right horizontally, 320px down vertically */
 }
+#content.container {
+  background: #f8f8f8;
+}
+#home > div[role="main"] .content .container {
+  background: #fff;
+}
 #home .container .row.row-green {
   background: #08743f;
   padding: 20px;
@@ -731,7 +737,7 @@ ul.dropdown-menu li a i {
 
 /* Wave container */
 .ondebox {
-  margin-top: -140px;
+  margin-top: -125px;
 }
 .onde {
   position:relative;

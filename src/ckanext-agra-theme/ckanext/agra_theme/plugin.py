@@ -148,9 +148,7 @@ class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
     def dataset_facets(self, facets_dict, package_type):
         return self.modify_facets(facets_dict)
 
-    def organization_facets(
-        self, facets_dict, organization_type, package_type
-    ):
+    def organization_facets(self, facets_dict, organization_type, package_type):
         return self.modify_facets(facets_dict, unlisted=["organization"])
 
     def group_facets(self, facets_dict, group_type, package_type):
@@ -234,9 +232,7 @@ class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
         """Return the schema for package display."""
         schema = super(AgraThemePlugin, self).show_package_schema()
         # (e.g. on dataset pages, or on the search page)
-        schema["tags"]["__extras"].append(
-            toolkit.get_converter("free_tags_only")
-        )
+        schema["tags"]["__extras"].append(toolkit.get_converter("free_tags_only"))
 
         # Add our custom country_code metadata field to the schema.
         schema.update(
@@ -250,9 +246,7 @@ class AgraThemePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
                     toolkit.get_validator("ignore_missing"),
                 ],
                 "business_lines": [
-                    toolkit.get_converter("convert_from_tags")(
-                        "business_lines"
-                    ),
+                    toolkit.get_converter("convert_from_tags")("business_lines"),
                     toolkit.get_validator("ignore_missing"),
                 ],
                 "impact_areas": [
