@@ -21,7 +21,7 @@ content %}
       {% snippet 'snippets/waves.html' %}
       <div class="container">
         {% set random_views = h.get_random_dashboard_view() %}
-        {% if random_views|length %}
+        {% if random_views %}
         <div class="row">
           <div class="col-md-12 dataset-highlights">
           <h1>Highlights</h1>

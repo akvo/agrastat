@@ -43,7 +43,7 @@ def get_random_dashboard_view():
     dashboard_views = query.all()
 
     if not dashboard_views:
-        return None  # No dashboard views found
+        return []  # No dashboard views found
 
     selected_views = []
     for view in dashboard_views:
@@ -59,7 +59,9 @@ def get_random_dashboard_view():
             view_id=view_id,
             qualified=True,
         )
-        link = f"/dataset/{package_name}/resource/{resource_id}?view_id={view_id}"
+        link = (
+            f"/dataset/{package_name}/resource/{resource_id}?view_id={view_id}"
+        )
         selected_views.append(
             {
                 "resource_name": resource_name,
