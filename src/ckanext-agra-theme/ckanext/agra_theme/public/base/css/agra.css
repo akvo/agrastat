@@ -865,9 +865,17 @@ ul.dropdown-menu li a i {
   font-size: 18px;
 }
 
-.result-business-lines {
+.dataset-business-lines {
+  display: block;
+  margin: 1px -15px 0px -15px;
   background: #08743f;
-  margin: -30px -45px 20px -45px;
-  padding: 16px 50px;
+  padding: 15px 28px 15px 28px;
   color: #fff;
+}
+
+.dataset-business-lines h2 {
+  font-size: 21px;
+  font-weight: 700;
+  line-height: normal;
+  margin: 0px;
 }
