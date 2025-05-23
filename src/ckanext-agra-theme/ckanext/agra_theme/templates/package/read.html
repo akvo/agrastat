@@ -1,5 +1,27 @@
 {% ckan_extends %}
 
+{% block primary_content %}
+    {% set business_line_names = [] %}
+        {% for selected_business_line in pkg.business_lines %}
+            {% for business_line in h.business_lines %}
+                {% if business_line == selected_business_line %}
+                    {% do business_line_names.append(business_line) %}
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    {% if business_line_names %}
+    <div class="dataset-business-lines">
+        <h2>Business Line:
+            {% for name in business_line_names %}
+                {%- if loop.last and loop.index > 1 %} and {% elif not loop.first %}, {% endif -%}
+                {{ name }}
+            {% endfor %}
+        </h2>
+    </div>
+    {% endif %}
+    {{ super() }}
+{% endblock %}
+
 {% block package_notes %}
     {% set package_download_count = h.get_package_download_count(pkg) %}
     <div class="tracking-info">

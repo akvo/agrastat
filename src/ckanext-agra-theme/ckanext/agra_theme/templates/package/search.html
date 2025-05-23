@@ -1,4 +1,52 @@
 {% ckan_extends %}
+
+{% block primary_content %}
+    {% set facets = {
+      'fields': fields_grouped,
+      'search': search_facets,
+      'titles': facet_titles,
+      'translated_fields': translated_fields,
+      'remove_field': remove_field }
+    %}
+    {% if facets %}
+      {% for field in facets.fields %}
+        {% set is_business_lines = True if field == 'vocab_business_lines' else False %}
+        {% set search_facets_items = facets.search.get(field)['items'] if facets.search and field in facets.search else [] %}
+        {% if is_business_lines %}
+        <div class="dataset-business-lines">
+          <h2>
+            {{ facets.titles.get(field) }}:
+
+            {% set values = [] %}
+            {% for value in facets.fields[field] %}
+              {%- if facets.translated_fields and (field, value) in facets.translated_fields -%}
+                {% set label = facets.translated_fields[(field, value)] %}
+              {%- else -%}
+                {% set label = h.list_dict_filter(search_facets_items, 'name', 'display_name', value) %}
+              {%- endif %}
+
+              {% if label is not none and label | string | trim != '' %}
+                {% do values.append(label | string | trim) %}
+              {% endif %}
+            {% endfor %}
+
+            {# Format the final list #}
+            {% if values | length == 1 %}
+              {{ values[0] }}
+            {% elif values | length == 2 %}
+              {{ values[0] }} & {{ values[1] }}
+            {% else %}
+              {{ values[:-1] | join(', ') }}, & {{ values[-1] }}
+            {% endif %}
+          </h2>
+        </div>
+        {% else %}
+        {% endif %}
+      {% endfor %}
+  {% endif %}
+  {{ super () }}
+{% endblock %}
+
 {% block secondary_content %}
   <div class="filters">
     <div>

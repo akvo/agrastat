@@ -864,3 +864,18 @@ ul.dropdown-menu li a i {
 .carousel-button i {
   font-size: 18px;
 }
+
+.dataset-business-lines {
+  display: block;
+  margin: 1px -15px 0px -15px;
+  background: #08743f;
+  padding: 15px 28px 15px 28px;
+  color: #fff;
+}
+
+.dataset-business-lines h2 {
+  font-size: 21px;
+  font-weight: 700;
+  line-height: normal;
+  margin: 0px;
+}
