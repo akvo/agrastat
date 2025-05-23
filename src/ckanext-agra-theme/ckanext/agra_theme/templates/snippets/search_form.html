@@ -1,0 +1,38 @@
+{% ckan_extends %}
+
+  {% block search_facets %}
+    {% if facets %}
+      <p class="filter-list">
+        {% for field in facets.fields %}
+          {% set is_business_lines = True if field == 'vocab_business_lines' else False %}
+          {% set search_facets_items = facets.search.get(field)['items'] if facets.search and field in facets.search else [] %}
+          {% if is_business_lines %}
+          {% else %}
+          <span class="facet">{{ facets.titles.get(field) }}:</span>
+          {% for value in facets.fields[field] %}
+            <span class="filtered pill">
+              {%- if facets.translated_fields and (field,value) in facets.translated_fields -%}
+                {{ facets.translated_fields[(field,value)] }}
+              {%- else -%}
+                {{ h.list_dict_filter(search_facets_items, 'name', 'display_name', value) }}
+              {%- endif %}
+              <a href="{{ facets.remove_field(field, value) }}" class="remove" title="{{ _('Remove') }}"><i class="fa fa-times"></i></a>
+            </span>
+          {% endfor %}
+          {% endif %}
+        {% endfor %}
+      </p>
+      <a class="show-filters btn btn-default">{{ _('Filter Results') }}</a>
+    {% endif %}
+    {% if not error %}
+      <h3>
+        {% snippet 'snippets/search_result_text.html', query=query, count=count, type=type %}
+      </h3>
+    {% else %}
+      <h2>Error</h2>
+    {% endif %}
+  {% endblock %}
+
+
+{% block search_title %}
+{% endblock %}

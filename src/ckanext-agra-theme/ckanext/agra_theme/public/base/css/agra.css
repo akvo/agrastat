@@ -864,3 +864,10 @@ ul.dropdown-menu li a i {
 .carousel-button i {
   font-size: 18px;
 }
+
+.result-business-lines {
+  background: #08743f;
+  margin: -30px -45px 20px -45px;
+  padding: 16px 50px;
+  color: #fff;
+}
